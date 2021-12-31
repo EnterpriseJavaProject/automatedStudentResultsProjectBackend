@@ -223,7 +223,7 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `usertype`, `staff_id`, `email`, `password`, `status`, `created_at`, `updated_at`) VALUES
 (1, 'Instructor', 'St2632', 'firstinstructor@aiti-kace.com.gh', 'fristInstructor', 'Active', '2021-09-18 09:14:49', '2021-09-28 14:14:23'),
 (2, 'Instructor', 'St7308', 'secondinstructor@aiti-kace.com.gh', 'secondInstructor', 'Active', '2021-09-15 14:18:26', '2021-09-28 14:14:57'),
-(3, 'academic secretary', 'St6833', 'academicsecretary@gamil.com', 'academicSecretary', 'Active', '2021-09-15 14:34:05', '2021-09-28 14:15:12'),
+(3, 'academic secretary', 'St6833', 'academicSecretary@gamil.com', 'academicSecretary', 'Active', '2021-09-15 14:34:05', '2021-09-28 14:15:12'),
 (4, 'course cordinator', 'St3073', 'coursecordinator@aiti-kace.com.gh', 'courseCordinator', 'Active', '2021-09-18 08:47:24', '2021-09-28 14:15:26'),
 (5, 'director of studies', 'St9462', 'directorofstudies@aiti-kace.com.gh', 'directorOfStudies', 'Active', '2021-09-18 09:03:00', '2021-09-28 14:15:33');
 
