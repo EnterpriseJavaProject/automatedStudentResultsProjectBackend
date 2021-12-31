@@ -46,7 +46,7 @@ public interface ModulesRepository extends JpaRepository<Modules, Long>  {
 
 	
 //  RETRIEVAL OF ALL MODULES UNDER EACH COURSE
-	@Query(value="SELECT * from courses, modules WHERE courses.id = modules.course_id and course_id = ?", nativeQuery=true)
+	@Query(value="SELECT * from modules WHERE modules.course_id = ?", nativeQuery=true)
 	public List<Modules> findModulesUnderEachCourseById(Long id);
 	
 	
