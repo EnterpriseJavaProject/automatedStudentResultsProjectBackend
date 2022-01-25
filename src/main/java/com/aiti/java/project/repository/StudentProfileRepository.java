@@ -27,7 +27,7 @@ public interface StudentProfileRepository extends JpaRepository<StudentProfile, 
 	// METHOD TO RETRIEVE ONLY STUDENT NAME AND ID 
 
 	@Query(value="SELECT DISTINCT students.id, students.name, students.student_id, students.course_id, students.date_of_birth, students.contact, students.gender, students.email, students.status, students.created_at, students.updated_at, modules.module_name, modules.course_name, modules.staff_name FROM students INNER JOIN modules ON modules.course_id = students.course_id where modules.id = ? GROUP by students.student_id ORDER BY modules.id", nativeQuery=true)
-	public List<StudentProfile> findAllStudentNameAndStudentIDForResults(int id);
+	public List<StudentProfile> retrieveStudentsUnderModule(int id);
 	
 	
 	
