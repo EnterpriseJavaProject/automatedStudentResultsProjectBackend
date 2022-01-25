@@ -23,6 +23,20 @@ public interface ModulesRepository extends JpaRepository<Modules, Long>  {
 	
 	
 	
+	//  ALL MODULES UNDER EACH COURSE
+	@Query(value="SELECT modules.course_name, modules.id, modules.module_name, modules.course_id, modules.staff_name, modules.status, modules.created_at, modules.updated_at from modules inner JOIN courses on modules.course_id = courses.id where courses.id = ? GROUP by modules.id ORDER BY modules.id", nativeQuery=true)
+	public List<Modules> findModulesUnderEachCourseById(int id);
+	
+	
+	
+	
+	
+
+	
+	
+	
+	
+	
 	// METHOD TO RETRIEVE ALL COURSE NAME UNDER MODULE TABLE
 	
 	@Query(value="SELECT DISTINCT modules.course_name, modules.id, modules.module_name, modules.course_id, modules.staff_name, modules.status, modules.created_at, modules.updated_at FROM `modules`", nativeQuery=true)
@@ -45,9 +59,7 @@ public interface ModulesRepository extends JpaRepository<Modules, Long>  {
 	
 
 	
-//  RETRIEVAL OF ALL MODULES UNDER EACH COURSE
-	@Query(value="SELECT * from modules WHERE modules.course_id = ?", nativeQuery=true)
-	public List<Modules> findModulesUnderEachCourseById(Long id);
+
 	
 	
 	
@@ -64,8 +76,8 @@ public interface ModulesRepository extends JpaRepository<Modules, Long>  {
 
 
 
-//  RETRIEVAL OF ALL STUDENTS UNDER EACH MODULES
-	@Query(value="SELECT  students.name, modules.module_name from students, courses, modules where students.course_id = courses.id and courses.id = modules.course_id and modules.id = ? ORDER BY modules.id;", nativeQuery=true)
+//  ALL STUDENTS UNDER EACH MODULES
+	@Query(value="SELECT  students.name, modules.module_name, modules.course_name from students, courses, modules where students.course_id = courses.id and courses.id = modules.course_id and modules.id = ? ORDER BY modules.id", nativeQuery=true)
 	public List<String> retrievalOfStudentsUnderEachModuleById(int id);
 
 
@@ -75,8 +87,8 @@ public interface ModulesRepository extends JpaRepository<Modules, Long>  {
 
 	
 //  RETRIEVE THE TOTAL NUMBER OF STUDENTS UNDER EACH MODULE
-@Query(value="SELECT modules.course_name,  modules.module_name, count(DISTINCT(students.name))from students, courses, modules where students.course_id = courses.id and courses.id = modules.course_id and modules.id = ? ;", nativeQuery=true)
-	public List<String> findTotalNumberOfStudentsUnderEachModuleById(int id);
+//@Query(value="SELECT modules.course_name,  modules.module_name, count(DISTINCT(students.name))from students, courses, modules where students.course_id = courses.id and courses.id = modules.course_id and modules.id = ? ;", nativeQuery=true)
+	//public List<String> findTotalNumberOfStudentsUnderEachModuleById(int id);
  
 	
 	
@@ -91,6 +103,39 @@ public interface ModulesRepository extends JpaRepository<Modules, Long>  {
 	
 	
 
+	
+	
+  	// RETRIEVE ONLY MODULE NAME AND COURSE NAME  
+	
+	@Query(value="SELECT DISTINCT students.name, students.student_id, modules.module_name, modules.course_name, staffs.name from students,staffs, courses, modules where students.course_id = courses.id and courses.id = modules.course_id and modules.id = ? GROUP by students.student_id ORDER BY modules.id", nativeQuery=true)
+	public String retrieveModuleNameAndCourseName(int id);
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+//	// METHOD TO RETRIEVE ONLY STUDENT NAME AND ID 
+//
+//		@Query(value="SELECT DISTINCT students.name, students.student_id FROM students INNER JOIN modules ON modules.course_id = students.course_id where modules.id = ? GROUP by students.student_id ORDER BY modules.id", nativeQuery=true)
+//		public List<StudentProfile> findAllStudentResults(int id);
+  		
+  			  			
+	
+	
+	
+		
+		// METHOD TO RETRIEVE ONLY STUDENT NAME,ID, COURSE NAME,MODULE NAME AND STAFF NAME 
+	
+//		@Query(value="SELECT DISTINCT students.name, students.student_id, modules.module_name, modules.course_name, modules.staff_name from students, courses, modules where students.course_id = courses.id and courses.id = modules.course_id and modules.id = ? GROUP by students.student_id ORDER BY modules.id", nativeQuery=true)
+//		public ArrayList<String> findAllStudentResults(int id);
 	
 	
 	
