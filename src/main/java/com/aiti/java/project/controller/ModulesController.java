@@ -94,9 +94,24 @@ public class ModulesController {
 		
 		
 		
+	
+		//   ALL MODULES UNDER EACH COURSE
+	  @GetMapping("/findModulesUnderEachCourseById/{id}")
+	  public List<Modules> findModulesUnderEachCourseById(@PathVariable("id") int id) {
+		  
+		  return modulesRepo.findModulesUnderEachCourseById(id);
+		  
+	  }
+	  
+	  
+	  
+	  
+	  
+	  
+	  
 		
 		
-		//	// METHOD TO RETRIEVE ALL COURSE NAME UNDER MODULE TABLE
+	// METHOD TO RETRIEVE ALL COURSE NAME UNDER MODULE TABLE
 		
 		@GetMapping("/getCourseNameAndCourseLevel")
 		public List<Modules> getCourseNameAndCourseLevel(){
@@ -105,59 +120,57 @@ public class ModulesController {
 	
 	
 			
+
+
+
+			  
+			  
+			  
+			  
+			  
+			  
+
+//
+//				//RETRIEVE THE TOTAL NUMBER OF MODULES UNDER EACH COURSE
+//				  	  @GetMapping("/totalNumberOfModulesUnderEachCourse/{id}")
+//				  public List<Modules> findTotalNumberOfModulesUnderEachCourseById(@PathVariable("id") int id) {
+//					  
+//					  return modulesRepo.findTotalNumberOfModulesUnderEachCourseById(id);
+//				  }
+//
+//
+//
+//
+//
+//			//  ALL STUDENTS UNDER EACH MODULES
+//				  	  @GetMapping("/retrievalOfStudentsUnderEachModule/{id}")
+//				  public List<String> retrievalOfStudentsUnderEachModuleById(@PathVariable("id") int id) {
+//					  
+//					  return modulesRepo.retrievalOfStudentsUnderEachModuleById(id);
+//				  }
+//
+//
+//
+//				  	  
+				  	  
+				  	  
+
+			//  RETRIEVE THE TOTAL NUMBER OF STUDENTS UNDER EACH MODULE
+				  	 // @GetMapping("/totalNumberOfStudentsUnderEachModule/{id}")
+				  //public List<String> findTotalNumberOfStudentsUnderEachModuleById(@PathVariable("id") int id) {
+					  
+					  //return modulesRepo.findTotalNumberOfStudentsUnderEachModuleById(id);
+				  //}
+			
 				
 				
 	
-				
-				
-				  
-				  
-				//   RETRIEVAL OF ALL MODULES UNDER EACH COURSE
-			  @GetMapping("/findModulesUnderEachCourseById/{id}")
-			  public List<Modules> findModulesUnderEachCourseById(@PathVariable("id") Long id) {
-				  
-				  return modulesRepo.findModulesUnderEachCourseById(id);
-				  
-			  }
-
-
-
-			  
-			  
-			  
-			  
-			  
-			  
-
-
-				//RETRIEVE THE TOTAL NUMBER OF MODULES UNDER EACH COURSE
-				  	  @GetMapping("/totalNumberOfModulesUnderEachCourse/{id}")
-				  public List<Modules> findTotalNumberOfModulesUnderEachCourseById(@PathVariable("id") int id) {
-					  
-					  return modulesRepo.findTotalNumberOfModulesUnderEachCourseById(id);
-				  }
-
-
-
-
-
-			//  RETRIEVAL OF ALL STUDENTS UNDER EACH MODULES
-				  	  @GetMapping("/retrievalOfStudentsUnderEachModule/{id}")
-				  public List<String> retrievalOfStudentsUnderEachModuleById(@PathVariable("id") int id) {
-					  
-					  return modulesRepo.retrievalOfStudentsUnderEachModuleById(id);
-				  }
-
-
-
-
-			//  RETRIEVE THE TOTAL NUMBER OF STUDENTS UNDER EACH MODULE
-				  	  @GetMapping("/totalNumberOfStudentsUnderEachModule/{id}")
-				  public List<String> findTotalNumberOfStudentsUnderEachModuleById(@PathVariable("id") int id) {
-					  
-					  return modulesRepo.findTotalNumberOfStudentsUnderEachModuleById(id);
-				  }
-			
+				  	  
+				  	  
+				  	  
+				  	  
+				  	  
+				  	  
 				
 				
 		
