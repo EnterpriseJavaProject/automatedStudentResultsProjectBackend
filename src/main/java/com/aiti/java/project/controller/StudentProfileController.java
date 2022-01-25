@@ -99,10 +99,10 @@ public class StudentProfileController {
 	  		// METHOD TO RETRIEVE ONLY STUDENT NAME AND STUDENT ID
 	  	
 	  	
-	  	@GetMapping("/retrieveStudentNameAndStudentIDfOrResults/{id}")
-	  	public List<StudentProfile> retrieveStudentNameAndStudentIDfOrResults(@PathVariable("id") int id) {
+	  	@GetMapping("/retrieveStudentsUnderModule/{id}")
+	  	public List<StudentProfile> findStudentsUnderModule(@PathVariable("id") int id) {
 	  		
-			return studentRepos.findAllStudentNameAndStudentIDForResults(id);
+			return studentRepos.retrieveStudentsUnderModule(id);
 	  						  		
 	  	}
 	  	
