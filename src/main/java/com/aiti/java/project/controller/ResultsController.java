@@ -25,11 +25,39 @@ public class ResultsController {
 	ResultsRepository resultsRepos;
 	
 	
-	@PostMapping("/saveResults")
-	public Results saveResults(@RequestBody Results results) {
-		return resultsRepos.save(results);
+	
+	
+	
+	
+	
+	
+	
+		//  SAVE ALL RESULTS
+	
+	@PostMapping("/saveAllResults")
+	public void saveAllResults(@RequestBody List<Results> results) {
+		
+		resultsRepos.saveAll(results);
+			
 	}
 	
+	
+	
+	
+	
+	// SAVE A SINGLE RESULTS
+	
+	@PostMapping("/saveResults")
+	public Results saveResults(@RequestBody Results results) {
+		
+	  return resultsRepos.save(results);
+			
+	}
+	
+	
+	
+	
+	// UPDATE RESULTS
 	
 	@PatchMapping("updateResults")
 	public Results updateResults(@RequestBody Results results) {
@@ -39,18 +67,23 @@ public class ResultsController {
 	
 	
 	@GetMapping("/getAllResults")
-	public List<Results> getAllResults(){
+	public Iterable<Results> getAllResults(){
 		return resultsRepos.findAll();
 	}
 	
 	
 	
+	
+	//  DELETE RESULTS
 	@DeleteMapping("/delete/{id}")
 	public void deleteResults(@PathVariable ("id") Long id) {
 		resultsRepos.deleteById(id);
 	}
 	
 	
+	
+	
+	// FIND RESULTS BY ID
 	
 	@GetMapping("/findResultsById/{id}")
 	public Results findById(@PathVariable("id") Long id) {
@@ -60,11 +93,24 @@ public class ResultsController {
 	
 	
 	
+	
+	// FIND REULTS BY STUDENT ID
+	
+	  @GetMapping("/findResultsByStudentID/{name}") 
+	  public List<Results> findByName(@PathVariable ("name") String student_id){ 
+		  return resultsRepos.findResultsByStudentID(student_id);
+		  
+	  }
+	  
+	  
+	  
+	  
+	  //  COUNT ALL RESULTS
+	
 	  @GetMapping("/countResults")
 	  public String countResults() {
 		  return resultsRepos.countResults();
 	  }
-	  
 	  
 	
 	
