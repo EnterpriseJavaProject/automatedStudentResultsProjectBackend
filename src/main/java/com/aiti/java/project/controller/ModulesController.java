@@ -38,6 +38,15 @@ public class ModulesController {
 	
 	
 	
+	
+	
+	
+	
+	
+	
+	
+// SAVE MODULE
+	
 	@PostMapping("/saveModules")
 	public Modules saveModules(@RequestBody Modules module) {
 		return modulesRepo.save(module);
@@ -45,6 +54,8 @@ public class ModulesController {
 	
 	
 	
+	
+	// UPDATE MODULE
 	
 	@PatchMapping("/updateModules")
 	public Modules updateModules(@RequestBody Modules module) {
@@ -54,6 +65,8 @@ public class ModulesController {
 	
 	
 	
+	 
+	// GET ALL MODULES
 	
 	@GetMapping("/getAllModules")
 	public List<Modules> getAllModules(){
@@ -63,6 +76,9 @@ public class ModulesController {
 	
 	
 	
+	
+	//  DELETE MODULE
+	
 	@DeleteMapping("/deleteModulesById/{id}")
 	public void deleteModules(@PathVariable ("id") Long id) {
 		modulesRepo.deleteById(id);
@@ -70,6 +86,7 @@ public class ModulesController {
 	
 	
 	
+	// FIND MODULES BY ID
 	
 	@GetMapping("/findModulesById/{id}")
 	public Modules findById(@PathVariable("id") Long id) {
@@ -80,6 +97,19 @@ public class ModulesController {
 	
 	
 	
+	// FIND MODULE BY NAME
+	
+	  @GetMapping("/findModuleByName/{name}") 
+	  public List<Courses> findByName(@PathVariable ("name") String modules_name){ 
+		  return modulesRepo.findModuleByName(modules_name);
+		  
+	  }
+	  
+	
+	  
+	  
+	  // COUNT ALL MODULE
+	
 	  @GetMapping("/countModule")
 	  public String countModule() {
 		  
@@ -89,12 +119,12 @@ public class ModulesController {
 	
 	  
 	  
+	 
+	  
 	  
 		
 		
-		
-		
-	
+ 	  
 		//   ALL MODULES UNDER EACH COURSE
 	  @GetMapping("/findModulesUnderEachCourseById/{id}")
 	  public List<Modules> findModulesUnderEachCourseById(@PathVariable("id") int id) {
@@ -122,7 +152,11 @@ public class ModulesController {
 			
 
 
-
+		@GetMapping("/findModuleById/{id}")
+		public Optional<Modules> findAllById(@PathVariable ("id")Long id){
+			
+			return modulesRepo.findById(id);
+		}
 			  
 			  
 			  
@@ -166,6 +200,10 @@ public class ModulesController {
 				
 	
 				  	  
+				  	  
+				  	  
+				  	  
+				 
 				  	  
 				  	  
 				  	  
