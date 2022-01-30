@@ -29,16 +29,33 @@ public class CoursesController {
 	@Autowired
 	CoursesRepository coursesRepo;
 	
+	
+	
+	
+	
+	
+	
+	//  SVAE COURSE
+	
 	@PostMapping("/saveCourses")
 	public Courses saveCourses(@RequestBody Courses courses) {
 		return coursesRepo.save(courses);
 	}
+	
+	
+	//  UPDATE COURSES
 	
 	@PatchMapping("/updateCourses")
 	public Courses updateCourses(@RequestBody Courses course) {
 		
 		return coursesRepo.save(course);
 	}
+	
+	
+	
+	
+	
+	// GET ALL COURSES
 	
 	@GetMapping("/getAllCourses")
 	public List<Courses> getAllCourses(){
@@ -47,7 +64,7 @@ public class CoursesController {
 	
 	
 
-	
+	// FIND ALL COURES
 	
 	@GetMapping("/findAllCourses")
 	public List<Courses> findAllCourses(){
@@ -57,7 +74,7 @@ public class CoursesController {
 	
 	
 	
-	
+	// DELETE COURSE
 	
 	@DeleteMapping("/deleteCourseById/{id}")
 	public void deleteCourse(@PathVariable ("id") Long id) {
@@ -66,6 +83,7 @@ public class CoursesController {
 	
 	
 	
+	// FIND COURSE BY ID
 	
 	@GetMapping("/findCourseById/{id}")
 	public Courses findById(@PathVariable("id") Long id) {
@@ -75,6 +93,19 @@ public class CoursesController {
 	
 	
 	
+	
+	// FIND COURSE BY NAME
+	
+	  @GetMapping("/findCourseByName/{name}") 
+	  public List<Courses> findByName(@PathVariable ("name") String course_name){ 
+		  return coursesRepo.findCourseByName(course_name);
+		  
+	  }
+	  
+	
+	  
+	  
+	  // COUNT ALL COURSES
 	
 	  @GetMapping("/countCourses")
 	  public String countCourses() {
@@ -87,13 +118,13 @@ public class CoursesController {
 
 	
 	
+	  // GET COURSE NAME AND COURSE LEVEL
 		
 		@GetMapping("/getCourseNameAndCourseLevel")
 		public List<Courses> getCourseNameAndCourseLevel(){
 			
 			return coursesRepo.getCourseNameAndCourseLevel();
 		}
-		
 		
 
 }
