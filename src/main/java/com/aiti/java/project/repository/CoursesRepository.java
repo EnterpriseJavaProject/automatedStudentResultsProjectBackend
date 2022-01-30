@@ -11,6 +11,16 @@ public interface CoursesRepository extends JpaRepository<Courses, Long> {
 
 	
 	
+	// FIND COURSE BY NAME
+	@Query(value="select id,course_name,course_level,status,created_at,updated_at,course_start_date,course_end_date,certificate_issuedate from courses where courses.course_name = ? order by id" , nativeQuery = true )
+	List<Courses> findCourseByName(String course_name);
+	
+	
+	
+	
+	
+	
+	
 	//  GET ONLY COURSE NAME AND COURSE LEVEL
 	@Query(value="select id,course_name,course_level,status,created_at,updated_at,course_start_date,course_end_date,certificate_issuedate from courses order by id;" , nativeQuery = true )
 	List<Courses> getCourseNameAndCourseLevel();
@@ -31,6 +41,7 @@ public interface CoursesRepository extends JpaRepository<Courses, Long> {
 	
 	@Query(value="select count(*) from courses", nativeQuery=true)
 	public String countCourses();
+
 
 	
 	
