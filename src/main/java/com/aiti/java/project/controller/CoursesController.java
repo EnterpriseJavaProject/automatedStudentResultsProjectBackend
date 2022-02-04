@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.aiti.java.project.entities.Courses;
@@ -28,10 +28,6 @@ public class CoursesController {
 	
 	@Autowired
 	CoursesRepository coursesRepo;
-	
-	
-	
-	
 	
 	
 	
@@ -76,8 +72,8 @@ public class CoursesController {
 	
 	// DELETE COURSE
 	
-	@DeleteMapping("/deleteCourseById/{id}")
-	public void deleteCourse(@PathVariable ("id") Long id) {
+	@DeleteMapping("/deleteCourseById")
+	public void deleteCourse(@RequestParam ("id") Long id) {
 		coursesRepo.deleteById(id);
 	}
 	
@@ -85,8 +81,8 @@ public class CoursesController {
 	
 	// FIND COURSE BY ID
 	
-	@GetMapping("/findCourseById/{id}")
-	public Courses findById(@PathVariable("id") Long id) {
+	@GetMapping("/findCourseById")
+	public Courses findById(@RequestParam("id") Long id) {
 		return coursesRepo.findById(id).get();
 	}
 	
@@ -96,8 +92,8 @@ public class CoursesController {
 	
 	// FIND COURSE BY NAME
 	
-	  @GetMapping("/findCourseByName/{name}") 
-	  public List<Courses> findByName(@PathVariable ("name") String course_name){ 
+	  @GetMapping("/findCourseByName") 
+	  public List<Courses> findByName(@RequestParam ("course_name") String course_name){ 
 		  return coursesRepo.findCourseByName(course_name);
 		  
 	  }
@@ -125,6 +121,7 @@ public class CoursesController {
 			
 			return coursesRepo.getCourseNameAndCourseLevel();
 		}
+		
 		
 
 }
