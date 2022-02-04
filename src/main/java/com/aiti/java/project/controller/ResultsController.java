@@ -11,18 +11,21 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.aiti.java.project.entities.Results;
-import com.aiti.java.project.repository.ResultsRepository;
+import com.aiti.java.project.entities.StudentResults;
+import com.aiti.java.project.repository.StudentResultsRepositry;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping("/results")
-public class ResultsController {
+@RequestMapping("/studentResults")
+public class StudentResultsController {
+	
+	
 	
 	@Autowired
-	ResultsRepository resultsRepos;
+	StudentResultsRepositry studentResultsRepositry;
 	
 	
 	
@@ -30,16 +33,27 @@ public class ResultsController {
 	
 	
 	
+	//  GET ALL RESULTS
+	
+	@GetMapping("/getAllResults")
+	public List<StudentResults> findAllResults(){
+		
+		return studentResultsRepositry.findAll();
+	}
 	
 	
-		//  SAVE ALL RESULTS
+	
+	
+
+	
+	//  SAVE ALL RESULTS
 	
 	@PostMapping("/saveAllResults")
-	public void saveAllResults(@RequestBody List<Results> results) {
+	public List<StudentResults> saveAllResults(@RequestBody List<StudentResults> saveResults){
 		
-		resultsRepos.saveAll(results);
-			
+		return studentResultsRepositry.saveAll(saveResults);
 	}
+	
 	
 	
 	
@@ -48,11 +62,12 @@ public class ResultsController {
 	// SAVE A SINGLE RESULTS
 	
 	@PostMapping("/saveResults")
-	public Results saveResults(@RequestBody Results results) {
+	public StudentResults saveResults(@RequestBody StudentResults save) {
 		
-	  return resultsRepos.save(results);
-			
+		return studentResultsRepositry.save(save);
 	}
+	
+	
 	
 	
 	
@@ -60,61 +75,101 @@ public class ResultsController {
 	// UPDATE RESULTS
 	
 	@PatchMapping("updateResults")
-	public Results updateResults(@RequestBody Results results) {
-		return resultsRepos.save(results);
-	}
-	
-	
-	
-	@GetMapping("/getAllResults")
-	public Iterable<Results> getAllResults(){
-		return resultsRepos.findAll();
-	}
-	
-	
-	
-	
-	//  DELETE RESULTS
-	@DeleteMapping("/delete/{id}")
-	public void deleteResults(@PathVariable ("id") Long id) {
-		resultsRepos.deleteById(id);
-	}
-	
-	
-	
-	
-	// FIND RESULTS BY ID
-	
-	@GetMapping("/findResultsById/{id}")
-	public Results findById(@PathVariable("id") Long id) {
-		return resultsRepos.findById(id).get();
+	public StudentResults updateResults(@RequestBody StudentResults update) {
+		
+		return studentResultsRepositry.save(update);
 	}
 	
 	
 	
 	
 	
-	// FIND REULTS BY STUDENT ID
 	
-	  @GetMapping("/findResultsByStudentID/{name}") 
-	  public List<Results> findByName(@PathVariable ("name") String student_id){ 
-		  return resultsRepos.findResultsByStudentID(student_id);
+//	//  DELETE RESULTS
+	@DeleteMapping("/delete")
+	public void deleteResults(@RequestParam ("id") Long id) {
+		
+		studentResultsRepositry.deleteById(id);
+		
+	}
+	
+	
+	
+	
+	
+//	// FIND RESULTS BY ID
+	
+	@GetMapping("/findResultsById")
+	public StudentResults findById(@RequestParam("id") Long id) {
+		
+		return studentResultsRepositry.findById(id).get();
+		
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+//	// FIND REULTS BY STUDENT ID
+	
+	  @GetMapping("/findResultsByStudentID") 
+	  public List<StudentResults> findByName(@RequestParam ("student_id") String student_id){ 
+		  
+		  return studentResultsRepositry.findResultsByStudentID(student_id);
 		  
 	  }
 	  
+
 	  
 	  
 	  
-	  //  COUNT ALL RESULTS
+	  
+	  
+	  
+//	  //  COUNT ALL RESULTS
 	
 	  @GetMapping("/countResults")
 	  public String countResults() {
-		  return resultsRepos.countResults();
+		  
+		  return studentResultsRepositry.countResults();
 	  }
+
 	  
+	  
+	  
+	  
+	  
+	  
+	  
+//	// FIND STUDENT MARKS
+		
+	  @GetMapping("/findOnlyStudentMarks") 
+	  public List<StudentResults> retrieveOnlyMarks(@RequestParam ("id") Long id){ 
+		  
+		  return studentResultsRepositry.findOnlyStudentMarks(id);
+		  
+	  }
 	
 	
 	
 	
+	  
+	  
+	  
+//		// FIND STUDENT MARKS
+		
+		  @GetMapping("/retrieveOnlyStudentMarks/{id}") 
+		  public List<StudentResults> findOnlyMarks(@PathVariable ("id") Long id){ 
+			  
+			  return studentResultsRepositry.findOnlyStudentMarks(id);
+			  
+		  }
+		 
 	
+
 }
