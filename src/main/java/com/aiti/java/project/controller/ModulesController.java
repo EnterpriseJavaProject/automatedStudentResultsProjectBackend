@@ -1,16 +1,17 @@
 package com.aiti.java.project.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.aiti.java.project.entities.Modules;
@@ -28,8 +29,6 @@ public class ModulesController {
 
 	  
   
-	  
-
 	
 	
 	@Autowired
@@ -41,10 +40,7 @@ public class ModulesController {
 	
 	
 	
-	
-	
-	
-	
+
 // SAVE MODULE
 	
 	@PostMapping("/saveModules")
@@ -79,8 +75,8 @@ public class ModulesController {
 	
 	//  DELETE MODULE
 	
-	@DeleteMapping("/deleteModulesById/{id}")
-	public void deleteModules(@PathVariable ("id") Long id) {
+	@DeleteMapping("/deleteModulesById")
+	public void deleteModules(@RequestParam ("id") Long id) {
 		modulesRepo.deleteById(id);
 	}
 	
@@ -88,8 +84,8 @@ public class ModulesController {
 	
 	// FIND MODULES BY ID
 	
-	@GetMapping("/findModulesById/{id}")
-	public Modules findById(@PathVariable("id") Long id) {
+	@GetMapping("/findModulesById")
+	public Modules findById(@RequestParam("id") Long id) {
 		return modulesRepo.findById(id).get();
 	}
 	
@@ -99,8 +95,8 @@ public class ModulesController {
 	
 	// FIND MODULE BY NAME
 	
-	  @GetMapping("/findModuleByName/{name}") 
-	  public List<Courses> findByName(@PathVariable ("name") String modules_name){ 
+	  @GetMapping("/findModuleByName") 
+	  public List<Modules> findByName(@RequestParam ("modules_name") String modules_name){ 
 		  return modulesRepo.findModuleByName(modules_name);
 		  
 	  }
@@ -126,8 +122,8 @@ public class ModulesController {
 		
  	  
 		//   ALL MODULES UNDER EACH COURSE
-	  @GetMapping("/findModulesUnderEachCourseById/{id}")
-	  public List<Modules> findModulesUnderEachCourseById(@PathVariable("id") int id) {
+	  @GetMapping("/findModulesUnderEachCourseById")
+	  public List<Modules> findModulesUnderEachCourseById(@RequestParam("id") int id) {
 		  
 		  return modulesRepo.findModulesUnderEachCourseById(id);
 		  
@@ -152,8 +148,8 @@ public class ModulesController {
 			
 
 
-		@GetMapping("/findModuleById/{id}")
-		public Optional<Modules> findAllById(@PathVariable ("id")Long id){
+		@GetMapping("/findModuleById")
+		public Optional<Modules> findAllById(@RequestParam ("id")Long id){
 			
 			return modulesRepo.findById(id);
 		}
@@ -203,14 +199,11 @@ public class ModulesController {
 				  	  
 				  	  
 				  	  
-				 
 				  	  
 				  	  
 				  	  
+				  	
 				  	  
 				  	  
-				
-				
-		
 
 }
