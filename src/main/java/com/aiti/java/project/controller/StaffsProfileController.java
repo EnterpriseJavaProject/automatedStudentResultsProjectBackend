@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.aiti.java.project.entities.Staffs;
@@ -27,6 +27,9 @@ public class StaffsProfileController {
 	
 	
 	
+	
+	//  SAVE STAFF
+	
 	@PostMapping("/saveStaff")
 	public Staffs saveStaff(@RequestBody Staffs staff) {
 		return staffRepos.save(staff);
@@ -35,12 +38,17 @@ public class StaffsProfileController {
 	
 	
 	
+	
+	// UPDATE STAFF
+	
 	@PatchMapping("/updateStaff")
 	public Staffs updateStaff(@RequestBody Staffs staff) {
 		return staffRepos.save(staff);
 	}
 	
 	
+	
+	// GET ALL STAFFS
 	
 	@GetMapping("/getAllStaffs")
 	public List<Staffs> getAllStaffs(){
@@ -49,15 +57,20 @@ public class StaffsProfileController {
 	
 	
 	
-	@DeleteMapping("/deleteStaff/{id}")
-	public void deleteStaff(@PathVariable ("id") int id) {
+	
+	//  DELETE STAFF
+	
+	@DeleteMapping("/deleteStaff")
+	public void deleteStaff(@RequestParam ("id") int id) {
 		staffRepos.deleteById(id);
 	}
 	
 	
 	
-	@GetMapping("/findStaffById/{id}")
-	public Staffs findStaffById(@PathVariable("id") int id) {
+	// FIND STAFF BY ID
+	
+	@GetMapping("/findStaffById")
+	public Staffs findStaffById(@RequestParam("id") int id) {
 		return staffRepos.findById(id).get();
 		
 	}
@@ -65,13 +78,40 @@ public class StaffsProfileController {
 	
 	
 	
-	  @GetMapping("/findStaffByName/{name}") 
-	  public List<Staffs> findByName(@PathVariable ("name") String name){ 
+	// FIND STAFF BY NAME
+	
+	  @GetMapping("/findStaffByName") 
+	  public List<Staffs> findByName(@RequestParam ("name") String name){ 
 		  return staffRepos.findByName(name);
 		  
 	  }
 	  
 	  
+	  
+	  
+	  
+	  
+	  
+		
+				
+		
+		
+	  	// RETRIEVE ONLY STAFF NAME 				  	
+	  	
+	  	@GetMapping("/retrieveStaffName")
+	  	public Staffs retrieveStaffName(@RequestParam("id") int id) {
+	  		
+	  		
+	  		return staffRepos.retrieveStaffName(id);
+	  		
+	  	}
+		  
+	  	
+	  	
+	  	
+	  	
+	  	
+	  	
 	  
 	  
 	//  RETRIEVAL OF THE LAST USERTYPE IN THE USERS TABLE
@@ -86,6 +126,8 @@ public class StaffsProfileController {
 	
 		
 		
+		
+		// COUNT ALL STAFFS
 	
 	  @GetMapping("/countStaff")
 	  public String countStaff() {
@@ -118,7 +160,12 @@ public class StaffsProfileController {
 		}
 	  
 	  
-	  
+
+		
+		
+		
+		
+		
 	  
 	  
 }
