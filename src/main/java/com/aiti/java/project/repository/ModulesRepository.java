@@ -2,6 +2,7 @@ package com.aiti.java.project.repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -12,16 +13,18 @@ public interface ModulesRepository extends JpaRepository<Modules, Long>  {
 	
 	
 
-	
-	
-	
-	
-	// FIND MODULE BY NAME
+	// FIND MODULE BY  MODULE NAME
 	@Query(value="SELECT DISTINCT modules.course_name, modules.id, modules.module_name, modules.course_id, modules.staff_name, modules.status, modules.created_at, modules.updated_at FROM modules where modules.module_name = ? order by modules.module_name", nativeQuery=true)
-	List<Courses> findModuleByName(String modules_name);
+	List<Modules> findModuleByModuleName(String modules_name);
 
 	
 	
+	
+	
+	
+	// FIND MODULE BY  COURSE NAME
+	@Query(value="SELECT DISTINCT modules.course_name, modules.id, modules.module_name, modules.course_id, modules.staff_name, modules.status, modules.created_at, modules.updated_at FROM modules where modules.course_name = ? order by modules.course_name", nativeQuery=true)
+	List<Modules> findModuleByCourseName(String course_name);
 	
 	
 	
@@ -153,17 +156,6 @@ public interface ModulesRepository extends JpaRepository<Modules, Long>  {
 	
 //		@Query(value="SELECT DISTINCT students.name, students.student_id, modules.module_name, modules.course_name, modules.staff_name from students, courses, modules where students.course_id = courses.id and courses.id = modules.course_id and modules.id = ? GROUP by students.student_id ORDER BY modules.id", nativeQuery=true)
 //		public ArrayList<String> findAllStudentResults(int id);
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 
 }
