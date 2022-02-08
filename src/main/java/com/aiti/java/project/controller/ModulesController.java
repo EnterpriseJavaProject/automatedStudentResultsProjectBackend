@@ -95,12 +95,24 @@ public class ModulesController {
 	
 	// FIND MODULE BY NAME
 	
-	  @GetMapping("/findModuleByName") 
+	  @GetMapping("/findModuleByModuleName") 
 	  public List<Modules> findByName(@RequestParam ("modules_name") String modules_name){ 
-		  return modulesRepo.findModuleByName(modules_name);
+		  return modulesRepo.findModuleByModuleName(modules_name);
 		  
 	  }
 	  
+	  
+	  
+	  
+	  
+	  
+		// FIND MODULE BY NAME
+		
+	  @GetMapping("/findModuleByCourseName") 
+	  public List<Modules> findByCourseName(@RequestParam ("course_name") String course_name){ 
+		  return modulesRepo.findModuleByCourseName(course_name);
+		  
+	  }  
 	
 	  
 	  
