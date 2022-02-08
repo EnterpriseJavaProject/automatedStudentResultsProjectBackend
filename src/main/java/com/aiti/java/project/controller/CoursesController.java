@@ -90,15 +90,33 @@ public class CoursesController {
 	
 	
 	
-	// FIND COURSE BY NAME
+	// FIND COURSE BY COURSE NAME
 	
-	  @GetMapping("/findCourseByName") 
+	  @GetMapping("/findCourseByCourseName") 
 	  public List<Courses> findByName(@RequestParam ("course_name") String course_name){ 
-		  return coursesRepo.findCourseByName(course_name);
+		  return coursesRepo.findCourseByCourseName(course_name);
 		  
 	  }
 	  
 	
+	
+	  
+	  
+	  
+	  
+		
+		// FIND COURSE BY COURSE LEVEL
+		
+		  @GetMapping("/findCourseByCourseLevel") 
+		  public List<Courses> findByCourseLevel(@RequestParam ("course_level") String course_level){ 
+			  return coursesRepo.findCourseByCourseLevel(course_level);
+			  
+		  }  
+	  
+	  
+	  
+	  
+	  
 	  
 	  
 	  // COUNT ALL COURSES
