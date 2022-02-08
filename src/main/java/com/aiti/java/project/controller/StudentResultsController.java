@@ -111,9 +111,65 @@ public class StudentResultsController {
 	
 	
 	
+
+//	// FIND REULTS BY STUDENT NAME
+	
+	  @GetMapping("/findResultsByStudentName") 
+	  public List<StudentResults> retrieveResultsByStudentName(@RequestParam ("student_name") String student_name){ 
+		  
+		  return studentResultsRepositry.findResultsByStudentName(student_name);
+		  
+	  }
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+//		// FIND REULTS BY COURSE NAME
+		
+		  @GetMapping("/findResultsByCourseName") 
+		  public List<StudentResults> retrieveResultsByCourseName(@RequestParam ("course_name") String course_name){ 
+			  
+			  return studentResultsRepositry.findResultsByCourseName(course_name);
+			  
+		  }
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+//			// FIND REULTS BY MODULE NAME
+			
+		  @GetMapping("/findResultsByModuleName") 
+		  public List<StudentResults> retrieveResultsByModuleName(@RequestParam ("module_name") String module_name){ 
+			  
+			  return studentResultsRepositry.findResultsByModuleName(module_name);
+			  
+		  }
+		  
+		  
+		  
+		  
+		  
+		  
+//			// FIND REULTS BY STAFF NAME
+			
+		  @GetMapping("/findResultsByStaffName") 
+		  public List<StudentResults> retrieveResultsByStaffName(@RequestParam ("staff_name") String staff_name){ 
+			  
+			  return studentResultsRepositry.findResultsByStaffName(staff_name);
+			  
+		  }
 	
 	
-	
+		  
+		  
+		  
+		  
 	
 //	// FIND REULTS BY STUDENT ID
 	
