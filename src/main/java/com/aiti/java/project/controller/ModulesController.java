@@ -93,7 +93,7 @@ public class ModulesController {
 	
 	
 	
-	// FIND MODULE BY NAME
+	// FIND MODULE BY MODULE NAME
 	
 	  @GetMapping("/findModuleByModuleName") 
 	  public List<Modules> findByName(@RequestParam ("modules_name") String modules_name){ 
@@ -106,7 +106,7 @@ public class ModulesController {
 	  
 	  
 	  
-		// FIND MODULE BY NAME
+		// FIND MODULE BY COURSE NAME
 		
 	  @GetMapping("/findModuleByCourseName") 
 	  public List<Modules> findByCourseName(@RequestParam ("course_name") String course_name){ 
