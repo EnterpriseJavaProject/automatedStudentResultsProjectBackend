@@ -219,12 +219,12 @@ public class StudentResultsController {
 	  
 //		// FIND STUDENT MARKS
 		
-		  @GetMapping("/retrieveOnlyStudentMarks/{id}") 
-		  public List<StudentResults> findOnlyMarks(@PathVariable ("id") Long id){ 
+		 // @GetMapping("/retrieveOnlyStudentMarks/{id}") 
+		//  public List<StudentResults> findOnlyMarks(@PathVariable ("id") Long id){ 
 			  
-			  return studentResultsRepositry.findOnlyStudentMarks(id);
+			//  return studentResultsRepositry.findOnlyStudentMarks(id);
 			  
-		  }
+		//  }
 		 
 	
 
