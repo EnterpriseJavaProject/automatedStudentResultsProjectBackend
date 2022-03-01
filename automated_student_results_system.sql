@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Feb 04, 2022 at 02:10 PM
+-- Generation Time: Mar 01, 2022 at 02:37 PM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 7.3.28
 
@@ -91,8 +91,8 @@ INSERT INTO `modules` (`id`, `module_name`, `course_name`, `staff_name`, `course
 (14, 'Hibernate', 'JAVA ENTERPRISE---JAVA7.2', 'Mr Yao', 5, 'Active', '2021-09-28 11:34:30', '2021-10-19 10:04:01'),
 (15, 'Python', 'CERTIFICATE IN SOFTWARE DEVELOPMENT---CSD1.1', 'Elvis Segbewu', 1, 'Active', '2021-09-28 11:39:14', '2021-10-18 13:41:59'),
 (16, 'Powerpoint', 'INTERNATIONAL COMPUTER DRIVING LICENCE---ICDL4.2', 'Mr Kennedy Asewie', 2, 'Active', '2021-09-28 11:43:56', '2021-10-19 09:57:05'),
-(18, 'CORE JAVA & JDBC', 'DIPLOMA IN BUSINESS COMPUTING---DBC1.1', 'Mr Francis Korsah', NULL, 'Active', '2021-10-20 14:32:31', '2021-10-20 14:38:07'),
-(19, 'PHP', 'DIPLOMA IN BUSINESS COMPUTING', 'Mr Edward Yeboah', NULL, 'Active', '2021-10-20 16:12:34', '2021-10-20 16:12:34');
+(18, 'CORE JAVA & JDBC', 'DIPLOMA IN BUSINESS COMPUTING---DBC1.1', 'Mr Francis Korsah', 6, 'Active', '2021-10-20 14:32:31', '2022-02-07 10:03:53'),
+(19, 'PHP', 'DIPLOMA IN BUSINESS COMPUTING', 'Mr Edward Yeboah', 6, 'Active', '2021-10-20 16:12:34', '2022-02-07 10:03:43');
 
 -- --------------------------------------------------------
 
@@ -119,18 +119,18 @@ CREATE TABLE `staffs` (
 
 INSERT INTO `staffs` (`id`, `name`, `staff_id`, `email`, `contact`, `usertype`, `course`, `status`, `created_at`, `updated_at`) VALUES
 (1, 'Mr Francis Korsah', 'St2632', 'firstinstructor@aiti-kace.com.gh', '0555560810', 'Instructor', 'CERTIFICATE IN SOFTWARE DEVELOPMENT', 'Active', '2021-09-18 08:55:07', '2021-09-22 11:28:20'),
-(3, 'Mr Gabriel Dwamena', 'St3073', 'coursecordinator@aiti-kace.com.gh', '0207638264', 'Course Cordinator', NULL, 'Active', '2021-09-18 08:51:50', '2021-10-20 15:25:14'),
-(7, 'Bismark Otu', 'ST41941', 'bismarko@aiti-kace.com.gh', '0549057688', 'Instructor', 'CERTIFICATE IN SOFTWARE DEVELOPMENT', 'Active', '2021-09-24 10:47:14', '2021-09-24 10:47:14'),
-(10, 'Elvis Segbawu', 'ST5645', 'elviss@aiti-kace.com.gh', '0505736458', 'Instructor', 'CERTIFICATE IN SOFTWARE DEVELOPMENT	', 'Active', '2021-10-20 16:00:15', '2021-10-20 16:02:19'),
-(9, 'Mr Hermas Songtaa', 'ST5768', 'hermass@aiti-kace.com.gh', '0548276444', 'Instructor', 'CERTIFICATE IN SOFTWARE DEVELOPMENT', 'Active', '2021-10-20 14:06:27', '2021-10-20 14:06:27'),
-(12, 'Mr Edward Yeboah', 'ST6580', 'edwardy@aiti-kace.com.gh', '0249658903', 'Instructor', 'DIPLOMA IN BUSINESS COMPUTING', 'Active', '2021-10-20 16:12:11', '2021-10-20 16:12:11'),
 (2, 'Mr Lawrence Kpodo', 'St6833', 'academicsecretary@aiti-kace.com.gh', '0547386724', 'Academic Secretary', NULL, 'Active', '2021-09-18 08:50:25', '2021-10-20 15:25:22'),
-(5, 'Mr Kennedy Asewie', 'St7308', 'secondinstructor@aiti-kace.com.gh', '0542426541', 'Instructor', 'INTERNATIONAL COMPUTER DRIVING LICENCE', 'Active', '2021-09-18 09:19:34', '2021-09-23 15:44:36'),
-(11, 'Jude Clottey', 'ST7429', 'judec@aiti-kace.com.gh', '0275856453', 'Instructor', 'CERTIFICATE IN SOFTWARE DEVELOPMENT', 'Active', '2021-10-20 16:09:35', '2021-10-20 16:09:35'),
+(3, 'Mr Gabriel Dwamena', 'St3073', 'coursecordinator@aiti-kace.com.gh', '0207638264', 'Course Cordinator', NULL, 'Active', '2021-09-18 08:51:50', '2021-10-20 15:25:14'),
+(4, 'Dr Yaw Okraku-Yirenkyi', 'St9462', 'directorofstudies@aiti-kace.com.gh', '0207693568', 'Director of Studies', NULL, 'Active', '2021-09-18 09:04:03', '2021-10-20 17:08:19'),
+(5, 'Kennedy Asewie', 'St7308', 'secondinstructor@aiti-kace.com.gh', '0542426541', 'Instructor', 'INTERNATIONAL COMPUTER DRIVING LICENCE', 'Active', '2021-09-18 09:19:34', '2022-02-15 11:40:20'),
 (6, 'Mr Yao', 'ST7834', 'yaoa@aiti-kace.com.gh', '0207457634', 'Instructor', 'JAVA ENTERPRISE', 'Active', '2021-10-19 10:03:24', '2021-10-19 10:03:24'),
+(7, 'Bismark Otu', 'ST41941', 'bismarko@aiti-kace.com.gh', '0549057688', 'Instructor', 'CERTIFICATE IN SOFTWARE DEVELOPMENT', 'Active', '2021-09-24 10:47:14', '2021-09-24 10:47:14'),
 (8, 'Nana Kwesi', 'St845', 'nanakwesi1006@hotmail.com', '0247016266', 'Instructor', 'International Computer Driving Licence', 'Active', '2021-09-24 10:49:08', '2021-09-24 10:52:25'),
-(13, 'Mr Isaac', 'ST8920', 'isaaca@aiti-kace.com.gh', '0573856354', 'Instructor', 'NETWORK INFORMATION SECURITY', 'Active', '2021-10-21 16:49:37', '2021-10-21 16:49:37'),
-(4, 'Dr Yaw Okraku-Yirenkyi', 'St9462', 'directorofstudies@aiti-kace.com.gh', '0207693568', 'Director of Studies', NULL, 'Active', '2021-09-18 09:04:03', '2021-10-20 17:08:19');
+(9, 'Mr Hermas Songtaa', 'ST5768', 'hermass@aiti-kace.com.gh', '0548276444', 'Instructor', 'CERTIFICATE IN SOFTWARE DEVELOPMENT', 'Active', '2021-10-20 14:06:27', '2021-10-20 14:06:27'),
+(10, 'Elvis Segbawu', 'ST5645', 'elviss@aiti-kace.com.gh', '0505736458', 'Instructor', 'CERTIFICATE IN SOFTWARE DEVELOPMENT	', 'Active', '2021-10-20 16:00:15', '2021-10-20 16:02:19'),
+(11, 'Jude Clottey', 'ST7429', 'judec@aiti-kace.com.gh', '0275856453', 'Instructor', 'CERTIFICATE IN SOFTWARE DEVELOPMENT', 'Active', '2021-10-20 16:09:35', '2021-10-20 16:09:35'),
+(12, 'Mr Edward Yeboah', 'ST6580', 'edwardy@aiti-kace.com.gh', '0249658903', 'Instructor', 'DIPLOMA IN BUSINESS COMPUTING', 'Active', '2021-10-20 16:12:11', '2021-10-20 16:12:11'),
+(13, 'Mr Isaac', 'ST8920', 'isaaca@aiti-kace.com.gh', '0573856354', 'Instructor', 'NETWORK INFORMATION SECURITY', 'Active', '2021-10-21 16:49:37', '2021-10-21 16:49:37');
 
 -- --------------------------------------------------------
 
@@ -141,7 +141,7 @@ INSERT INTO `staffs` (`id`, `name`, `staff_id`, `email`, `contact`, `usertype`, 
 CREATE TABLE `students` (
   `id` int(255) NOT NULL,
   `name` varchar(250) DEFAULT NULL,
-  `student_id` varchar(255) NOT NULL,
+  `student_id` varchar(255) DEFAULT NULL,
   `course_id` int(255) DEFAULT NULL,
   `date_of_birth` varchar(255) DEFAULT NULL,
   `contact` varchar(255) DEFAULT NULL,
@@ -158,7 +158,7 @@ CREATE TABLE `students` (
 --
 
 INSERT INTO `students` (`id`, `name`, `student_id`, `course_id`, `date_of_birth`, `contact`, `gender`, `email`, `fees`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Nana Kwesi', 'CSD1.12020M001', 1, '2000-11-20', '0555560810', 'male', 'firststudent@aiti-kace.com.gh', '', 'Active', '2021-09-15 12:16:36', '2021-10-18 11:59:09'),
+(1, 'Nana Kwesi', 'CSD1.12020M001', 1, '2000-11-20', '0555560810', 'Male', 'firststudent@aiti-kace.com.gh', '', 'Active', '2021-09-15 12:16:36', '2022-02-28 11:34:57'),
 (2, 'Mary Otu', 'ICDL6.82021M045', 2, '2001-10-14', '0209563478', 'Female', 'maryotu1006@gmail.com', '', 'Active', '2021-10-11 13:19:47', '2021-10-19 16:49:31'),
 (3, 'Solomon OKyere', 'Java2020M009', 5, '1999-11-30', '0547457890', 'Male', 'solomonokyere2843@gmail.com', '', 'Active', '2021-10-19 09:52:47', '2021-10-19 16:49:34'),
 (4, 'Bismark Otu', 'DBC2020M038', 6, '2001-10-14', '0570578396', 'Male', 'bismarkotu10@gmail.com', '', 'Active', '2021-10-29 13:43:34', '2021-10-29 14:08:08'),
@@ -180,7 +180,7 @@ CREATE TABLE `students_results` (
   `id` int(255) NOT NULL,
   `studentname` varchar(255) DEFAULT NULL,
   `studentid` varchar(255) DEFAULT NULL,
-  `coursename` varchar(255) DEFAULT NULL,
+  `course_id` int(255) DEFAULT NULL,
   `modulename` varchar(255) DEFAULT NULL,
   `staffname` varchar(255) DEFAULT NULL,
   `marks` int(100) DEFAULT NULL,
@@ -188,18 +188,6 @@ CREATE TABLE `students_results` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `students_results`
---
-
-INSERT INTO `students_results` (`id`, `studentname`, `studentid`, `coursename`, `modulename`, `staffname`, `marks`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Nana Kwesi', 'CSD1.12020M001', 'CERTIFICATE IN SOFTWARE DEVELOPMENT---CSD1.1', 'Oracle Database', 'Bismark Otu', NULL, 'Active', '2022-02-03 15:13:51', '2022-02-03 15:14:08'),
-(2, 'Akeem Amosu', 'CSD1.22021M002', 'CERTIFICATE IN SOFTWARE DEVELOPMENT---CSD1.1', 'Oracle Database', 'Bismark Otu', 79, 'Active', '2022-02-03 15:13:51', '2022-02-03 15:13:51'),
-(3, 'Felix Annan', 'CSD2020M027', 'CERTIFICATE IN SOFTWARE DEVELOPMENT---CSD1.1', 'Oracle Database', 'Bismark Otu', 66, 'Active', '2022-02-03 15:13:51', '2022-02-03 15:13:51'),
-(4, 'Nana Kwesi', 'CSD1.12020M001', 'CERTIFICATE IN SOFTWARE DEVELOPMENT---CSD1.1', 'HTML/CSS', 'Mr Francis Korsah', 81, 'Active', '2022-02-04 10:09:29', '2022-02-04 10:09:29'),
-(5, 'Akeem Amosu', 'CSD1.22021M002', 'CERTIFICATE IN SOFTWARE DEVELOPMENT---CSD1.1', 'HTML/CSS', 'Mr Francis Korsah', 60, 'Active', '2022-02-04 10:09:29', '2022-02-04 10:09:29'),
-(6, 'Felix Annan', 'CSD2020M027', 'CERTIFICATE IN SOFTWARE DEVELOPMENT---CSD1.1', 'HTML/CSS', 'Mr Francis Korsah', 78, 'Active', '2022-02-04 10:09:29', '2022-02-04 10:09:29');
 
 -- --------------------------------------------------------
 
@@ -247,28 +235,48 @@ ALTER TABLE `modules`
   ADD KEY `course_ibfk_4` (`course_id`);
 
 --
+-- Indexes for table `staffs`
+--
+ALTER TABLE `staffs`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `students`
 --
 ALTER TABLE `students`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `student_id` (`student_id`);
+  ADD UNIQUE KEY `student_id` (`student_id`),
+  ADD KEY `fk_course` (`course_id`);
 
 --
 -- Indexes for table `students_results`
 --
 ALTER TABLE `students_results`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `fk` (`studentid`);
+  ADD KEY `hg_stu` (`studentid`),
+  ADD KEY `hg_cour` (`course_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
+-- AUTO_INCREMENT for table `courses`
+--
+ALTER TABLE `courses`
+  MODIFY `id` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
 -- AUTO_INCREMENT for table `modules`
 --
 ALTER TABLE `modules`
   MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT for table `staffs`
+--
+ALTER TABLE `staffs`
+  MODIFY `id` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `students`
@@ -280,17 +288,30 @@ ALTER TABLE `students`
 -- AUTO_INCREMENT for table `students_results`
 --
 ALTER TABLE `students_results`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
 --
 
 --
+-- Constraints for table `modules`
+--
+ALTER TABLE `modules`
+  ADD CONSTRAINT `fk_course_id` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`);
+
+--
+-- Constraints for table `students`
+--
+ALTER TABLE `students`
+  ADD CONSTRAINT `fk_course` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`);
+
+--
 -- Constraints for table `students_results`
 --
 ALTER TABLE `students_results`
-  ADD CONSTRAINT `fk` FOREIGN KEY (`studentid`) REFERENCES `students` (`student_id`);
+  ADD CONSTRAINT `hg_cour` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`),
+  ADD CONSTRAINT `hg_stu` FOREIGN KEY (`studentid`) REFERENCES `students` (`student_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
