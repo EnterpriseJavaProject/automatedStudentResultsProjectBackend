@@ -1,5 +1,9 @@
 package com.aiti.java.project.controller;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +11,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -200,14 +203,43 @@ public class StudentResultsController {
 	  
 	  
 	  
+		// METHOD TO INSERT STUDENT NAME,ID,COURSE_ID,MODULE NAME AND STAFF NAME INTO RESULTS TABLE
 	  
 	  
-//	// FIND STUDENT MARKS
-		
-	  @GetMapping("/findOnlyStudentMarks") 
-	  public List<StudentResults> retrieveOnlyMarks(@RequestParam ("id") Long id){ 
+	  @GetMapping("/insertIntoStudentNameIDandCourseIdIntoResults") 
+	  public Long insertIntoResults(@RequestParam("module_id") Long module_id) throws SQLException, ClassNotFoundException{ 
 		  
-		  return studentResultsRepositry.findOnlyStudentMarks(id);
+		 
+		  Long module_idd = module_id;
+			
+			
+			Class.forName("com.mysql.cj.jdbc.Driver");
+
+			
+			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/automated_student_results_system", "root", "");
+			
+			
+			PreparedStatement statement = conn.prepareStatement("INSERT into students_results(students_results.studentname, students_results.studentid,students_results.course_id,students_results.staffname, students_results.modulename, students_results.status) SELECT DISTINCT students.name, students.student_id, students.course_id, modules.staff_name, modules.module_name, modules.status FROM students, modules where students.course_id = modules.course_id and modules.id = '"+module_idd+"' GROUP by students.student_id ORDER BY modules.id");
+
+			statement.executeUpdate();
+
+			return module_id;
+
+	  }   
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+//	// FIND STUDENT INFO FROM RESULTS TABLE
+		
+	  @GetMapping("/findAllStudentsUnderResults") 
+	  public List<StudentResults> findAllStudentsUnderResults(@RequestParam ("module_id") Long module_id){ 
+		  
+		  return studentResultsRepositry.findAllStudentsUnderResults(module_id);
 		  
 	  }
 	
@@ -215,16 +247,8 @@ public class StudentResultsController {
 	
 	
 	  
-	  
-	  
-//		// FIND STUDENT MARKS
-		
-		 // @GetMapping("/retrieveOnlyStudentMarks/{id}") 
-		//  public List<StudentResults> findOnlyMarks(@PathVariable ("id") Long id){ 
-			  
-			//  return studentResultsRepositry.findOnlyStudentMarks(id);
-			  
-		//  }
+
+
 		 
 	
 
