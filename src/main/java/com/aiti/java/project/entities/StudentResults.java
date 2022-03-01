@@ -16,7 +16,7 @@ public class StudentResults {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	private String studentname;
-	private String coursename;
+	private String course_id;
 	private String studentid;
 	private String modulename;
 	private String staffname;
@@ -36,12 +36,12 @@ public class StudentResults {
 
 
 
-	public StudentResults(Long id, String studentname, String coursename, String studentid, String modulename,
+	public StudentResults(Long id, String studentname, String course_id, String studentid, String modulename,
 			String staffname, String marks, String status, String created_at, String updated_at) {
 		super();
 		this.id = id;
 		this.studentname = studentname;
-		this.coursename = coursename;
+		this.course_id = course_id;
 		this.studentid = studentid;
 		this.modulename = modulename;
 		this.staffname = staffname;
@@ -82,15 +82,15 @@ public class StudentResults {
 
 
 
-	public String getCoursename() {
-		return coursename;
+	public String getCourse_id() {
+		return course_id;
 	}
 
 
 
 
-	public void setCoursename(String coursename) {
-		this.coursename = coursename;
+	public void setCourse_id(String course_id) {
+		this.course_id = course_id;
 	}
 
 
@@ -196,20 +196,14 @@ public class StudentResults {
 
 	@Override
 	public String toString() {
-		return "StudentResults [id=" + id + ", studentname=" + studentname + ", coursename=" + coursename
-				+ ", studentid=" + studentid + ", modulename=" + modulename + ", staffname=" + staffname + ", marks="
-				+ marks + ", status=" + status + ", created_at=" + created_at + ", updated_at=" + updated_at + "]";
+		return "StudentResults [id=" + id + ", studentname=" + studentname + ", course_id=" + course_id + ", studentid="
+				+ studentid + ", modulename=" + modulename + ", staffname=" + staffname + ", marks=" + marks
+				+ ", status=" + status + ", created_at=" + created_at + ", updated_at=" + updated_at + "]";
 	}
 
 
 
 
-	
-	
-	
-	
-	
-	
 	
 	
 	
