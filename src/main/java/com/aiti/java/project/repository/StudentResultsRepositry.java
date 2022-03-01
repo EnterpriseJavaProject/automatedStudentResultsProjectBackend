@@ -1,8 +1,10 @@
 package com.aiti.java.project.repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import com.aiti.java.project.entities.StudentResults;
@@ -13,8 +15,8 @@ public interface StudentResultsRepositry extends JpaRepository<StudentResults, L
 	
 	
 	// FIND STUDENT MARKS
-	@Query(value="SELECT DISTINCT students_results.id, students_results.studentName, students_results.studentID, students_results.courseName, students_results.moduleName, students_results.staffName, students_results.marks, students_results.status, students_results.created_at, students_results.updated_at FROM students_results INNER JOIN modules ON students_results.courseName = modules.course_name and students_results.moduleName = modules.module_name and students_results.staffName = modules.staff_name where students_results.courseName = modules.course_name and students_results.moduleName = modules.module_name and students_results.staffName = modules.staff_name and modules.id = ?  GROUP by students_results.id ORDER BY students_results.id" , nativeQuery = true )
-	List<StudentResults> findOnlyStudentMarks(Long id);
+	@Query(value="SELECT DISTINCT students_results.id, students_results.studentname, students_results.studentid, students_results.course_id, students_results.modulename, students_results.staffname, students_results.marks, students_results.status, students_results.created_at, students_results.updated_at FROM students_results INNER JOIN modules ON  students_results.modulename = modules.module_name and students_results.staffname = modules.staff_name where students_results.course_id = modules.course_id and modules.id = ?  GROUP by students_results.id ORDER BY modules.id;" , nativeQuery = true )
+	List<StudentResults> findAllStudentsUnderResults(Long module_id);
 	
 	
 	
@@ -64,14 +66,7 @@ public interface StudentResultsRepositry extends JpaRepository<StudentResults, L
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 	
 	// COUNT ALL RESULTS
@@ -80,5 +75,41 @@ public interface StudentResultsRepositry extends JpaRepository<StudentResults, L
 	public String countResults();
 	
 	
+	
+	
+	
 
+	
+	
+	@Query(value="SELECT DISTINCT students.name, students.student_id, students_results.marks FROM students INNER JOIN students_results on students.student_id = students_results.studentid INNER JOIN modules ON students_results.courseName = modules.course_name and students_results.moduleName = modules.module_name and students_results.staffName = modules.staff_name where students_results.courseName = modules.course_name and students_results.moduleName = modules.module_name and students_results.staffName = modules.staff_name and modules.id = ?  GROUP by students_results.id ORDER BY students_results.id", nativeQuery=true)
+	ArrayList<Object> findStudentNameStudentIdAndMarks(Long id);
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	// METHOD TO INSERT INTO RESULTS TABLE AND SELECT FROM STUDENT TBALE
+	@Modifying
+	@Query
+	(value="INSERT into students_results(students_results.studentname,students_results.studentid,students_results.course_id) SELECT DISTINCT students.name, students.student_id, students.course_id FROM students INNER JOIN modules ON students.course_id = modules.course_id where students.course_id = modules.course_id and modules.id = ?  GROUP by students.student_id ORDER BY modules.id", nativeQuery=true)
+	public List<StudentResults> insertIntoResults(Long id);
+	
+	
+
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
 }
