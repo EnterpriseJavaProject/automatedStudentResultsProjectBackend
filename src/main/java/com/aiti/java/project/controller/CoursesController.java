@@ -135,9 +135,9 @@ public class CoursesController {
 		//	FIND STUDENT COURSES
 	
 	@GetMapping("/findStudentCourses")
-	public List<Courses> findStudentCourses(@RequestParam("student_id") Long id) {
+	public List<Courses> findStudentCourses(@RequestParam("student_id") Long student_id) {
 
-		return coursesRepo.findStudentCourses(id);
+		return coursesRepo.findStudentCourses(student_id);
 
 	}
 	
@@ -147,9 +147,9 @@ public class CoursesController {
 	//	FIND STUDENT COURSES
 	
 @GetMapping("/findStaffCourses")
-public List<Courses> findStaffCourses(@RequestParam("student_id") Long id) {
+public List<Courses> findStaffCourses(@RequestParam("staff_id") Long staff_id) {
 
-	return coursesRepo.findStaffCourses(id);
+	return coursesRepo.findStaffCourses(staff_id);
 
 }
 
