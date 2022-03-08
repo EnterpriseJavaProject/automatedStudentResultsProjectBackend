@@ -1,6 +1,5 @@
 package com.aiti.java.project.entities;
 
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,7 +8,6 @@ import javax.persistence.Table;
 
 
 @Entity
-@DiscriminatorValue("0")
 @Table(name="modules")
 public class Modules {
 	
@@ -21,6 +19,8 @@ public class Modules {
 	private String staff_name;
 	private String course_id;
 	private String status;
+	private String module_start_date;
+	private String module_end_date;
 	private String created_at;
 	private String updated_at;
 //	private String count;
@@ -43,17 +43,8 @@ public class Modules {
 
 
 
-	
-
-
-	
-	
-	
-	
-	
-	
 	public Modules(Long id, String course_name, String module_name, String staff_name, String course_id, String status,
-			String created_at, String updated_at) {
+			String module_start_date, String module_end_date, String created_at, String updated_at) {
 		super();
 		this.id = id;
 		this.course_name = course_name;
@@ -61,6 +52,8 @@ public class Modules {
 		this.staff_name = staff_name;
 		this.course_id = course_id;
 		this.status = status;
+		this.module_start_date = module_start_date;
+		this.module_end_date = module_end_date;
 		this.created_at = created_at;
 		this.updated_at = updated_at;
 	}
@@ -68,25 +61,9 @@ public class Modules {
 
 
 
-
-
-
-
-	
-
-
 	public Long getId() {
 		return id;
 	}
-
-
-
-
-
-
-
-
-
 
 
 
@@ -98,27 +75,9 @@ public class Modules {
 
 
 
-
-
-
-
-
-
-
-
-
 	public String getCourse_name() {
 		return course_name;
 	}
-
-
-
-
-
-
-
-
-
 
 
 
@@ -130,27 +89,9 @@ public class Modules {
 
 
 
-
-
-
-
-
-
-
-
-
 	public String getModule_name() {
 		return module_name;
 	}
-
-
-
-
-
-
-
-
-
 
 
 
@@ -162,27 +103,9 @@ public class Modules {
 
 
 
-
-
-
-
-
-
-
-
-
 	public String getStaff_name() {
 		return staff_name;
 	}
-
-
-
-
-
-
-
-
-
 
 
 
@@ -194,27 +117,9 @@ public class Modules {
 
 
 
-
-
-
-
-
-
-
-
-
 	public String getCourse_id() {
 		return course_id;
 	}
-
-
-
-
-
-
-
-
-
 
 
 
@@ -226,27 +131,9 @@ public class Modules {
 
 
 
-
-
-
-
-
-
-
-
-
 	public String getStatus() {
 		return status;
 	}
-
-
-
-
-
-
-
-
-
 
 
 
@@ -258,11 +145,30 @@ public class Modules {
 
 
 
+	public String getModule_start_date() {
+		return module_start_date;
+	}
 
 
 
 
+	public void setModule_start_date(String module_start_date) {
+		this.module_start_date = module_start_date;
+	}
 
+
+
+
+	public String getModule_end_date() {
+		return module_end_date;
+	}
+
+
+
+
+	public void setModule_end_date(String module_end_date) {
+		this.module_end_date = module_end_date;
+	}
 
 
 
@@ -274,27 +180,9 @@ public class Modules {
 
 
 
-
-
-
-
-
-
-
-
-
 	public void setCreated_at(String created_at) {
 		this.created_at = created_at;
 	}
-
-
-
-
-
-
-
-
-
 
 
 
@@ -306,15 +194,6 @@ public class Modules {
 
 
 
-
-
-
-
-
-
-
-
-
 	public void setUpdated_at(String updated_at) {
 		this.updated_at = updated_at;
 	}
@@ -322,40 +201,23 @@ public class Modules {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 	@Override
 	public String toString() {
 		return "Modules [id=" + id + ", course_name=" + course_name + ", module_name=" + module_name + ", staff_name="
-				+ staff_name + ", course_id=" + course_id + ", status=" + status + ", created_at=" + created_at
+				+ staff_name + ", course_id=" + course_id + ", status=" + status + ", module_start_date="
+				+ module_start_date + ", module_end_date=" + module_end_date + ", created_at=" + created_at
 				+ ", updated_at=" + updated_at + "]";
 	}
 
 
 
 
+	
 
 
-
-
-
-
-
-	public String toString1() {
-		return "[course_name=" + course_name + ", module_name=" + module_name + ", staff_name="
-				+ staff_name + "]";
-	}
-
+	
+	
+	
 	
 	
 	
