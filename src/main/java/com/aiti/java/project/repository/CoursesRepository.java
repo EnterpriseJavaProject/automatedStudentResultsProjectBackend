@@ -56,7 +56,7 @@ public interface CoursesRepository extends JpaRepository<Courses, Long> {
 	//	FIND STUDENT COURSES
 	
 	@Query(value="SELECT courses.id, courses.course_name, courses.course_level, courses.status, courses.created_at, courses.updated_at, courses.course_start_date, courses.course_end_date, courses.certificate_issuedate FROM courses inner join students on courses.id = students.course_id WHERE courses.id = students.course_id and students.id = ? GROUP by courses.course_name order by courses.course_name", nativeQuery=true)
-	public List<Courses> findStudentCourses(Long id);
+	public List<Courses> findStudentCourses(Long student_id);
 	
 	
 	
@@ -66,7 +66,7 @@ public interface CoursesRepository extends JpaRepository<Courses, Long> {
 //	FIND STAFF COURSES
 	
 	@Query(value="SELECT courses.id, courses.course_name, courses.course_level, courses.status, courses.created_at, courses.updated_at, courses.course_start_date, courses.course_end_date, courses.certificate_issuedate FROM courses inner join staffs on courses.id = staffs.course_id WHERE courses.id = staffs.course_id and staffs.id = ? GROUP by courses.course_name order by courses.course_name", nativeQuery=true)
-	public List<Courses> findStaffCourses(Long id);
+	public List<Courses> findStaffCourses(Long staff_id);
 	
 	
 	
