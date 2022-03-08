@@ -50,6 +50,23 @@ public interface CoursesRepository extends JpaRepository<Courses, Long> {
 	
 	@Query(value="select count(*) from courses", nativeQuery=true)
 	public String countCourses();
+	
+	
+	
+		//  TOTAL NUMBER OF MODULES UNDER EACH COURSE
+	
+	@Query(value="SELECT count(modules.module_name) from modules INNER join courses on modules.course_id = courses.id where modules.course_id = courses.id and courses.id = ? GROUP by modules.course_name", nativeQuery=true)
+	public Long totalNumberOfModulesUnderEachCourse(Long id);
+	
+	
+	
+	
+	
+	
+	//  TOTAL NUMBER OF STUDENTS UNDER EACH COURSE
+	
+	@Query(value="SELECT count(students.name) from students INNER join courses on students.course_id = courses.id where students.course_id = courses.id and courses.id = ?  GROUP by courses.id order by courses.id", nativeQuery=true)
+	public Long totalNumberOfStudentsUnderEachCourse(Long id);
 
 	
 	
