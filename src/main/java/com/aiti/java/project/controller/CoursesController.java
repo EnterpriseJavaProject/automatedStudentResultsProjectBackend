@@ -126,6 +126,42 @@ public class CoursesController {
 		  
 		  return coursesRepo.countCourses();
 	  }
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		// TOTAL NUMBER OF  MODULES UNDER EACH COURSE
+
+	@GetMapping("/totalNumberOfModulesUnderEachCourse")
+	public Long totalNumberOfModulesUnderEachCourse(@RequestParam("id") Long id) {
+
+		return coursesRepo.totalNumberOfModulesUnderEachCourse(id);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+
+	// TOTAL NUMBER OF STUDENTS UNDER EACH COURSE
+	
+	@GetMapping("/totalNumberOfStudentsUnderEachCourse")
+	public Long totalNumberOfStudentsUnderEachCourse(@RequestParam("id") Long id) {
+
+		return coursesRepo.totalNumberOfStudentsUnderEachCourse(id);
+
+	}
+	
 	  
 	
 
