@@ -20,7 +20,7 @@ public class Staffs {
 	private String email;
 	private String contact;
 	private String usertype;
-	private String course;
+	private Long course_id;
 	private String status;
 	private String created_at;
 	private String updated_at;
@@ -40,7 +40,7 @@ public class Staffs {
 
 
 
-	public Staffs(int id, String staff_id, String name, String email, String contact, String usertype, String course,
+	public Staffs(int id, String staff_id, String name, String email, String contact, String usertype, Long course_id,
 			String status, String created_at, String updated_at) {
 		super();
 		this.id = id;
@@ -49,7 +49,7 @@ public class Staffs {
 		this.email = email;
 		this.contact = contact;
 		this.usertype = usertype;
-		this.course = course;
+		this.course_id = course_id;
 		this.status = status;
 		this.created_at = created_at;
 		this.updated_at = updated_at;
@@ -168,8 +168,8 @@ public class Staffs {
 
 
 
-	public String getCourse() {
-		return course;
+	public Long getCourse_id() {
+		return course_id;
 	}
 
 
@@ -177,8 +177,8 @@ public class Staffs {
 
 
 
-	public void setCourse(String course) {
-		this.course = course;
+	public void setCourse_id(Long course_id) {
+		this.course_id = course_id;
 	}
 
 
@@ -243,10 +243,9 @@ public class Staffs {
 	@Override
 	public String toString() {
 		return "Staffs [id=" + id + ", staff_id=" + staff_id + ", name=" + name + ", email=" + email + ", contact="
-				+ contact + ", usertype=" + usertype + ", course=" + course + ", status=" + status + ", created_at="
-				+ created_at + ", updated_at=" + updated_at + "]";
+				+ contact + ", usertype=" + usertype + ", course_id=" + course_id + ", status=" + status
+				+ ", created_at=" + created_at + ", updated_at=" + updated_at + "]";
 	}
-
 
 
 
