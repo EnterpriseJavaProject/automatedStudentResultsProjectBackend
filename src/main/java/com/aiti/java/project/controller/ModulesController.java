@@ -132,12 +132,12 @@ public class ModulesController {
 	  
 		
 		
- 	  
+  	  
 		//   ALL MODULES UNDER EACH COURSE
-	  @GetMapping("/findModulesUnderEachCourseById")
-	  public List<Modules> findModulesUnderEachCourseById(@RequestParam("id") int id) {
+	  @GetMapping("/findModulesUnderEachCourse")
+	  public List<Modules> alModulesUnderEachCourse(@RequestParam("id") Long id) {
 		  
-		  return modulesRepo.findModulesUnderEachCourseById(id);
+		  return modulesRepo.alModulesUnderEachCourse(id);
 		  
 	  }
 	  
