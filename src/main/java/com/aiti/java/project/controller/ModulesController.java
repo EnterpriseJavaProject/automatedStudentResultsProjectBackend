@@ -113,6 +113,25 @@ public class ModulesController {
 		  return modulesRepo.findModuleByCourseName(course_name);
 		  
 	  }  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+		// FIND MODULE BY COURSE NAME
+		
+	  @GetMapping("/findByCourseID") 
+	  public List<Modules> findByCourseID(@RequestParam ("course_id") Long course_id){ 
+		  return modulesRepo.findModuleByCourseID(course_id);
+		  
+	  }  
+	  
+	  
+	  
+	  
+	  
 	
 	  
 	  
@@ -132,12 +151,12 @@ public class ModulesController {
 	  
 		
 		
-  	  
+ 	  
 		//   ALL MODULES UNDER EACH COURSE
 	  @GetMapping("/findModulesUnderEachCourse")
-	  public List<Modules> alModulesUnderEachCourse(@RequestParam("id") Long id) {
+	  public List<Modules> findModulesUnderEachCourseById(@RequestParam("id") Long id) {
 		  
-		  return modulesRepo.alModulesUnderEachCourse(id);
+		  return modulesRepo.allModulesUnderEachCourse(id);
 		  
 	  }
 	  
@@ -174,11 +193,11 @@ public class ModulesController {
 
 //
 //				//RETRIEVE THE TOTAL NUMBER OF MODULES UNDER EACH COURSE
-//				  	  @GetMapping("/totalNumberOfModulesUnderEachCourse/{id}")
-//				  public List<Modules> findTotalNumberOfModulesUnderEachCourseById(@PathVariable("id") int id) {
-//					  
-//					  return modulesRepo.findTotalNumberOfModulesUnderEachCourseById(id);
-//				  }
+				  	  @GetMapping("/totalNumberOfModulesUnderEachCourse")
+				  public List<Modules> findTotalNumberOfModulesUnderEachCourseById(@RequestParam("course_id") int course_id) {
+					  
+					  return modulesRepo.findTotalNumberOfModulesUnderEachCourseById(course_id);
+				  }
 //
 //
 //
