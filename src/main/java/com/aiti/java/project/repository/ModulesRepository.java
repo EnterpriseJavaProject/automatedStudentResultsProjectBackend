@@ -28,6 +28,12 @@ public interface ModulesRepository extends JpaRepository<Modules, Long>  {
 	
 	
 	
+	// FIND MODULE BY  COURSE ID
+	@Query(value="SELECT DISTINCT modules.course_name,modules.module_start_date, modules.module_end_date, modules.id, modules.module_name, modules.course_id, modules.staff_name, modules.status, modules.created_at, modules.updated_at FROM modules where modules.course_id = ? order by modules.course_id", nativeQuery=true)
+	List<Modules> findModuleByCourseID(Long course_id);
+	
+	
+	
 	
 	
 	@Query(value="select count(*) from modules", nativeQuery=true)
@@ -42,7 +48,7 @@ public interface ModulesRepository extends JpaRepository<Modules, Long>  {
 //  ALL MODULES UNDER EACH COURSE
 	
 	@Query(value="select modules.id, modules.module_name,modules.module_start_date, modules.module_end_date, modules.module_start_date, modules.module_end_date,modules.course_name, modules.course_id, modules.staff_name, modules.status, modules.created_at, modules.updated_at from modules inner join courses on modules.course_id = courses.id where modules.course_id = courses.id and courses.id = ? GROUP by modules.module_name order by modules.module_name", nativeQuery=true)
-	public List<Modules> alModulesUnderEachCourse(Long id);
+	public List<Modules> allModulesUnderEachCourse(Long id);
 	
 	
 	
