@@ -15,12 +15,13 @@ public class StudentResults {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
-	private String studentname;
+	private String name;
 	private String course_id;
-	private String studentid;
+	private String student_id;
 	private String modulename;
 	private String staffname;
 	private String marks;
+	private int module_id;
 	private String status;
 	private String created_at;
 	private String updated_at;
@@ -36,16 +37,17 @@ public class StudentResults {
 
 
 
-	public StudentResults(Long id, String studentname, String course_id, String studentid, String modulename,
-			String staffname, String marks, String status, String created_at, String updated_at) {
+	public StudentResults(Long id, String name, String course_id, String student_id, String modulename,
+			String staffname, String marks, int module_id, String status, String created_at, String updated_at) {
 		super();
 		this.id = id;
-		this.studentname = studentname;
+		this.name = name;
 		this.course_id = course_id;
-		this.studentid = studentid;
+		this.student_id = student_id;
 		this.modulename = modulename;
 		this.staffname = staffname;
 		this.marks = marks;
+		this.module_id = module_id;
 		this.status = status;
 		this.created_at = created_at;
 		this.updated_at = updated_at;
@@ -68,15 +70,15 @@ public class StudentResults {
 
 
 
-	public String getStudentname() {
-		return studentname;
+	public String getName() {
+		return name;
 	}
 
 
 
 
-	public void setStudentname(String studentname) {
-		this.studentname = studentname;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 
@@ -96,15 +98,15 @@ public class StudentResults {
 
 
 
-	public String getStudentid() {
-		return studentid;
+	public String getStudent_id() {
+		return student_id;
 	}
 
 
 
 
-	public void setStudentid(String studentid) {
-		this.studentid = studentid;
+	public void setStudent_id(String student_id) {
+		this.student_id = student_id;
 	}
 
 
@@ -147,6 +149,20 @@ public class StudentResults {
 
 	public void setMarks(String marks) {
 		this.marks = marks;
+	}
+
+
+
+
+	public int getModule_id() {
+		return module_id;
+	}
+
+
+
+
+	public void setModule_id(int module_id) {
+		this.module_id = module_id;
 	}
 
 
@@ -196,17 +212,16 @@ public class StudentResults {
 
 	@Override
 	public String toString() {
-		return "StudentResults [id=" + id + ", studentname=" + studentname + ", course_id=" + course_id + ", studentid="
-				+ studentid + ", modulename=" + modulename + ", staffname=" + staffname + ", marks=" + marks
-				+ ", status=" + status + ", created_at=" + created_at + ", updated_at=" + updated_at + "]";
+		return "StudentResults [id=" + id + ", name=" + name + ", course_id=" + course_id + ", student_id=" + student_id
+				+ ", modulename=" + modulename + ", staffname=" + staffname + ", marks=" + marks + ", module_id="
+				+ module_id + ", status=" + status + ", created_at=" + created_at + ", updated_at=" + updated_at + "]";
 	}
 
 
 
 
 	
-	
-	
-	
 
+	
+	
 }
