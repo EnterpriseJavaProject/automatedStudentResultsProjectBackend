@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Mar 08, 2022 at 05:04 PM
--- Server version: 10.4.17-MariaDB
--- PHP Version: 7.3.26
+-- Host: 127.0.0.1
+-- Generation Time: Mar 16, 2022 at 03:39 PM
+-- Server version: 10.4.22-MariaDB
+-- PHP Version: 8.1.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -180,9 +180,10 @@ INSERT INTO `students` (`id`, `name`, `student_id`, `course_id`, `date_of_birth`
 
 CREATE TABLE `students_results` (
   `id` int(255) NOT NULL,
-  `studentname` varchar(255) DEFAULT NULL,
-  `studentid` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `student_id` varchar(255) DEFAULT NULL,
   `course_id` int(255) DEFAULT NULL,
+  `module_id` int(100) DEFAULT NULL,
   `modulename` varchar(255) DEFAULT NULL,
   `staffname` varchar(255) DEFAULT NULL,
   `marks` int(100) DEFAULT NULL,
@@ -256,8 +257,14 @@ ALTER TABLE `students`
 --
 ALTER TABLE `students_results`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `hg_stu` (`studentid`),
+  ADD KEY `hg_stu` (`student_id`),
   ADD KEY `hg_cour` (`course_id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -294,6 +301,12 @@ ALTER TABLE `students_results`
   MODIFY `id` int(255) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- Constraints for dumped tables
 --
 
@@ -320,7 +333,7 @@ ALTER TABLE `students`
 --
 ALTER TABLE `students_results`
   ADD CONSTRAINT `hg_cour` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`),
-  ADD CONSTRAINT `hg_stu` FOREIGN KEY (`studentid`) REFERENCES `students` (`student_id`);
+  ADD CONSTRAINT `hg_stu` FOREIGN KEY (`student_id`) REFERENCES `students` (`student_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
