@@ -18,7 +18,7 @@ import com.aiti.java.project.entities.Modules;
 import com.aiti.java.project.repository.ModulesRepository;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:9090")
 @RequestMapping("/modules")
 public class ModulesController {
 	
