@@ -17,7 +17,7 @@ import com.aiti.java.project.entities.Users;
 import com.aiti.java.project.repository.UsersRepository;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:9090")
 @RequestMapping("/users")
 public class UsersController {
 	
