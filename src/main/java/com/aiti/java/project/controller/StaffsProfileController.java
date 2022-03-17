@@ -17,7 +17,7 @@ import com.aiti.java.project.entities.Staffs;
 import com.aiti.java.project.repository.StaffProfileRepository;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:9090")
 @RequestMapping("/staffs")
 public class StaffsProfileController {
 	
