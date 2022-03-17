@@ -18,7 +18,7 @@ import com.aiti.java.project.repository.CoursesRepository;
 
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:9090")
 @RequestMapping("/courses")
 public class CoursesController {
 	
