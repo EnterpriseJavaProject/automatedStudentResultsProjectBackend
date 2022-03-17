@@ -21,7 +21,7 @@ import com.aiti.java.project.entities.StudentResults;
 import com.aiti.java.project.repository.StudentResultsRepositry;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:9090")
 @RequestMapping("/studentResults")
 public class StudentResultsController {
 	
