@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 16, 2022 at 03:39 PM
+-- Generation Time: Mar 24, 2022 at 11:52 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -159,18 +159,18 @@ CREATE TABLE `students` (
 -- Dumping data for table `students`
 --
 
-INSERT INTO `students` (`id`, `name`, `student_id`, `course_id`, `date_of_birth`, `contact`, `gender`, `email`, `fees`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Nana Kwesi', 'CSD1.12020M001', 1, '2000-11-20', '0555560810', 'Male', 'firststudent@aiti-kace.com.gh', '', 'Active', '2021-09-15 12:16:36', '2022-02-28 11:34:57'),
-(2, 'Mary Otu', 'ICDL6.82021M045', 2, '2001-10-14', '0209563478', 'Female', 'maryotu1006@gmail.com', '', 'Active', '2021-10-11 13:19:47', '2021-10-19 16:49:31'),
-(3, 'Solomon OKyere', 'Java2020M009', 5, '1999-11-30', '0547457890', 'Male', 'solomonokyere2843@gmail.com', '', 'Active', '2021-10-19 09:52:47', '2021-10-19 16:49:34'),
-(4, 'Bismark Otu', 'DBC2020M038', 6, '2001-10-14', '0570578396', 'Male', 'bismarkotu10@gmail.com', '', 'Active', '2021-10-29 13:43:34', '2021-10-29 14:08:08'),
-(8, 'Akeem Amosu', 'CSD1.22021M002', 1, '2021-11-30', '0570578396', 'Male', 'akeem@gmail.com', '', 'Active', '2021-12-16 12:39:20', '2021-12-16 12:39:20'),
-(9, 'Eugene Asante', 'DBC2020M011', 6, '2021-12-01', '0570578396', 'Male', 'eugeneasante654@hotmail.com', '', 'Active', '2021-12-16 12:45:02', '2021-12-16 12:45:02'),
-(10, 'Francis Annan', 'CSD1.22021M003', 2, '2021-12-02', '0208362456', 'Male', 'francisannan@gmail.com', '', 'Active', '2021-12-16 12:47:48', '2021-12-16 12:47:48'),
-(11, 'Moses Otu', 'JAVA2020M011', 5, '2021-11-28', '0249653674', 'Male', 'mosesotu@gmail.com', '', 'Active', '2021-12-16 17:01:27', '2021-12-16 17:01:27'),
-(12, 'Oscar Opoku', 'CSD1.22021M034', 3, '1999-01-01', '0578456789', 'Male', 'oscaropoku23@gmail.com', '', 'Active', '2022-01-18 10:07:14', '2022-01-18 10:07:14'),
-(13, 'Asante Richard', 'CSD1.22021M022', 3, '1999-01-01', '0507384658', 'Male', 'asanterichard3@gmail.com', '', 'Active', '2022-01-18 10:08:39', '2022-01-18 10:08:39'),
-(14, 'Felix Annan', 'CSD2020M027', 1, '2022-01-24', '0549057666', 'Male', 'felixannan22@gmail.com', '', 'Active', '2022-01-24 09:31:12', '2022-01-24 09:31:12');
+-- INSERT INTO `students` (`id`, `name`, `student_id`, `course_id`, `date_of_birth`, `contact`, `gender`, `email`, `fees`, `status`, `created_at`, `updated_at`) VALUES
+-- (1, 'Nana Kwesi', 'CSD1.12020M001', 1, '2000-11-20', '0555560810', 'Male', 'firststudent@aiti-kace.com.gh', '', 'Active', '2021-09-15 12:16:36', '2022-02-28 11:34:57'),
+-- (2, 'Mary Otu', 'ICDL6.82021M045', 2, '2001-10-14', '0209563478', 'Female', 'maryotu1006@gmail.com', '', 'Active', '2021-10-11 13:19:47', '2021-10-19 16:49:31'),
+-- (3, 'Solomon OKyere', 'Java2020M009', 5, '1999-11-30', '0547457890', 'Male', 'solomonokyere2843@gmail.com', '', 'Active', '2021-10-19 09:52:47', '2021-10-19 16:49:34'),
+-- (4, 'Bismark Otu', 'DBC2020M038', 6, '2001-10-14', '0570578396', 'Male', 'bismarkotu10@gmail.com', '', 'Active', '2021-10-29 13:43:34', '2021-10-29 14:08:08'),
+-- (8, 'Akeem Amosu', 'CSD1.22021M002', 1, '2021-11-30', '0570578396', 'Male', 'akeem@gmail.com', '', 'Active', '2021-12-16 12:39:20', '2021-12-16 12:39:20'),
+-- (9, 'Eugene Asante', 'DBC2020M011', 6, '2021-12-01', '0570578396', 'Male', 'eugeneasante654@hotmail.com', '', 'Active', '2021-12-16 12:45:02', '2021-12-16 12:45:02'),
+-- (10, 'Francis Annan', 'CSD1.22021M003', 2, '2021-12-02', '0208362456', 'Male', 'francisannan@gmail.com', '', 'Active', '2021-12-16 12:47:48', '2021-12-16 12:47:48'),
+-- (11, 'Moses Otu', 'JAVA2020M011', 5, '2021-11-28', '0249653674', 'Male', 'mosesotu@gmail.com', '', 'Active', '2021-12-16 17:01:27', '2021-12-16 17:01:27'),
+-- (12, 'Oscar Opoku', 'CSD1.22021M034', 3, '1999-01-01', '0578456789', 'Male', 'oscaropoku23@gmail.com', '', 'Active', '2022-01-18 10:07:14', '2022-01-18 10:07:14'),
+-- (13, 'Asante Richard', 'CSD1.22021M022', 3, '1999-01-01', '0507384658', 'Male', 'asanterichard3@gmail.com', '', 'Active', '2022-01-18 10:08:39', '2022-01-18 10:08:39'),
+-- (14, 'Felix Annan', 'CSD2020M027', 1, '2022-01-24', '0549057666', 'Male', 'felixannan22@gmail.com', '', 'Active', '2022-01-24 09:31:12', '2022-01-24 09:31:12');
 
 -- --------------------------------------------------------
 
@@ -184,8 +184,8 @@ CREATE TABLE `students_results` (
   `student_id` varchar(255) DEFAULT NULL,
   `course_id` int(255) DEFAULT NULL,
   `module_id` int(100) DEFAULT NULL,
-  `modulename` varchar(255) DEFAULT NULL,
-  `staffname` varchar(255) DEFAULT NULL,
+  `module_name` varchar(255) DEFAULT NULL,
+  `staff_name` varchar(255) DEFAULT NULL,
   `marks` int(100) DEFAULT NULL,
   `status` varchar(255) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
