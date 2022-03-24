@@ -81,10 +81,8 @@ public interface StudentResultsRepositry extends JpaRepository<StudentResults, L
 
 	
 	
-	@Query(value="SELECT DISTINCT students.name, students.student_id, students_results.marks FROM students INNER JOIN students_results on students.student_id = students_results.studentid INNER JOIN modules ON students_results.courseName = modules.course_name and students_results.moduleName = modules.module_name and students_results.staffName = modules.staff_name where students_results.courseName = modules.course_name and students_results.moduleName = modules.module_name and students_results.staffName = modules.staff_name and modules.id = ?  GROUP by students_results.id ORDER BY students_results.id", nativeQuery=true)
+	@Query(value="SELECT DISTINCT students.name, students.student_id, students_results.marks FROM students INNER JOIN students_results on students.student_id = students_results.student_id INNER JOIN modules ON students_results.course_id = modules.course_id and students_results.module_name = modules.module_name and students_results.staff_name = modules.staff_name where students_results.courseName = modules.course_name and students_results.moduleName = modules.module_name and students_results.staffName = modules.staff_name and modules.id = ?  GROUP by students_results.id ORDER BY students_results.id", nativeQuery=true)
 	ArrayList<Object> findStudentNameStudentIdAndMarks(Long id);
-	
-	
 	
 	
 	
