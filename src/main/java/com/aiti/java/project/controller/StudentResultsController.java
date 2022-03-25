@@ -201,59 +201,7 @@ public class StudentResultsController {
 	  
 	  
 	  
-	  
-		// METHOD TO INSERT INTO RESULTS TABLE AND SELECT FROM STUDENT TABLE
-	  
-	  @SuppressWarnings("null")
-	  @org.springframework.transaction.annotation.Transactional
-	  @GetMapping("/insertIntoStudentNameIDandCourseIdIntoResults/{id}") 
-	  public void insertIntoResults(@PathVariable("id") int id) throws SQLException, ClassNotFoundException{ 
-		  
-		  	 
-		  	int module_id = id;
-			
-			
-			Class.forName("com.mysql.cj.jdbc.Driver");
-
-			
-			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/automated_student_results_system", "root", "");
-			
-			Statement stmt = conn.createStatement();
-			
-			
-			ResultSet selectRs = stmt.executeQuery("SELECT students_results.module_id FROM students_results inner join modules on students_results.course_id = modules.course_id where students_results.course_id = modules.course_id and modules.id = '"+module_id+"' GROUP by students_results.id ORDER by students_results.id");
-
-
-		while(selectRs.next()) {
-			
-			
-			if(selectRs.getInt(1) != id) {
-
-				//PreparedStatement insertstatement = conn.prepareStatement("INSERT into students_results(students_results.name, students_results.student_id,students_results.course_id, students_results.staffname,students_results.module_id, students_results.modulename, students_results.status) SELECT DISTINCT students.name, students.student_id, students.course_id, modules.staff_name, module.id, modules.module_name, modules.status FROM students, modules where students.course_id = modules.course_id and modules.id = '"+module_id+"' GROUP by students.student_id ORDER BY modules.id");
-				
-				//return insertstatement.executeUpdate();
-				
-				System.out.println("Inserted Successfully");
-				
-			}
-			
-			
-			else{
-				 
-				//conn.close();
-				
-				//return module_id;
-				System.out.println("ID already exist");
-				
-			}
-			
-		}	
-		
-				//System.out.println("Not this one");
-			
-			}
-	  
-	  
+	 
 	  
 	  
 	  
