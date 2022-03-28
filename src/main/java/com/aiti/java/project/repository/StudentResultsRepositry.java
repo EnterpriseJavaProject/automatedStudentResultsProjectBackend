@@ -14,8 +14,8 @@ public interface StudentResultsRepositry extends JpaRepository<StudentResults, L
 	
 	
 	
-	// FIND STUDENT MARKS
-	@Query(value="SELECT DISTINCT students_results.id, students_results.name, students_results.student_id, students_results.course_id, students_results.module_name, students_results.staff_name, students_results.marks, students_results.status, students_results.created_at, students_results.updated_at FROM students_results INNER JOIN modules ON  students_results.module_name = modules.module_name and students_results.staff_name = modules.staff_name where students_results.course_id = modules.course_id and modules.id = ?  GROUP by students_results.id ORDER BY modules.id" , nativeQuery = true )
+	// FIND ALL STUDENTS UNDER RESULTS TABLE
+	@Query(value="SELECT DISTINCT students_results.id, students_results.name, students_results.student_id, students_results.course_id, students_results.module_name, students_results.staff_name, students_results.marks, students_results.status, students_results.created_at, students_results.updated_at FROM students_results INNER JOIN modules ON  students_results.course_id = modules.course_id where students_results.course_id = modules.course_id and modules.id = ?  GROUP by students_results.id ORDER BY modules.id" , nativeQuery = true )
 	List<StudentResults> findAllStudentsUnderResults(Long module_id);
 	
 	
