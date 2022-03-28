@@ -48,6 +48,42 @@ public class StudentResultsController {
 	
 	
 
+	// SAVE ONLY STUDENT INFO INTO RESULTS TABLE
+	
+	@PostMapping("/saveOnlyStudent")
+	public StudentResults saveOnlyStudent(@RequestBody StudentResults save) {
+		
+		return studentResultsRepositry.save(save);
+	}
+	
+	
+	
+	
+	
+	// FIND ALL STUDENTS UNDER RESULTS TABLE
+	
+	  @GetMapping("/retrieveAllStudentsUnderResults/{id}") 
+	  public List<StudentResults> findAllStudentsUnderResults(@PathVariable ("id") Long id){ 
+		  
+		  return studentResultsRepositry.findAllStudentsUnderResults(id);
+		  
+	  }
+	  
+	  
+	  
+	
+	
+	// SAVE STUDENT RESULTS
+	
+	@PatchMapping("saveStudentResults")
+	public StudentResults saveStudentResults(@RequestBody StudentResults update) {
+		
+		return studentResultsRepositry.save(update);
+	}
+	
+	
+	
+
 	
 	//  SAVE ALL RESULTS
 	
@@ -60,30 +96,7 @@ public class StudentResultsController {
 	
 	
 	
-	
-	
-	// SAVE A SINGLE RESULTS
-	
-	@PostMapping("/saveResults")
-	public StudentResults saveResults(@RequestBody StudentResults save) {
-		
-		return studentResultsRepositry.save(save);
-	}
-	
-	
-	
-	
-	
-	
-	// UPDATE RESULTS
-	
-	@PatchMapping("updateResults")
-	public StudentResults updateResults(@RequestBody StudentResults update) {
-		
-		return studentResultsRepositry.save(update);
-	}
-	
-	
+
 	
 	
 	
