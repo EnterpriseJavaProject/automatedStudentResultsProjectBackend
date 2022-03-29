@@ -223,7 +223,31 @@ INSERT INTO `users` (`id`, `usertype`, `staff_id`, `email`, `password`, `status`
 --
 -- Indexes for dumped tables
 --
+DELIMITER $$
 
+CREATE TRIGGER after_inserting_into_student
+AFTER INSERT ON students FOR EACH ROW
+BEGIN
+
+    IF (NEW.status = 'Active')
+    THEN
+    
+INSERT into students_results(students_results.name, students_results.student_id, students_results.course_id, students_results.status,
+                             students_results.module_name, students_results.module_id, students_results.staff_name)
+
+SELECT NEW.name, NEW.student_id, NEW.course_id, NEW.status, 
+modules.module_name, modules.id, modules.staff_name
+FROM modules where modules.course_id = NEW.course_id GROUP by modules.module_name ORDER by modules.module_name;
+
+
+
+    END IF;
+    
+
+
+END$$
+
+DELIMITER ;
 --
 -- Indexes for table `courses`
 --
@@ -274,25 +298,25 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `courses`
 --
 ALTER TABLE `courses`
-  MODIFY `id` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(250) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `modules`
 --
 ALTER TABLE `modules`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `staffs`
 --
 ALTER TABLE `staffs`
-  MODIFY `id` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(250) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `students_results`
@@ -304,7 +328,7 @@ ALTER TABLE `students_results`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(250) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
@@ -333,6 +357,7 @@ ALTER TABLE `students`
 --
 ALTER TABLE `students_results`
   ADD CONSTRAINT `hg_cour` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`),
+  ADD CONSTRAINT `md_fk` FOREIGN KEY (`module_id`) REFERENCES `modules` (`id`),
   ADD CONSTRAINT `hg_stu` FOREIGN KEY (`student_id`) REFERENCES `students` (`student_id`);
 COMMIT;
 
