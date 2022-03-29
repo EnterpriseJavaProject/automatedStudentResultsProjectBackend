@@ -18,7 +18,7 @@ import com.aiti.java.project.repository.CoursesRepository;
 
 
 @RestController
-@CrossOrigin(origins = "http://localhost:9090")
+@CrossOrigin(origins = "*")
 @RequestMapping("/courses")
 public class CoursesController {
 	
@@ -126,25 +126,26 @@ public class CoursesController {
 		  
 		  return coursesRepo.countCourses();
 	  }
+	  
 	
-	
-	
-	
-	
-		
+
+
+	  
+	  
 		//	FIND STUDENT COURSES
-	
+		
 	@GetMapping("/findStudentCourses")
 	public List<Courses> findStudentCourses(@RequestParam("student_id") Long student_id) {
 
 		return coursesRepo.findStudentCourses(student_id);
 
 	}
+	  
+	  
+	  
 	
 	
-	
-	
-	//	FIND STUDENT COURSES
+	//	FIND STAFF COURSES
 	
 @GetMapping("/findStaffCourses")
 public List<Courses> findStaffCourses(@RequestParam("staff_id") Long staff_id) {
@@ -153,40 +154,38 @@ public List<Courses> findStaffCourses(@RequestParam("staff_id") Long staff_id) {
 
 }
 
-	
-	
-	
-	
-	
-		// TOTAL NUMBER OF  MODULES UNDER EACH COURSE
 
-	@GetMapping("/totalNumberOfModulesUnderEachCourse")
-	public Long totalNumberOfModulesUnderEachCourse(@RequestParam("id") Long id) {
-
-		return coursesRepo.totalNumberOfModulesUnderEachCourse(id);
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-
-	// TOTAL NUMBER OF STUDENTS UNDER EACH COURSE
-	
-	@GetMapping("/totalNumberOfStudentsUnderEachCourse")
-	public Long totalNumberOfStudentsUnderEachCourse(@RequestParam("id") Long id) {
-
-		return coursesRepo.totalNumberOfStudentsUnderEachCourse(id);
-
-	}
-	
 	  
-	
-
-
+	  
+		// TOTAL NUMBER OF MODULES UNDER EACH COURSE
+	  
+	  @GetMapping("/totalNumberOfModulesUnderEachCourse")
+	  public Long totalNumberOfModulesUnderEachCourse(@RequestParam("id") Long id) {
+		  
+		  return coursesRepo.totalNumberOfModulesUnderEachCourse(id);
+	  }
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+		//  STUDENTS UNDER EACH COURSE
+	  
+	  @GetMapping("/totalNumberOfStudentsUnderEachCourse")
+	  public Long totalNumberOfStudentsUnderEachCourse(@RequestParam("id") Long id) {
+		  
+		  return coursesRepo.totalNumberOfStudentsUnderEachCourse(id);
+	  }
+	  
+	  
+	  
+	  
 	
 	
 	  // GET COURSE NAME AND COURSE LEVEL
