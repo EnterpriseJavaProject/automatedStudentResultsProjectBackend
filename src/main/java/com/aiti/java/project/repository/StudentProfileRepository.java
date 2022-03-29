@@ -10,46 +10,45 @@ import com.aiti.java.project.entities.StudentProfile;
 public interface StudentProfileRepository extends JpaRepository<StudentProfile, Long> {
 	
 	
+
 	
-	
-	
-	
+	// COUNT ALL STUDENTS
 	@Query(value="select count(*) from students", nativeQuery=true)
 	public String countStudent();
 	
 	
 	
 	
+	// COUNT ALL MALE STUDENTS
+	@Query(value="select count(*) from students where gender = 'Male' ", nativeQuery=true)
+	public String countAllMaleStudent();
 	
 	
 	
 	
-	// METHOD TO RETRIEVE ONLY STUDENT NAME AND ID 
-
-	@Query(value="SELECT DISTINCT students.id, students.name, students.student_id, students.course_id, students.date_of_birth, students.contact, students.gender, students.email, students.status, students.created_at, students.updated_at, modules.module_name, modules.course_name, modules.staff_name FROM students INNER JOIN modules ON modules.course_id = students.course_id where modules.id = ? GROUP by students.student_id ORDER BY modules.id", nativeQuery=true)
-	public List<StudentProfile> retrieveStudentsUnderModule(int id);
+	// COUNT ALL FEMALE STUDENTS
+	@Query(value="select count(*) from students where gender = 'Female' ", nativeQuery=true)
+	public String countAllFemaleStudent();
+	
+	
+	
+	// METHOD TO RETRIEVE STUDENTS UNDER EACH MODULE 
+	
+	@Query(value="SELECT DISTINCT students.id, students.name, students.student_id, students.course_id, students.date_of_birth, students.contact, students.gender,students.fees, students.email, students.status, students.created_at, students.updated_at FROM students INNER JOIN modules ON students.course_id = modules.course_id where students.course_id = modules.course_id and modules.id = ?  GROUP by students.student_id ORDER BY modules.id", nativeQuery=true)
+	public StudentProfile[] retrieveStudentsUnderModule(Long id);
 	
 	
 	
 	
 	
-	
-	
-	
-	
-	
-	//@Query(value="select full_name from students", nativeQuery=true)
 	List<StudentProfile> findByName(String name);
 	
 	
 	
-	// METHOD TO RETRIEVE ALL STUDENT NAME AND STUDENT ID FROM STUDENT TABLE
-	
-//	@Query(value="SELECT DISTINCT `id`, `name`, `student_id`, `course_name`, `course_id`, `date_of_birth`, `contact`, `gender`, `email`, `status`, `created_at`, `updated_at` FROM `students`", nativeQuery=true)
-//	public List<StudentProfile> getStudentNameAndStudentID();
 	
 	
 	
+
 	
 	
 	
