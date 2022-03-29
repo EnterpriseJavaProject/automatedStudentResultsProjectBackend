@@ -18,7 +18,7 @@ import com.aiti.java.project.entities.StudentProfile;
 import com.aiti.java.project.repository.StudentProfileRepository;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:9090")
+@CrossOrigin(origins = "*")
 @RequestMapping("/students")
 public class StudentProfileController {
 	
@@ -113,7 +113,23 @@ public class StudentProfileController {
 	 
 
 	  
+	  //  COUNT ALL MALE STUDENTS
 	  
+	  @GetMapping("/countAllMaleStudent")
+	  public String countAllMaleStudent() {
+		  return studentRepos.countAllMaleStudent();
+	  }
+	  
+	  
+	  
+	  
+	  
+	  //  COUNT ALL FEMALE STUDENTS
+	  
+	  @GetMapping("/countAllFemaleStudent")
+	  public String countAllFemaleStudent() {
+		  return studentRepos.countAllFemaleStudent();
+	  }
 	  
 	  
 	  
@@ -132,18 +148,7 @@ public class StudentProfileController {
 	  	
 	  	
 	  	
-	  	
-//	  	@SuppressWarnings("unchecked")
-//		@GetMapping("/retrieveStudentsUnderModule/{id}")
-//	    public List<Object[]> find(@PathVariable("id") Long id) {
-//	    	
-//	        EntityManager entityManager = entityManagerFactory.createEntityManager();
-//	        Query query = entityManager.createQuery("SELECT DISTINCT results.marks, students.id, students.name, students.student_id, students.course_id, students.date_of_birth, students.contact, students.gender,students.fees, students.email, students.status, students.created_at, students.updated_at FROM students inner JOIN results on students.student_id = results.student_id INNER JOIN modules ON students.course_id = modules.course_id where students.student_id = results.student_id and modules.id = ?  GROUP by students.student_id ORDER BY modules.id");
-//	        query.setParameter("id", id);
-//
-//	        return query.getResultList();
-//	        
-//	    }
+	  
 		
 		
 	  	
