@@ -88,12 +88,9 @@ public interface ModulesRepository extends JpaRepository<Modules, Long>  {
 	
 
 
-
-
 	//RETRIEVE THE TOTAL NUMBER OF MODULES UNDER EACH COURSE
-	@Query(value="SELECT modules.id, modules.module_name,modules.module_start_date, modules.module_end_date, modules.staff_name, modules.course_id, modules.status, modules.created_at, modules.updated_at,count(modules.module_name), modules.course_name from  modules where modules.course_id = ? GROUP by modules.course_name;", nativeQuery=true)
-	public List<Modules> findTotalNumberOfModulesUnderEachCourseById(int id);
-	
+	@Query(value="SELECT count(modules.module_name) from  modules inner join courses on modules.course_id = courses.id where modules.course_id = courses.id and courses.id = ?", nativeQuery=true)
+	public String findTotalNumberOfModulesUnderEachCourseById(int id);
 	
 	
 
