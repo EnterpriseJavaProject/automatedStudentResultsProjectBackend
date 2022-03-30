@@ -98,13 +98,13 @@ public class StaffsProfileController {
 		
 	  	// RETRIEVE ONLY STAFF NAME 				  	
 	  	
-	  	@GetMapping("/retrieveStaffName")
-	  	public Staffs retrieveStaffName(@RequestParam("id") int id) {
+	  	//@GetMapping("/retrieveStaffName")
+	  	//public Staffs retrieveStaffName(@RequestParam("id") int id) {
 	  		
 	  		
-	  		return staffRepos.retrieveStaffName(id);
+	  		//return staffRepos.retrieveStaffName(id);
 	  		
-	  	}
+	  	//}
 		  
 	  	
 	  	
