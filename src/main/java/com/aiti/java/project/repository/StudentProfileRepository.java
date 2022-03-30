@@ -12,6 +12,24 @@ public interface StudentProfileRepository extends JpaRepository<StudentProfile, 
 	
 
 	
+	
+	
+		// TOTAL NUMBER OF STUDENTS WITH FULL PAYMENT
+	@Query(value="select count(*) from students where fees LIKE '%Full%' order by students.fees ", nativeQuery=true)
+	public String totalNumberOfStudentWithFullPayment();
+	
+	
+	
+	
+	
+	
+	// TOTAL NUMBER OF STUDENTS WITH PART PAYMENT
+	@Query(value="select count(*) from students where fees LIKE '%Part%' order by students.fees ", nativeQuery=true)
+	public String totalNumberOfStudentWithPartPayment();
+	
+	
+	
+	
 	// COUNT ALL STUDENTS
 	@Query(value="select count(*) from students", nativeQuery=true)
 	public String countStudent();
