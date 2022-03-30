@@ -12,6 +12,25 @@ public interface CoursesRepository extends JpaRepository<Courses, Long> {
 	
 	
 	
+	
+	//	FIND STUDENT COURSES
+	
+	@Query(value="SELECT courses.id, courses.course_name, courses.course_level, courses.status, courses.created_at, courses.updated_at, courses.course_start_date, courses.course_end_date, courses.certificate_issuedate FROM courses inner join students on courses.id = students.course_id WHERE courses.id = students.course_id and students.id = ? GROUP by courses.course_name order by courses.course_name", nativeQuery=true)
+	public List<Courses> findStudentCourses(Long student_id);
+	
+	
+	
+	
+//	FIND STAFF COURSES
+	
+	@Query(value="SELECT courses.id, courses.course_name, courses.course_level, courses.status, courses.created_at, courses.updated_at, courses.course_start_date, courses.course_end_date, courses.certificate_issuedate FROM courses inner join staffs on courses.id = staffs.course_id WHERE courses.id = staffs.course_id and staffs.id = ? GROUP by courses.course_name order by courses.course_name", nativeQuery=true)
+	public List<Courses> findStaffCourses(Long staff_id);
+	
+	
+	
+	
+	
+	
 	// FIND COURSE BY COURSE NAME
 	@Query(value="select id,course_name,course_level,status,created_at,updated_at,course_start_date,course_end_date,certificate_issuedate from courses where courses.course_name = ? order by id" , nativeQuery = true )
 	List<Courses> findCourseByCourseName(String course_name);
@@ -53,36 +72,30 @@ public interface CoursesRepository extends JpaRepository<Courses, Long> {
 	
 	
 	
-	//	FIND STUDENT COURSES
 	
-	@Query(value="SELECT courses.id, courses.course_name, courses.course_level, courses.status, courses.created_at, courses.updated_at, courses.course_start_date, courses.course_end_date, courses.certificate_issuedate FROM courses inner join students on courses.id = students.course_id WHERE courses.id = students.course_id and students.id = ? GROUP by courses.course_name order by courses.course_name", nativeQuery=true)
-	public List<Courses> findStudentCourses(Long student_id);
+	// MODULES UNDER EACH COURSE
 	
-	
-	
-
-	
-//	FIND STAFF COURSES
-	
-	@Query(value="SELECT courses.id, courses.course_name, courses.course_level, courses.status, courses.created_at, courses.updated_at, courses.course_start_date, courses.course_end_date, courses.certificate_issuedate FROM courses inner join staffs on courses.id = staffs.course_id WHERE courses.id = staffs.course_id and staffs.id = ? GROUP by courses.course_name order by courses.course_name", nativeQuery=true)
-	public List<Courses> findStaffCourses(Long staff_id);
+	@Query(value="select modules.module_name, modules.module_start_date, modules.module_end_date from  modules inner join courses on modules.course_id = courses.id where modules.course_id = courses.id and courses.id = ? GROUP by modules.module_name order by modules.module_name", nativeQuery=true)
+	public Long allModulesUnderEachCourse(Long id);
 	
 	
 	
 	
-		//  TOTAL NUMBER OF MODULES UNDER EACH COURSE
 	
-	@Query(value="SELECT count(modules.module_name) from modules INNER join courses on modules.course_id = courses.id where modules.course_id = courses.id and courses.id = ? GROUP by modules.course_name", nativeQuery=true)
+	
+	
+	// TOTAL NUMBER OF MODULES UNDER EACH COURSE
+	
+	@Query(value="select count(modules.module_name) from  modules inner join courses on modules.course_id = courses.id where modules.course_id = courses.id and courses.id = ? GROUP by modules.module_name", nativeQuery=true)
 	public Long totalNumberOfModulesUnderEachCourse(Long id);
 	
 	
 	
 	
 	
+	//  STUDENTS UNDER EACH COURSE
 	
-	//  TOTAL NUMBER OF STUDENTS UNDER EACH COURSE
-	
-	@Query(value="SELECT count(students.name) from students INNER join courses on students.course_id = courses.id where students.course_id = courses.id and courses.id = ?  GROUP by courses.id order by courses.id", nativeQuery=true)
+	@Query(value="select count(students.name) from students inner join courses on students.course_id = courses.id where students.course_id = courses.id and courses.id = ? GROUP by courses.id order by courses.id", nativeQuery=true)
 	public Long totalNumberOfStudentsUnderEachCourse(Long id);
 
 	
