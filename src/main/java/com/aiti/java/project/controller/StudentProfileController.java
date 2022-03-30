@@ -38,6 +38,28 @@ public class StudentProfileController {
 	
 	
 	
+			// TOTAL NUMBER OF STUDENTS WITH FULL PAYMENT
+	  
+	  @GetMapping("/totalNumberOfStudentWithFullPayment")
+	  public String totalNumberOfStudentWithFullPayment() {
+		  return studentRepos.totalNumberOfStudentWithFullPayment();
+	  }
+	  
+	  
+	  
+	  
+	  
+		// TOTAL NUMBER OF STUDENTS WITH PART PAYMENT
+	  
+	  @GetMapping("/totalNumberOfStudentWithPartPayment")
+	  public String totalNumberOfStudentWithPartPayment() {
+		  return studentRepos.totalNumberOfStudentWithPartPayment();
+	  }
+	  
+	
+	
+	
+	
 	
 	
 	
@@ -133,7 +155,21 @@ public class StudentProfileController {
 	  
 	  
 	  
-	  	  	
+	  
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	  	
 		// METHOD TO RETRIEVE ONLY STUDENT NAME AND STUDENT ID  ?id=1
 	  	
