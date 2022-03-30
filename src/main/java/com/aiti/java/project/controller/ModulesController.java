@@ -194,7 +194,7 @@ public class ModulesController {
 //
 //				//RETRIEVE THE TOTAL NUMBER OF MODULES UNDER EACH COURSE
 				  	  @GetMapping("/totalNumberOfModulesUnderEachCourse")
-				  public List<Modules> findTotalNumberOfModulesUnderEachCourseById(@RequestParam("course_id") int course_id) {
+				  public String findTotalNumberOfModulesUnderEachCourseById(@RequestParam("course_id") int course_id) {
 					  
 					  return modulesRepo.findTotalNumberOfModulesUnderEachCourseById(course_id);
 				  }
