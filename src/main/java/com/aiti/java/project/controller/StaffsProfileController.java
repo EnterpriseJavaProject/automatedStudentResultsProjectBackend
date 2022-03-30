@@ -17,7 +17,7 @@ import com.aiti.java.project.entities.Staffs;
 import com.aiti.java.project.repository.StaffProfileRepository;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:9090")
+@CrossOrigin(origins = "*")
 @RequestMapping("/staffs")
 public class StaffsProfileController {
 	
@@ -98,11 +98,11 @@ public class StaffsProfileController {
 		
 	  	// RETRIEVE ONLY STAFF NAME 				  	
 	  	
-	  	//@GetMapping("/retrieveStaffName")
-	  	//public Staffs retrieveStaffName(@RequestParam("id") int id) {
+	  //	@GetMapping("/retrieveStaffName")
+	  //	public Staffs retrieveStaffName(@RequestParam("id") int id) {
 	  		
 	  		
-	  		//return staffRepos.retrieveStaffName(id);
+	  	//	return staffRepos.retrieveStaffName(id);
 	  		
 	  	//}
 		  
