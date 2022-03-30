@@ -97,7 +97,7 @@ public class StudentResultsController {
 	
 	//  SAVE ALL RESULTS
 	
-	@PutMapping("/saveResults")
+	@PatchMapping("/saveAllResults")
 	public List<StudentResults> saveAllResults(@RequestBody List<StudentResults> saveResults){
 		
 		return studentResultsRepositry.saveAll(saveResults);
