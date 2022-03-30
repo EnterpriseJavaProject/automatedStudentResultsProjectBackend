@@ -142,8 +142,7 @@ public class CoursesController {
 	}
 	  
 	  
-	
-	
+	  
 	
 	
 	//	FIND STAFF COURSES
