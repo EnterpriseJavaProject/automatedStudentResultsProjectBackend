@@ -48,8 +48,6 @@ public interface StudentProfileRepository extends JpaRepository<StudentProfile, 
 	
 	
 	
-
-	
 	
 	
 	
