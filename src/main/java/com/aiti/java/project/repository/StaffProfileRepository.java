@@ -11,14 +11,14 @@ public interface StaffProfileRepository extends JpaRepository<Staffs, Integer> {
 	
 	
 //  GET ALL STAFF INFO
-	@Query(value="select id,staff_id,name,email,contact,usertype,course,status,created_at,updated_at from staffs order by id;" , nativeQuery = true )
+	@Query(value="select id,staff_id,name,email,contact,usertype,course_id,status,created_at,updated_at from staffs order by id;" , nativeQuery = true )
 	List<Staffs> retrivalOfStaffName(Staffs retrivalOfStaffName);
 	
 	
 	
 	
 	//  GET ONLY INTRUCTORS NAMES
-	@Query(value="select id,staff_id,name,email,contact,usertype,course,status,created_at,updated_at from staffs where usertype = 'Instructor' order by name;" , nativeQuery = true )
+	@Query(value="select id,staff_id,name,email,contact,usertype,course_id,status,created_at,updated_at from staffs where usertype = 'Instructor' order by name;" , nativeQuery = true )
 	List<Staffs> getInstructorNames();
 	
 	
@@ -40,5 +40,17 @@ public interface StaffProfileRepository extends JpaRepository<Staffs, Integer> {
 	public String countStaff();
 	
 	
-
+	
+	
+	
+	
+	
+	
+	
+	
+	// RETRIEVE ONLY STAFF NAME 
+	
+	@Query(value="select staffs.name from staffs where staffs.course_id = ?", nativeQuery=true)
+	public Staffs retrieveStaffName(int id);
+	
 }
