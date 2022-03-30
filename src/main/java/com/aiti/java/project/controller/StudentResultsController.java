@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -149,10 +148,10 @@ public class StudentResultsController {
 	  
 //		// FIND REULTS BY COURSE NAME
 		
-		  @GetMapping("/findResultsByCourseName") 
-		  public List<StudentResults> retrieveResultsByCourseName(@RequestParam ("course_name") String course_name){ 
+		  @GetMapping("/findResultsByCourseId") 
+		  public List<StudentResults> retrieveResultsByCourseId(@RequestParam ("course_name") String course_name){ 
 			  
-			  return studentResultsRepositry.findResultsByCourseName(course_name);
+			  return studentResultsRepositry.findResultsByCourseId(course_name);
 			  
 		  }
 		  
@@ -359,7 +358,14 @@ public class StudentResultsController {
 	  
 	  
 
-	  
-	
+		 
+		// METHOD TO SEARCH FOR STUDENT RESULTS
+		
+		  @GetMapping("/searchStudentFinalResults/{student_id}") 
+		  public StudentResults[] searchStudentFinalResults(@PathVariable("student_id") String student_id){ 
+			  
+			  return studentResultsRepositry.searchStudentFinalResults(student_id);
+			  
+		  }
 
 }
