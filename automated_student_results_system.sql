@@ -145,7 +145,7 @@ CREATE TABLE `students` (
   `name` varchar(250) DEFAULT NULL,
   `student_id` varchar(255) DEFAULT NULL,
   `course_id` int(255) DEFAULT NULL,
-  `date_of_birth` date DEFAULT NULL,
+  `date_of_birth` varchar(255) DEFAULT NULL,
   `contact` varchar(255) DEFAULT NULL,
   `gender` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
