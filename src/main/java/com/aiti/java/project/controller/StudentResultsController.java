@@ -38,6 +38,29 @@ public class StudentResultsController {
 	  
 	  
 	  
+//	// FIND REULTS BY STUDENT ID
+	
+	  @GetMapping("/findResultsByStudentID") 
+	  public List<StudentResults> findByName(@RequestParam ("student_id") String student_id){ 
+		  
+		  return studentResultsRepositry.findResultsByStudentID(student_id);
+		  
+	  }
+	  	
+	
+
+//	// FIND REULTS BY STUDENT NAME
+	
+	  @GetMapping("/findResultsByStudentName") 
+	  public List<StudentResults> retrieveResultsByStudentName(@RequestParam ("student_name") String student_name){ 
+		  
+		  return studentResultsRepositry.findResultsByStudentName(student_name);
+		  
+	  }
+	  
+	  
+	  
+	  
 	  
 	  
 	  
@@ -119,28 +142,16 @@ public class StudentResultsController {
 //	// FIND RESULTS BY ID
 	
 	@GetMapping("/findResultsById")
-	public StudentResults findById(@RequestParam("id") Long id) {
+	public List<StudentResults> findById(@RequestParam("id") Long id) {
 		
-		return studentResultsRepositry.findById(id).get();
+		return studentResultsRepositry.findResultsById(id);
 		
 	}
 
 	
 	
 	
-	
-	
 
-//	// FIND REULTS BY STUDENT NAME
-	
-	  @GetMapping("/findResultsByStudentName") 
-	  public List<StudentResults> retrieveResultsByStudentName(@RequestParam ("student_name") String student_name){ 
-		  
-		  return studentResultsRepositry.findResultsByStudentName(student_name);
-		  
-	  }
-	  
-	  
 	  
 	  
 	  
@@ -190,15 +201,7 @@ public class StudentResultsController {
 		  
 		  
 	
-//	// FIND REULTS BY STUDENT ID
-	
-	  @GetMapping("/findResultsByStudentID") 
-	  public List<StudentResults> findByName(@RequestParam ("student_id") String student_id){ 
-		  
-		  return studentResultsRepositry.findResultsByStudentID(student_id);
-		  
-	  }
-	  
+
 
 	  
 	  
