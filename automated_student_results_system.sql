@@ -145,7 +145,7 @@ CREATE TABLE `students` (
   `name` varchar(250) DEFAULT NULL,
   `student_id` varchar(255) DEFAULT NULL,
   `course_id` int(255) DEFAULT NULL,
-  `date_of_birth` varchar(255) DEFAULT NULL,
+  `date_of_birth` date DEFAULT NULL,
   `contact` varchar(255) DEFAULT NULL,
   `gender` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
@@ -223,31 +223,7 @@ INSERT INTO `users` (`id`, `usertype`, `staff_id`, `email`, `password`, `status`
 --
 -- Indexes for dumped tables
 --
-DELIMITER $$
 
-CREATE TRIGGER after_inserting_into_student
-AFTER INSERT ON students FOR EACH ROW
-BEGIN
-
-    IF (NEW.status = 'Active')
-    THEN
-    
-INSERT into students_results(students_results.name, students_results.student_id, students_results.course_id, students_results.status,
-                             students_results.module_name, students_results.module_id, students_results.staff_name)
-
-SELECT NEW.name, NEW.student_id, NEW.course_id, NEW.status, 
-modules.module_name, modules.id, modules.staff_name
-FROM modules where modules.course_id = NEW.course_id GROUP by modules.module_name ORDER by modules.module_name;
-
-
-
-    END IF;
-    
-
-
-END$$
-
-DELIMITER ;
 --
 -- Indexes for table `courses`
 --
@@ -334,32 +310,61 @@ ALTER TABLE `users`
 -- Constraints for dumped tables
 --
 
+
+DELIMITER $$
+
+CREATE TRIGGER after_inserting_into_student
+AFTER INSERT ON students FOR EACH ROW
+BEGIN
+
+    IF (NEW.status = 'Active')
+    THEN
+    
+INSERT into students_results(students_results.name, students_results.student_id, students_results.course_id, students_results.status,
+                             students_results.module_name, students_results.module_id, students_results.staff_name)
+
+SELECT NEW.name, NEW.student_id, NEW.course_id, NEW.status, 
+modules.module_name, modules.id, modules.staff_name
+FROM modules where modules.course_id = NEW.course_id GROUP by modules.module_name ORDER by modules.module_name;
+
+
+
+    END IF;
+    
+
+
+END$$
+
+DELIMITER ;
+
+
+
 --
 -- Constraints for table `modules`
 --
-ALTER TABLE `modules`
-  ADD CONSTRAINT `fk_course_id` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`);
+-- ALTER TABLE `modules`
+--   ADD CONSTRAINT `fk_course_id` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`);
 
 --
 -- Constraints for table `staffs`
 --
-ALTER TABLE `staffs`
-  ADD CONSTRAINT `cou_fk` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`);
+-- ALTER TABLE `staffs`
+--   ADD CONSTRAINT `cou_fk` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`);
 
 --
 -- Constraints for table `students`
 --
-ALTER TABLE `students`
-  ADD CONSTRAINT `fk_course` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`);
+-- ALTER TABLE `students`
+--   ADD CONSTRAINT `fk_course` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`);
 
 --
 -- Constraints for table `students_results`
 --
-ALTER TABLE `students_results`
-  ADD CONSTRAINT `hg_cour` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`),
-  ADD CONSTRAINT `md_fk` FOREIGN KEY (`module_id`) REFERENCES `modules` (`id`),
-  ADD CONSTRAINT `hg_stu` FOREIGN KEY (`student_id`) REFERENCES `students` (`student_id`);
-COMMIT;
+-- ALTER TABLE `students_results`
+--   ADD CONSTRAINT `hg_cour` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`),
+--   ADD CONSTRAINT `md_fk` FOREIGN KEY (`module_id`) REFERENCES `modules` (`id`),
+--   ADD CONSTRAINT `hg_stu` FOREIGN KEY (`student_id`) REFERENCES `students` (`student_id`);
+-- COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
