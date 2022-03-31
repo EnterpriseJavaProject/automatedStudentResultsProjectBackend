@@ -98,21 +98,21 @@ public interface ModulesRepository extends JpaRepository<Modules, Long>  {
 	
 
 
-
 //  ALL STUDENTS UNDER EACH MODULES
-	@Query(value="SELECT  students.name, modules.module_name, modules.course_name from students, courses, modules where students.course_id = courses.id and courses.id = modules.course_id and modules.id = ? ORDER BY modules.id", nativeQuery=true)
-	public List<String> retrievalOfStudentsUnderEachModuleById(int id);
-
-
-
-
+	@Query(value="SELECT count(students.name) from  students inner join modules on modules.course_id = students.course_id where modules.course_id = students.course_id and modules.id = ?", nativeQuery=true)
+	public String retrievalOfStudentsUnderEachModuleById(int module_id);
 
 
 	
-//  RETRIEVE THE TOTAL NUMBER OF STUDENTS UNDER EACH MODULE
-//@Query(value="SELECT modules.course_name,  modules.module_name, count(DISTINCT(students.name))from students, courses, modules where students.course_id = courses.id and courses.id = modules.course_id and modules.id = ? ;", nativeQuery=true)
-	//public List<String> findTotalNumberOfStudentsUnderEachModuleById(int id);
- 
+	
+	
+	
+//  TOTAL NUMBER OF STUDENTS RESULTS UPLOADED
+	@Query(value="SELECT DISTINCT COUNT(students_results.name) from  students_results  inner join modules on students_results.module_id = modules.id where students_results.module_id = modules.id and marks > 0 and modules.id = ?", nativeQuery=true)
+	public String totalNumberOfStudentsResultsUploaded(int module_id);
+
+
+
 	
 	
 	
