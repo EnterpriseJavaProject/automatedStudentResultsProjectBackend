@@ -37,6 +37,21 @@ public class StudentProfileController {
 	
 	
 	
+		// SELECTING FROM STUDENT TABLE FOR RESULTS
+	
+	@GetMapping("/selectingFromStudentForResults")
+	public List<StudentProfile> selectingFromStudentForResults(@RequestParam ("student_id") String student_id, @RequestParam ("course_id") int course_id){
+		
+		return studentRepos.selectingFromStudentForResults(student_id, course_id);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	
 			// TOTAL NUMBER OF STUDENTS WITH FULL PAYMENT
 	  
