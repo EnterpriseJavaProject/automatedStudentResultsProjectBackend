@@ -27,10 +27,10 @@ public interface StudentResultsRepositry extends JpaRepository<StudentResults, L
 	
 	
 	
+//	// FIND REULTS BY STUDENT ID AND COURSE ID
+	@Query(value="SELECT DISTINCT students_results.id, students_results.name, students_results.student_id, students_results.course_id, students_results.module_name, students_results.module_id, students_results.staff_name, students_results.marks, students_results.status, students_results.created_at, students_results.updated_at FROM students_results inner join courses on students_results.course_id = courses.id where students_results.course_id = courses.id and students_results.student_id = ? and students_results.course_id = ?  GROUP by students_results.id ORDER BY students_results.id" , nativeQuery = true )
+	List<StudentResults> findResultsByStudentID(String student_id, int course_id);
 	
-//	// FIND REULTS BY STUDENT ID
-	@Query(value="SELECT DISTINCT students_results.id, students_results.name, students_results.student_id, students_results.course_id, students_results.module_name, students_results.module_id, students_results.staff_name, students_results.marks, students_results.status, students_results.created_at, students_results.updated_at FROM students_results where students_results.student_id = ?  GROUP by students_results.id ORDER BY students_results.id" , nativeQuery = true )
-	List<StudentResults> findResultsByStudentID(String student_id);
 	
 	
 	
