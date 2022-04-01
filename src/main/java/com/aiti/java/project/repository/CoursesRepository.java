@@ -11,6 +11,13 @@ public interface CoursesRepository extends JpaRepository<Courses, Long> {
 
 	
 	
+		// SELECTING FROM COURSE TABLE FOR RESULTS
+	
+	@Query(value="SELECT DISTINCT courses.id, courses.course_name, courses.course_level, courses.status, courses.created_at, courses.updated_at, courses.course_start_date, courses.course_end_date, courses.certificate_issuedate FROM courses inner join students_results on courses.id = students_results.course_id where courses.id = students_results.course_id and students_results.student_id = ? and students_results.course_id = ?  GROUP by courses.id ORDER BY courses.id", nativeQuery=true)
+	public List<Courses> selectingFromCourseForResults(String student_id, int course_id);
+	
+	
+	
 	
 	
 	//	FIND STUDENT COURSES
