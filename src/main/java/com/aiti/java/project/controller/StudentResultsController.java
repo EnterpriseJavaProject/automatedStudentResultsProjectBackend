@@ -37,15 +37,15 @@ public class StudentResultsController {
 	
 	  
 	  
-	  
 //	// FIND REULTS BY STUDENT ID
 	
-	  @GetMapping("/findResultsByStudentID") 
-	  public List<StudentResults> findByName(@RequestParam ("student_id") String student_id){ 
+	  @GetMapping("/findStudentResultsByStudentIdAndCourseId") 
+	  public List<StudentResults> findByName(@RequestParam ("student_id") String student_id, @RequestParam ("course_id") int course_id){ 
 		  
-		  return studentResultsRepositry.findResultsByStudentID(student_id);
+		  return studentResultsRepositry.findResultsByStudentID(student_id, course_id);
 		  
 	  }
+	  	
 	  	
 	
 
