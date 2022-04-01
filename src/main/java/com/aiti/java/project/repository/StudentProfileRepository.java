@@ -12,6 +12,14 @@ public interface StudentProfileRepository extends JpaRepository<StudentProfile, 
 	
 
 	
+		
+	// SELECTING FROM STUDENT TABLE FOR RESULTS
+	@Query(value="SELECT DISTINCT students.id, students.name, students.student_id, students.course_id, students.date_of_birth, students.contact, students.gender,students.fees, students.email, students.status, students.created_at, students.updated_at FROM students inner join students_results on students.student_id = students_results.student_id where students.student_id = students_results.student_id and students_results.student_id = ? and students_results.course_id = ?  GROUP by students.id ORDER BY students.id", nativeQuery=true)
+	public List<StudentProfile> selectingFromStudentForResults(String student_id, int course_id);
+	
+	
+	
+	
 	
 	
 		// TOTAL NUMBER OF STUDENTS WITH FULL PAYMENT
