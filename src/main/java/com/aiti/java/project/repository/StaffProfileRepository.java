@@ -10,7 +10,7 @@ import com.aiti.java.project.entities.Staffs;
 public interface StaffProfileRepository extends JpaRepository<Staffs, Integer> {
 	
 //  USERS LOGIN ROLE
-	@Query(value="SELECT DISTINCT staffs.id, staffs.name, staffs.staff_id, staffs.email, staffs.contact, staffs.usertype, staffs.course_id, staffs.status, staffs.created_at, staffs.updated_at from staffs INNER join users on staffs.staff_id = users.staff_id and staffs.email = users.email and staffs.usertype = users.usertype where staffs.staff_id = users.staff_id and staffs.email = users.email and staffs.usertype = users.usertype and staffs.email = ? and users.password = ? GROUP by staffs.email ORDER by staffs.name" , nativeQuery = true )
+	@Query(value="SELECT DISTINCT staffs.id, staffs.name, staffs.staff_id, staffs.email, staffs.contact, staffs.usertype, staffs.course_id, staffs.status, staffs.created_at, staffs.updated_at from staffs INNER join users on staffs.staff_id = users.staff_id and staffs.email = users.email and staffs.usertype = users.usertype where staffs.staff_id = users.staff_id and staffs.email = users.email and staffs.usertype = users.usertype and users.email = ? and users.password = ? " , nativeQuery = true )
 	List<Staffs> userLoginRole(String email, String password);
 	
 	
