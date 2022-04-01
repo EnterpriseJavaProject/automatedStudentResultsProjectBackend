@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 24, 2022 at 11:52 AM
+-- Generation Time: Apr 01, 2022 at 04:02 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -120,7 +120,7 @@ CREATE TABLE `staffs` (
 --
 
 INSERT INTO `staffs` (`id`, `name`, `staff_id`, `email`, `contact`, `usertype`, `course_id`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Mr Francis Korsah', 'St2632', 'firstinstructor@aiti-kace.com.gh', '0555560810', 'Instructor', 1, 'Active', '2021-09-18 08:55:07', '2022-03-08 11:53:06'),
+(1, 'Mr Francis Korsah', 'St2632', 'francisk@aiti-kace.com.gh', '0555560810', 'Instructor', 1, 'Active', '2022-03-31 19:06:07', '2022-04-01 11:03:34'),
 (2, 'Mr Lawrence Kpodo', 'St6833', 'academicsecretary@aiti-kace.com.gh', '0547386724', 'Academic Secretary', NULL, 'Active', '2021-09-18 08:50:25', '2021-10-20 15:25:22'),
 (3, 'Mr Gabriel Dwamena', 'St3073', 'coursecordinator@aiti-kace.com.gh', '0207638264', 'Course Cordinator', NULL, 'Active', '2021-09-18 08:51:50', '2021-10-20 15:25:14'),
 (4, 'Dr Yaw Okraku-Yirenkyi', 'St9462', 'directorofstudies@aiti-kace.com.gh', '0207693568', 'Director of Studies', NULL, 'Active', '2021-09-18 09:04:03', '2021-10-20 17:08:19'),
@@ -145,7 +145,7 @@ CREATE TABLE `students` (
   `name` varchar(250) DEFAULT NULL,
   `student_id` varchar(255) DEFAULT NULL,
   `course_id` int(255) DEFAULT NULL,
-  `date_of_birth` varchar(255) DEFAULT NULL,
+  `date_of_birth` varchar(100) DEFAULT NULL,
   `contact` varchar(255) DEFAULT NULL,
   `gender` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
@@ -156,21 +156,30 @@ CREATE TABLE `students` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `students`
+-- Triggers `students`
 --
+DELIMITER $$
+CREATE TRIGGER `after_inserting_into_student` AFTER INSERT ON `students` FOR EACH ROW BEGIN
 
--- INSERT INTO `students` (`id`, `name`, `student_id`, `course_id`, `date_of_birth`, `contact`, `gender`, `email`, `fees`, `status`, `created_at`, `updated_at`) VALUES
--- (1, 'Nana Kwesi', 'CSD1.12020M001', 1, '2000-11-20', '0555560810', 'Male', 'firststudent@aiti-kace.com.gh', '', 'Active', '2021-09-15 12:16:36', '2022-02-28 11:34:57'),
--- (2, 'Mary Otu', 'ICDL6.82021M045', 2, '2001-10-14', '0209563478', 'Female', 'maryotu1006@gmail.com', '', 'Active', '2021-10-11 13:19:47', '2021-10-19 16:49:31'),
--- (3, 'Solomon OKyere', 'Java2020M009', 5, '1999-11-30', '0547457890', 'Male', 'solomonokyere2843@gmail.com', '', 'Active', '2021-10-19 09:52:47', '2021-10-19 16:49:34'),
--- (4, 'Bismark Otu', 'DBC2020M038', 6, '2001-10-14', '0570578396', 'Male', 'bismarkotu10@gmail.com', '', 'Active', '2021-10-29 13:43:34', '2021-10-29 14:08:08'),
--- (8, 'Akeem Amosu', 'CSD1.22021M002', 1, '2021-11-30', '0570578396', 'Male', 'akeem@gmail.com', '', 'Active', '2021-12-16 12:39:20', '2021-12-16 12:39:20'),
--- (9, 'Eugene Asante', 'DBC2020M011', 6, '2021-12-01', '0570578396', 'Male', 'eugeneasante654@hotmail.com', '', 'Active', '2021-12-16 12:45:02', '2021-12-16 12:45:02'),
--- (10, 'Francis Annan', 'CSD1.22021M003', 2, '2021-12-02', '0208362456', 'Male', 'francisannan@gmail.com', '', 'Active', '2021-12-16 12:47:48', '2021-12-16 12:47:48'),
--- (11, 'Moses Otu', 'JAVA2020M011', 5, '2021-11-28', '0249653674', 'Male', 'mosesotu@gmail.com', '', 'Active', '2021-12-16 17:01:27', '2021-12-16 17:01:27'),
--- (12, 'Oscar Opoku', 'CSD1.22021M034', 3, '1999-01-01', '0578456789', 'Male', 'oscaropoku23@gmail.com', '', 'Active', '2022-01-18 10:07:14', '2022-01-18 10:07:14'),
--- (13, 'Asante Richard', 'CSD1.22021M022', 3, '1999-01-01', '0507384658', 'Male', 'asanterichard3@gmail.com', '', 'Active', '2022-01-18 10:08:39', '2022-01-18 10:08:39'),
--- (14, 'Felix Annan', 'CSD2020M027', 1, '2022-01-24', '0549057666', 'Male', 'felixannan22@gmail.com', '', 'Active', '2022-01-24 09:31:12', '2022-01-24 09:31:12');
+    IF (NEW.status = 'Active')
+    THEN
+    
+INSERT into students_results(students_results.name, students_results.student_id, students_results.course_id, students_results.status,
+                             students_results.module_name, students_results.module_id, students_results.staff_name)
+
+SELECT NEW.name, NEW.student_id, NEW.course_id, NEW.status, 
+modules.module_name, modules.id, modules.staff_name
+FROM modules where modules.course_id = NEW.course_id GROUP by modules.module_name ORDER by modules.module_name;
+
+
+
+    END IF;
+    
+
+
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -214,11 +223,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `usertype`, `staff_id`, `email`, `password`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Instructor', 'St2632', 'firstinstructor@aiti-kace.com.gh', 'fristInstructor', 'Active', '2021-09-18 09:14:49', '2021-09-28 14:14:23'),
+(1, 'Instructor', 'St2632', 'francisk@aiti-kace.com.gh', 'franciskInstructor', 'Active', '2021-09-18 09:14:49', '2022-04-01 11:05:38'),
 (2, 'Instructor', 'St7308', 'secondinstructor@aiti-kace.com.gh', 'secondInstructor', 'Active', '2021-09-15 14:18:26', '2021-09-28 14:14:57'),
-(3, 'academic secretary', 'St6833', 'academicsecretary@gamil.com', 'academicSecretary', 'Active', '2021-09-15 14:34:05', '2021-09-28 14:15:12'),
-(4, 'course cordinator', 'St3073', 'coursecordinator@aiti-kace.com.gh', 'courseCordinator', 'Active', '2021-09-18 08:47:24', '2021-09-28 14:15:26'),
-(5, 'director of studies', 'St9462', 'directorofstudies@aiti-kace.com.gh', 'directorOfStudies', 'Active', '2021-09-18 09:03:00', '2021-09-28 14:15:33');
+(3, 'Academic Secretary', 'St6833', 'academicsecretary@aiti-kace.com.gh', 'academicSecretary', 'Active', '2021-09-15 14:34:05', '2022-04-01 13:57:43'),
+(4, 'Course Cordinator', 'St3073', 'coursecordinator@aiti-kace.com.gh', 'courseCordinator', 'Active', '2021-09-18 08:47:24', '2022-04-01 13:58:53'),
+(5, 'Director of Studies', 'St9462', 'directorofstudies@aiti-kace.com.gh', 'directorOfStudies', 'Active', '2021-09-18 09:03:00', '2022-04-01 13:59:09');
 
 --
 -- Indexes for dumped tables
@@ -269,6 +278,31 @@ ALTER TABLE `users`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+DELIMITER $$
+
+CREATE TRIGGER after_inserting_into_student
+AFTER INSERT ON students FOR EACH ROW
+BEGIN
+
+    IF (NEW.status = 'Active')
+    THEN
+    
+INSERT into students_results(students_results.name, students_results.student_id, students_results.course_id, students_results.status,
+                             students_results.module_name, students_results.module_id, students_results.staff_name)
+
+SELECT NEW.name, NEW.student_id, NEW.course_id, NEW.status, 
+modules.module_name, modules.id, modules.staff_name
+FROM modules where modules.course_id = NEW.course_id GROUP by modules.module_name ORDER by modules.module_name;
+
+
+
+    END IF;
+    
+
+
+END$$
+
+DELIMITER ;
 
 --
 -- AUTO_INCREMENT for table `courses`
@@ -305,66 +339,7 @@ ALTER TABLE `students_results`
 --
 ALTER TABLE `users`
   MODIFY `id` int(250) NOT NULL AUTO_INCREMENT;
-
---
--- Constraints for dumped tables
---
-
-
-DELIMITER $$
-
-CREATE TRIGGER after_inserting_into_student
-AFTER INSERT ON students FOR EACH ROW
-BEGIN
-
-    IF (NEW.status = 'Active')
-    THEN
-    
-INSERT into students_results(students_results.name, students_results.student_id, students_results.course_id, students_results.status,
-                             students_results.module_name, students_results.module_id, students_results.staff_name)
-
-SELECT NEW.name, NEW.student_id, NEW.course_id, NEW.status, 
-modules.module_name, modules.id, modules.staff_name
-FROM modules where modules.course_id = NEW.course_id GROUP by modules.module_name ORDER by modules.module_name;
-
-
-
-    END IF;
-    
-
-
-END$$
-
-DELIMITER ;
-
-
-
---
--- Constraints for table `modules`
---
--- ALTER TABLE `modules`
---   ADD CONSTRAINT `fk_course_id` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`);
-
---
--- Constraints for table `staffs`
---
--- ALTER TABLE `staffs`
---   ADD CONSTRAINT `cou_fk` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`);
-
---
--- Constraints for table `students`
---
--- ALTER TABLE `students`
---   ADD CONSTRAINT `fk_course` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`);
-
---
--- Constraints for table `students_results`
---
--- ALTER TABLE `students_results`
---   ADD CONSTRAINT `hg_cour` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`),
---   ADD CONSTRAINT `md_fk` FOREIGN KEY (`module_id`) REFERENCES `modules` (`id`),
---   ADD CONSTRAINT `hg_stu` FOREIGN KEY (`student_id`) REFERENCES `students` (`student_id`);
--- COMMIT;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
