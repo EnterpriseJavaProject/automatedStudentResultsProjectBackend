@@ -26,6 +26,19 @@ public class StaffsProfileController {
 	
 	
 	
+		
+	// USERS LOGIN
+	
+	  @GetMapping("/userLogin") 
+	  public List<Staffs> userLoginRole(@RequestParam("email") String email, @RequestParam("password") String password){ 
+		  
+		  return staffRepos.userLoginRole(email, password);
+		  
+	  }
+	  
+	
+	
+	
 	
 	
 	//  SAVE STAFF
