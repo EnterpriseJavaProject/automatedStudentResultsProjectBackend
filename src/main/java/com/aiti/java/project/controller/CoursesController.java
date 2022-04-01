@@ -31,6 +31,21 @@ public class CoursesController {
 	
 	
 	
+	
+		
+	// SELECTING FROM COURSE TABLE FOR RESULTS
+	
+	@GetMapping("/selectingFromCourseForResults")
+	public List<Courses> selectingFromCourseForResults(@RequestParam ("student_id") String student_id, @RequestParam ("course_id") int course_id){
+		
+		return coursesRepo.selectingFromCourseForResults(student_id, course_id);
+	}
+	
+	
+	
+	
+	
+	
 	//  SVAE COURSE
 	
 	@PostMapping("/saveCourses")
