@@ -12,6 +12,11 @@ import com.aiti.java.project.entities.StudentResults;
 public interface StudentResultsRepositry extends JpaRepository<StudentResults, Long> {
 	
 	
+	// TOTAL NUMBER OF STUDENTS RESULTS UPLOADED
+	@Query(value="SELECT count(students_results.marks) FROM students_results INNER JOIN modules ON  students_results.module_id = modules.id where students_results.module_id = modules.id and students_results.marks >= 1 and modules.id = ?" , nativeQuery = true )
+	String totalNumberOfStudentResultsUploadedUnderEachModule(Long module_id);
+	
+	
 	
 //	// FIND REULTS BY ID
 	@Query(value="SELECT DISTINCT students_results.id, students_results.name, students_results.student_id, students_results.course_id, students_results.module_name, students_results.module_id, students_results.staff_name, students_results.marks, students_results.status, students_results.created_at, students_results.updated_at FROM students_results where students_results.id = ?  GROUP by students_results.id ORDER BY students_results.id" , nativeQuery = true )
