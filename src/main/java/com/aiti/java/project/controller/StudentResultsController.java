@@ -35,9 +35,22 @@ public class StudentResultsController {
 	
 	
 	
+	// TOTAL NUMBER OF STUDENTS RESULTS UPLOADED
+	
+	  @GetMapping("/totalNumberOfStudentResultsUploadedUnderEachModule") 
+	  public String totalNumberOfStudentResultsUploadedUnderEachModule(@RequestParam ("module_id") Long module_id){ 
+		  
+		  return studentResultsRepositry.totalNumberOfStudentResultsUploadedUnderEachModule(module_id);
+		  
+	  }
+	
+	
+	
+	
+	
+	
 	  
-	  
-//	// FIND REULTS BY STUDENT ID AND COURSE ID
+//	// FIND RESULTS BY STUDENT ID AND COURSE ID
 	
 	  @GetMapping("/findStudentResultsByStudentIdAndCourseId") 
 	  public List<StudentResults> findStudentResultsByStudentIdAndCourseId(@RequestParam ("student_id") String student_id, @RequestParam ("course_id") int course_id){ 
