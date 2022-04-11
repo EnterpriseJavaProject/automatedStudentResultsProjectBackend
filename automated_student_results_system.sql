@@ -75,6 +75,31 @@ CREATE TABLE `modules` (
 --
 -- Dumping data for table `modules`
 --
+DELIMITER $$
+
+CREATE TRIGGER after_inserting_into_modules
+AFTER INSERT ON modules FOR EACH ROW
+BEGIN
+
+    IF (NEW.status = 'Active')
+    THEN
+    
+INSERT into students_results(students_results.module_id, students_results.module_name, students_results.course_id, students_results.staff_name, students_results.status,  
+                             students_results.name, students_results.student_id)
+
+SELECT NEW.id, NEW.module_name, NEW.course_id , NEW.staff_name, NEW.status, 
+students.name, students.student_id
+FROM students where students.course_id = NEW.course_id GROUP by students.name ORDER by students.name;
+
+
+    END IF;
+    
+
+
+END$$
+
+DELIMITER ;
+
 
 INSERT INTO `modules` (`id`, `module_name`, `course_name`, `staff_name`, `course_id`, `status`, `module_start_date`, `module_end_date`, `created_at`, `updated_at`) VALUES
 (1, 'HTML/CSS', 'CERTIFICATE IN SOFTWARE DEVELOPMENT---CSD1.1', 'Mr Francis Korsah', 1, 'Active', '2020-09-08', '2022-10-20', '2020-10-16 00:08:37', '2022-03-08 10:32:11'),
