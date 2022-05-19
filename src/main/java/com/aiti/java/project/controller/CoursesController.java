@@ -32,7 +32,23 @@ public class CoursesController {
 	
 	
 	
+	
+	  
+		//	FIND PAST STUDENT COURSES
 		
+	@GetMapping("/findPastStudentCourses")
+	public List<Courses> findPastStudentCourses(@RequestParam("student_id") Long student_id) {
+
+		return coursesRepo.findPastStudentCourses(student_id);
+
+	}
+	
+	
+	
+	
+	
+	
+	
 	// SELECTING FROM COURSE TABLE FOR RESULTS
 	
 	@GetMapping("/selectingFromCourseForResults")
