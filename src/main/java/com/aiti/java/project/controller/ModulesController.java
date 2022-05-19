@@ -37,30 +37,47 @@ public class ModulesController {
 	
 	
 	
+	  
+		//   ALL MODULES UNDER PAST STUDENT COURSE
+	  @GetMapping("/findModulesUnderPastStudentCourse")
+	  public List<Modules> findModulesUnderPastStudentCourse(@RequestParam("id") Long id) {
+		  
+		  return modulesRepo.allModulesUnderPastStudentCourse(id);
+		  
+	  }
+	  
+	
+	
+	
 	
 	//  TOTAL NUMBER OF STUDENTS UNDER EACH MODULES
-		  	  @GetMapping("/totalNumberOfStudentsUnderEachModule")
-		  public String retrievalOfStudentsUnderEachModuleById(@RequestParam("module_id") int module_id) {
-			  
-			  return modulesRepo.retrievalOfStudentsUnderEachModuleById(module_id);
-		  }
-		  	  
-		  	  
-		  	  
-		  	  
-		  	  
-		  	  
-		  	  
-		  //  TOTAL NUMBER OF STUDENTS RESULTS UPLOADED
-					  	  @GetMapping("/totalNumberOfStudentsResultsUploaded")
-					  public String totalNumberOfStudentsResultsUploaded(@RequestParam("module_id") int module_id) {
-						  
-						  return modulesRepo.totalNumberOfStudentsResultsUploaded(module_id);
-					  }
+	  @GetMapping("/totalNumberOfStudentsUnderEachModule")
+public String retrievalOfStudentsUnderEachModuleById(@RequestParam("module_id") int module_id) {
+	  
+	  return modulesRepo.retrievalOfStudentsUnderEachModuleById(module_id);
+}
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+//  TOTAL NUMBER OF STUDENTS RESULTS UPLOADED
+			  	  @GetMapping("/totalNumberOfStudentsResultsUploaded")
+			  public String totalNumberOfStudentsResultsUploaded(@RequestParam("module_id") int module_id) {
+				  
+				  return modulesRepo.totalNumberOfStudentsResultsUploaded(module_id);
+			  }
+			  	  
 					  	  
-	
-	
-	
+					  	  
+					  	  
+					  	  
+					  	  
+					  	  
+					  	  
+					  	  
 	
 	
 
@@ -214,8 +231,37 @@ public class ModulesController {
 			  
 			  
 
-			  	  
+//
+//				//RETRIEVE THE TOTAL NUMBER OF MODULES UNDER EACH COURSE
+				  	  @GetMapping("/totalNumberOfModulesUnderEachCourse")
+				  public String findTotalNumberOfModulesUnderEachCourseById(@RequestParam("course_id") int course_id) {
+					  
+					  return modulesRepo.findTotalNumberOfModulesUnderEachCourseById(course_id);
+				  }
 
+				  	  
+		
+				  	  
+				  	  
+				  	  
+				  	
+
+
+
+				  	  
+				  	  
+				  	  
+
+			//  RETRIEVE THE TOTAL NUMBER OF STUDENTS UNDER EACH MODULE
+				  	 // @GetMapping("/totalNumberOfStudentsUnderEachModule/{id}")
+				  //public List<String> findTotalNumberOfStudentsUnderEachModuleById(@PathVariable("id") int id) {
+					  
+					  //return modulesRepo.findTotalNumberOfStudentsUnderEachModuleById(id);
+				  //}
+			
+				
+				
+	
 				  	  
 				  	  
 				  	  
