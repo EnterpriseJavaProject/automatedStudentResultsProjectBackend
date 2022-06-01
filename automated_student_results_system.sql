@@ -75,30 +75,7 @@ CREATE TABLE `modules` (
 --
 -- Dumping data for table `modules`
 --
-DELIMITER $$
 
-CREATE TRIGGER after_inserting_into_modules
-AFTER INSERT ON modules FOR EACH ROW
-BEGIN
-
-    IF (NEW.status = 'Active')
-    THEN
-    
-INSERT into students_results(students_results.module_id, students_results.module_name, students_results.course_id, students_results.staff_name, students_results.status,  
-                             students_results.name, students_results.student_id)
-
-SELECT NEW.id, NEW.module_name, NEW.course_id , NEW.staff_name, NEW.status, 
-students.name, students.student_id
-FROM students where students.course_id = NEW.course_id GROUP by students.name ORDER by students.name;
-
-
-    END IF;
-    
-
-
-END$$
-
-DELIMITER ;
 
 
 INSERT INTO `modules` (`id`, `module_name`, `course_name`, `staff_name`, `course_id`, `status`, `module_start_date`, `module_end_date`, `created_at`, `updated_at`) VALUES
@@ -161,6 +138,29 @@ INSERT INTO `staffs` (`id`, `name`, `staff_id`, `email`, `contact`, `usertype`, 
 
 -- --------------------------------------------------------
 
+
+
+-- Table structure for table `past students`
+
+CREATE TABLE `past_students` (
+  `id` int(255) NOT NULL,
+  `name` varchar(250) DEFAULT NULL,
+  `student_id` varchar(255) DEFAULT NULL,
+  `course_id` int(255) DEFAULT NULL,
+  `date_of_birth` varchar(100) DEFAULT NULL,
+  `contact` varchar(255) DEFAULT NULL,
+  `gender` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `fees` varchar(255) DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+
+
+
 --
 -- Table structure for table `students`
 --
@@ -181,61 +181,9 @@ CREATE TABLE `students` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Triggers `students`
---
-DELIMITER $$
-CREATE TRIGGER `after_inserting_into_student` AFTER INSERT ON `students` FOR EACH ROW BEGIN
-
-    IF (NEW.status = 'Active')
-    THEN
-    
-INSERT into students_results(students_results.name, students_results.student_id, students_results.course_id, students_results.status,
-                             students_results.module_name, students_results.module_id, students_results.staff_name)
-
-SELECT NEW.name, NEW.student_id, NEW.course_id, NEW.status, 
-modules.module_name, modules.id, modules.staff_name
-FROM modules where modules.course_id = NEW.course_id GROUP by modules.module_name ORDER by modules.module_name;
 
 
 
-    END IF;
-    
-
-
-END
-$$
-DELIMITER ;
-
-
-
-
-
-
-DELIMITER $$
-
-CREATE TRIGGER after_updating_only_course_id
-AFTER UPDATE ON students FOR EACH ROW
-BEGIN
-
-    IF (OLD.course_id != NEW.course_id)
-    THEN
-    
-INSERT into students_results(students_results.name, students_results.student_id, students_results.course_id, students_results.status,
-                             students_results.module_name, students_results.module_id, students_results.staff_name)
-
-SELECT NEW.name, NEW.student_id, NEW.course_id, NEW.status, 
-modules.module_name, modules.id, modules.staff_name
-FROM modules where modules.course_id = NEW.course_id GROUP by modules.module_name ORDER by modules.module_name;
-
-ELSE(NEW.course_id == students_results.course_id)
-set NEW.status = 'Active';
-
-    END IF;
-
-END$$
-
-DELIMITER ;
--- --------------------------------------------------------
 
 --
 -- Table structure for table `students_results`
@@ -287,6 +235,122 @@ INSERT INTO `users` (`id`, `usertype`, `staff_id`, `email`, `password`, `status`
 -- Indexes for dumped tables
 --
 
+
+
+
+-- Triggers `students`
+--
+DELIMITER $$
+CREATE TRIGGER `after_inserting_into_student` AFTER INSERT ON `students` FOR EACH ROW BEGIN
+
+    IF (NEW.status = 'Active')
+    THEN
+    
+INSERT into students_results(students_results.name, students_results.student_id, students_results.course_id, students_results.status,
+                             students_results.module_name, students_results.module_id, students_results.staff_name)
+
+SELECT NEW.name, NEW.student_id, NEW.course_id, NEW.status, 
+modules.module_name, modules.id, modules.staff_name
+FROM modules where modules.course_id = NEW.course_id GROUP by modules.module_name ORDER by modules.module_name;
+
+
+
+    END IF;
+    
+
+
+END
+$$
+DELIMITER ;
+
+
+
+
+
+
+DELIMITER $$
+
+CREATE TRIGGER after_updating_only_course_id
+AFTER UPDATE ON students FOR EACH ROW
+BEGIN
+
+    IF (OLD.course_id != NEW.course_id)
+    THEN
+    
+INSERT into students_results(students_results.name, students_results.student_id, students_results.course_id, students_results.status,
+                             students_results.module_name, students_results.module_id, students_results.staff_name)
+
+SELECT NEW.name, NEW.student_id, NEW.course_id, NEW.status, 
+modules.module_name, modules.id, modules.staff_name
+FROM modules where modules.course_id = NEW.course_id GROUP by modules.module_name ORDER by modules.module_name;
+
+
+
+    END IF;
+
+END$$
+
+DELIMITER ;
+-- --------------------------------------------------------
+
+
+
+
+
+DELIMITER $$
+
+CREATE TRIGGER after_inserting_into_modules
+AFTER INSERT ON modules FOR EACH ROW
+BEGIN
+
+    IF (NEW.status = 'Active')
+    THEN
+    
+INSERT into students_results(students_results.module_id, students_results.module_name, students_results.course_id, students_results.staff_name, students_results.status,  
+                             students_results.name, students_results.student_id)
+
+SELECT NEW.id, NEW.module_name, NEW.course_id , NEW.staff_name, NEW.status, 
+students.name, students.student_id
+FROM students where students.course_id = NEW.course_id GROUP by students.name ORDER by students.name;
+
+
+    END IF;
+    
+
+
+END$$
+
+DELIMITER ;
+
+
+
+
+
+
+DELIMITER $$
+
+CREATE TRIGGER `insert_into_past_student` AFTER INSERT ON `students`
+ FOR EACH ROW BEGIN
+
+    IF (NEW.status = 'Active')
+    THEN
+    
+INSERT into past_students(past_students.id, past_students.name,past_students.student_id,past_students.course_id,
+ 						 past_students.date_of_birth,past_students.contact,past_students.gender,
+                         past_students.email,past_students.fees,past_students.status)
+
+SELECT NEW.id, NEW.name, NEW.student_id, NEW.course_id,
+NEW.date_of_birth, NEW.contact,
+NEW.gender, NEW.email, NEW.fees, NEW.status
+FROM students;
+
+    END IF;
+    
+
+END$$
+
+DELIMITER ;
+
 --
 -- Indexes for table `courses`
 --
@@ -311,6 +375,13 @@ ALTER TABLE `staffs`
 -- Indexes for table `students`
 --
 ALTER TABLE `students`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `student_id` (`student_id`),
+  ADD KEY `fk_course` (`course_id`);
+
+
+
+  ALTER TABLE `past_students`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `student_id` (`student_id`),
   ADD KEY `fk_course` (`course_id`);
@@ -356,6 +427,10 @@ ALTER TABLE `staffs`
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT;
+
+
+  ALTER TABLE `past_students`
   MODIFY `id` int(255) NOT NULL AUTO_INCREMENT;
 
 --
