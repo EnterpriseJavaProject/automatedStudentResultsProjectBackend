@@ -23,58 +23,80 @@ import com.aiti.java.project.repository.StudentProfileRepository;
 public class StudentProfileController {
 	
 	
-
+	@Autowired
+	SendingEmailService sendingEmailService;
+	
+	
 	
 	@Autowired
 	StudentProfileRepository studentRepos;
 	
 	
 	
+	
 
-    //private EntityManagerFactory entityManagerFactory;
+	
+	
+	// STUDENTS UNDER EACH COURSE
+  	
+  	
+  	@GetMapping("/findStudentsUnderCourse")
+  	public StudentProfile[] retrieveStudentsUnderCourse(@RequestParam("id") Long id) {
+  		
+		return studentRepos.retrieveStudentsUnderCourse(id);
+  						  		
+  	}
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+	
+	// SENDING STUDENTS EMAIL AFTER RESULTS BEEN UPLOADED
+	
+	@GetMapping("/sendingStudentEmailAfterRestultsBeenUploaded") 
+	public String sendingStudentEmailAfterRestultsBeenUploaded() {
+		 
+		 return sendingEmailService.sendingStudentEmailAfterRestultsBeenUploaded();
+	 }
+	
+	
+	
+	
+	
+  	
+	
+	// SENDING STUDENTS WELCOME EMAIL AFTER BEING ADMTITTED
+	
+	@GetMapping("/sendingStudentsWelcomeEmailAfterBeingAdmitted") 
+	public String sendingStudentsWelcomeEmailAfterBeingAdmitted() {
+		 
+		 return sendingEmailService.sendingStudentsWelcomeEmailAfterBeingAdmitted();
+	 }
+	
+	
+	
+	
 
 	
 	
 	
 	
-		// SELECTING FROM STUDENT TABLE FOR RESULTS
-	
-	@GetMapping("/selectingFromStudentForResults")
-	public List<StudentProfile> selectingFromStudentForResults(@RequestParam ("student_id") String student_id, @RequestParam ("course_id") int course_id){
-		
-		return studentRepos.selectingFromStudentForResults(student_id, course_id);
-	}
 	
 	
+	// SELECTING FROM THE STUDENT TABLE FOR RESULTS
+
+@GetMapping("/selectingFromStudentForResults")
+public List<StudentProfile> selectingFromStudentForResults(@RequestParam ("student_id") String student_id, @RequestParam ("course_id") int course_id){
 	
-	
-	
-	
-	
-	
-	
-			// TOTAL NUMBER OF STUDENTS WITH FULL PAYMENT
-	  
-	  @GetMapping("/totalNumberOfStudentWithFullPayment")
-	  public String totalNumberOfStudentWithFullPayment() {
-		  return studentRepos.totalNumberOfStudentWithFullPayment();
-	  }
-	  
-	  
-	  
-	  
-	  
-		// TOTAL NUMBER OF STUDENTS WITH PART PAYMENT
-	  
-	  @GetMapping("/totalNumberOfStudentWithPartPayment")
-	  public String totalNumberOfStudentWithPartPayment() {
-		  return studentRepos.totalNumberOfStudentWithPartPayment();
-	  }
-	  
-	
-	
-	
-	
+	return studentRepos.selectingFromStudentForResults(student_id, course_id);
+}
+
+
+
 	
 	
 	
@@ -171,20 +193,29 @@ public class StudentProfileController {
 	  
 	  
 	  
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	  
+	  
+	  
+		// TOTAL NUMBER OF STUDENTS WITH FULL PAYMENT
+	  
+	  @GetMapping("/totalNumberOfStudentWithFullPayment")
+	  public String totalNumberOfStudentWithFullPayment() {
+		  return studentRepos.totalNumberOfStudentWithFullPayment();
+	  }
+	  
+	  
+	  
+	  
+	  
+		// TOTAL NUMBER OF STUDENTS WITH PART PAYMENT
+	  
+	  @GetMapping("/totalNumberOfStudentWithPartPayment")
+	  public String totalNumberOfStudentWithPartPayment() {
+		  return studentRepos.totalNumberOfStudentWithPartPayment();
+	  }
+	  
+	  
+	  	  	
 	  	
 		// METHOD TO RETRIEVE ONLY STUDENT NAME AND STUDENT ID  ?id=1
 	  	
@@ -209,7 +240,7 @@ public class StudentProfileController {
 	  	
 	  	
 	  	
-	
+	  	
 	  	
 	  	
 	  	
