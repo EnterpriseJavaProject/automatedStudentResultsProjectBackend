@@ -35,6 +35,38 @@ public class StudentResultsController {
 	
 	
 	
+//	// FIND PAST STUDENT RESULTS BY STUDENT ID AND COURSE ID
+	
+	  @GetMapping("/findPastStudentResultsByStudentIDandCourseID") 
+	  public List<StudentResults> findPastStudentResultsByStudentIDandCourseID(@RequestParam ("student_id") String student_id, @RequestParam ("course_id") int course_id){ 
+		  
+		  return studentResultsRepositry.findPastStudentResultsByStudentIDandCourseID(student_id, course_id);
+		  
+	  }
+	  
+	  
+	  
+	  
+	  
+	
+	
+//	// FIND PAST STUDENT RESULTS BY STUDENT ID
+	
+	  @GetMapping("/findPastStudentResultsByStudentID") 
+	  public List<StudentResults> findPastStudentResultsByStudentID(@RequestParam ("student_id") String student_id){ 
+		  
+		  return studentResultsRepositry.findPastStudentResultsByStudentID(student_id);
+		  
+	  }
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	// TOTAL NUMBER OF STUDENTS RESULTS UPLOADED
 	
 	  @GetMapping("/totalNumberOfStudentResultsUploadedUnderEachModule") 
