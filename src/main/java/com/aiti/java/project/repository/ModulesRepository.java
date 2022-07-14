@@ -12,6 +12,66 @@ import com.aiti.java.project.entities.Modules;
 public interface ModulesRepository extends JpaRepository<Modules, Long>  {
 	
 	
+	
+	
+	
+	
+	
+	// SELECTING ONLY STAFF NAME FROM MODULE AND SENDING THEM EMAIL NOTIFICATIONS
+	@Query(value="SELECT DISTINCT modules.staff_name, modules.course_name,modules.module_name, modules.module_start_date, modules.module_end_date FROM modules inner join staffs on modules.course_id = staffs.course_id and modules.staff_name = staffs.name where staffs.usertype not like '%Academic Secretary%' and staffs.usertype not like '%Course Cordinator%' and staffs.usertype not like '%Director of Studies%' and modules.course_id = staffs.course_id and modules.staff_name = staffs.name GROUP by staffs.email order by staffs.updated_at desc limit 1" , nativeQuery = true )
+	String selectingStaffNameCourseAndModuleNameModuleStartAndEndDatetoSendEmailNotificationtoInstructors();
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	// SELECTING ONLY STAFF NAME FROM MODULE AND SENDING THEM EMAIL NOTIFICATIONS
+	@Query(value="SELECT modules.staff_name FROM modules GROUP by modules.updated_at order by modules.updated_at desc limit 1" , nativeQuery = true )
+	String selectingStaffNametoSendEmailNotification();
+	
+	
+	// SELECTING ONLY COURSE NAME FROM MODULE AND SENDING THEM EMAIL NOTIFICATIONS
+	@Query(value="SELECT modules.course_name FROM modules GROUP by modules.updated_at order by modules.updated_at desc limit 1" , nativeQuery = true )
+	String selectingCourseNametoSendEmailNotification();
+	
+	
+	// SELECTING ONLY MODULE NAME FROM MODULE AND SENDING THEM EMAIL NOTIFICATIONS
+	@Query(value="SELECT  modules.module_name FROM modules GROUP by modules.updated_at order by modules.updated_at desc limit 1" , nativeQuery = true )
+	String selectingModuleNametoSendEmailNotification();
+	
+	
+	// SELECTING ONLY MODULE START DATE FROM MODULE AND SENDING THEM EMAIL NOTIFICATIONS
+	@Query(value="SELECT  modules.module_start_date FROM modules GROUP by modules.updated_at order by modules.updated_at desc limit 1" , nativeQuery = true )
+	String selectingModuleStartDatetoSendEmailNotification();
+	
+	
+	// SELECTING ONLY MODULE END DATE FROM MODULE AND SENDING THEM EMAIL NOTIFICATIONS
+	@Query(value="SELECT  modules.module_end_date FROM modules GROUP by modules.updated_at order by modules.updated_at desc limit 1" , nativeQuery = true )
+	String selectingModuleEndDatetoSendEmailNotification();
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	// SELECTING COURSE NAME, MODULE NAME, STAFF NAME, MODULE START AND END DATE
+	@Query(value="SELECT  DISTINCT modules.course_name,modules.module_start_date, modules.module_end_date, modules.id, modules.module_name, modules.course_id, modules.staff_name, modules.status, modules.created_at, modules.updated_at FROM modules inner join staffs on modules.course_id = staffs.course_id and modules.staff_name = staffs.name where modules.course_id = staffs.course_id and modules.staff_name = staffs.name GROUP by staffs.email order by staffs.updated_at DESC limit 1", nativeQuery=true)
+	List<Modules> selectingCourseNameModuleNameStaffNameModuleStartAndEndDate();
+	
+	
+	
+	
+	
+	
 
 	// FIND MODULE BY  MODULE NAME
 	@Query(value="SELECT DISTINCT modules.course_name,modules.module_start_date, modules.module_end_date, modules.id, modules.module_name, modules.course_id, modules.staff_name, modules.status, modules.created_at, modules.updated_at FROM modules where modules.module_name = ? order by modules.module_name", nativeQuery=true)
@@ -47,7 +107,7 @@ public interface ModulesRepository extends JpaRepository<Modules, Long>  {
 	
 //  ALL MODULES UNDER EACH COURSE
 	
-	@Query(value="select modules.id, modules.module_name,modules.module_start_date, modules.module_end_date, modules.module_start_date, modules.module_end_date,modules.course_name, modules.course_id, modules.staff_name, modules.status, modules.created_at, modules.updated_at from modules inner join courses on modules.course_id = courses.id where modules.course_id = courses.id and courses.id = ? GROUP by modules.module_name order by modules.module_name", nativeQuery=true)
+	@Query(value="select modules.id, modules.module_name,modules.module_start_date, modules.module_end_date, modules.module_start_date, modules.module_end_date,modules.course_name, modules.course_id, modules.staff_name, modules.status, modules.created_at, modules.updated_at from modules inner join courses on modules.course_id = courses.id where modules.course_id = courses.id and courses.id = ?", nativeQuery=true)
 	public List<Modules> allModulesUnderEachCourse(Long id);
 	
 	
@@ -55,6 +115,11 @@ public interface ModulesRepository extends JpaRepository<Modules, Long>  {
 	
 	
 
+//  ALL MODULES UNDER PAST COURSE
+	
+	@Query(value="select modules.id, modules.module_name,modules.module_start_date, modules.module_end_date, modules.module_start_date, modules.module_end_date,modules.course_name, modules.course_id, modules.staff_name, modules.status, modules.created_at, modules.updated_at from modules inner join courses on modules.course_id = courses.id where modules.course_id = courses.id and courses.id = ?", nativeQuery=true)
+	public List<Modules> allModulesUnderPastStudentCourse(Long id);
+	
 	
 	
 	
@@ -98,6 +163,7 @@ public interface ModulesRepository extends JpaRepository<Modules, Long>  {
 	
 
 
+
 //  ALL STUDENTS UNDER EACH MODULES
 	@Query(value="SELECT count(students.name) from  students inner join modules on modules.course_id = students.course_id where modules.course_id = students.course_id and modules.id = ?", nativeQuery=true)
 	public String retrievalOfStudentsUnderEachModuleById(int module_id);
@@ -113,6 +179,14 @@ public interface ModulesRepository extends JpaRepository<Modules, Long>  {
 
 
 
+
+
+
+	
+//  RETRIEVE THE TOTAL NUMBER OF STUDENTS UNDER EACH MODULE
+//@Query(value="SELECT modules.course_name,  modules.module_name, count(DISTINCT(students.name))from students, courses, modules where students.course_id = courses.id and courses.id = modules.course_id and modules.id = ? ;", nativeQuery=true)
+	//public List<String> findTotalNumberOfStudentsUnderEachModuleById(int id);
+ 
 	
 	
 	
