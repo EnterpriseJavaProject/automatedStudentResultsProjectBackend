@@ -41,9 +41,28 @@ public interface StudentResultsRepositry extends JpaRepository<StudentResults, L
 	
 	
 	
+	
+//	// FIND PAST STUDENT RESULTS BY STUDENT ID AND COURSE ID
+	@Query(value="SELECT students_results.id, students_results.name, students_results.student_id, students_results.course_id, students_results.module_name, students_results.module_id, students_results.staff_name, students_results.marks, students_results.status, students_results.created_at, students_results.updated_at FROM students_results inner join past_students on students_results.student_id = past_students.student_id and students_results.course_id = past_students.course_id where students_results.student_id = past_students.student_id and students_results.course_id = past_students.course_id and past_students.fees = 'Full Payment' and students_results.student_id = ? and students_results.course_id = ?  GROUP by students_results.id ORDER BY students_results.id" , nativeQuery = true )
+	List<StudentResults> findPastStudentResultsByStudentIDandCourseID(String student_id, int course_id);
+	
+	
+	
+	
+	
+	
+//	// FIND REULTS BY PAST STUDENT ID
+	@Query(value="SELECT DISTINCT students_results.id, students_results.name, students_results.student_id, students_results.course_id, students_results.module_name, students_results.module_id, students_results.staff_name, students_results.marks, students_results.status, students_results.created_at, students_results.updated_at FROM students_results inner join past_students on students_results.student_id = past_students.student_id and students_results.course_id = past_students.course_id where students_results.student_id = past_students.student_id and students_results.course_id = past_students.course_id and past_students.fees = 'Full Payment' and students_results.student_id = ? GROUP by students_results.id ORDER BY students_results.id" , nativeQuery = true )
+	List<StudentResults> findPastStudentResultsByStudentID(String student_id);
+	
+	
+	
 //	// FIND REULTS BY STUDENT NAME
 	@Query(value="SELECT DISTINCT students_results.id, students_results.name, students_results.student_id, students_results.course_id, students_results.module_name, students_results.module_id, students_results.staff_name, students_results.marks, students_results.status, students_results.created_at, students_results.updated_at FROM students_results where students_results.name = ?  GROUP by students_results.id ORDER BY students_results.id" , nativeQuery = true )
 	List<StudentResults> findResultsByStudentName(String student_name);
+	
+	
+	
 	
 	
 	
