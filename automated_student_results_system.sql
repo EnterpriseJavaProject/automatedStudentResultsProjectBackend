@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 01, 2022 at 04:02 PM
--- Server version: 10.4.22-MariaDB
--- PHP Version: 8.1.2
+-- Generation Time: Jul 14, 2022 at 05:41 PM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 7.4.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -31,6 +31,7 @@ CREATE TABLE `courses` (
   `id` int(250) NOT NULL,
   `course_name` varchar(255) DEFAULT NULL,
   `course_level` varchar(255) DEFAULT NULL,
+  `coordinator` varchar(250) DEFAULT NULL,
   `status` varchar(255) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
@@ -43,15 +44,9 @@ CREATE TABLE `courses` (
 -- Dumping data for table `courses`
 --
 
-INSERT INTO `courses` (`id`, `course_name`, `course_level`, `status`, `created_at`, `updated_at`, `course_start_date`, `course_end_date`, `certificate_issuedate`) VALUES
-(1, 'CERTIFICATE IN SOFTWARE DEVELOPMENT', 'CSD1.1', 'Active', '2020-10-15 23:53:42', '2022-03-08 10:29:28', '2020-09-08', '2021-10-10', '2020-10-15'),
-(2, 'INTERNATIONAL COMPUTER DRIVING LICENCE', 'ICDL4.2', 'Active', '2020-10-16 00:03:59', '2021-09-28 11:49:41', '2021-09-27', '2022-10-20', '2021-09-28'),
-(3, 'CERTIFICATE IN SOFTWARE DEVELOPMENT', 'CSD4.2', 'Active', '2020-10-16 00:06:43', '2020-10-16 00:06:43', '2021-10-18', '2022-03-15', '2020-10-16'),
-(4, 'CISCO CERTIFIED NETWORK ASSOCIATE', 'CCNA9.2', 'Active', '2021-09-28 11:15:49', '2021-10-20 13:49:47', '2021-03-15', '2022-11-20', '2021-09-28'),
-(5, 'JAVA ENTERPRISE', 'JAVA7.2', 'Active', '2021-09-28 11:21:49', '2021-09-28 11:21:49', '2020-03-15', '2022-03-15', '2021-09-28'),
-(6, 'DIPLOMA IN BUSINESS COMPUTING', 'DBC1.1', 'Active', '2021-10-20 14:20:44', '2021-10-20 14:25:55', '2021-10-20', '2021-11-21', '2021-11-30'),
-(7, 'NETWORK INFORMATION SECURITY', 'NIS3.8', 'Active', '2021-10-21 16:46:40', '2021-10-21 16:46:40', '2021-10-21', '2021-12-07', '2022-07-19'),
-(8, 'CERTIFIED INFORMATION SYSTEM AUDITOR', 'CISA1.1', 'Active', '2021-10-29 11:25:08', '2021-10-29 11:25:08', '2021-10-29', '2021-12-02', '2022-08-10');
+INSERT INTO `courses` (`id`, `course_name`, `course_level`, `coordinator`, `status`, `created_at`, `updated_at`, `course_start_date`, `course_end_date`, `certificate_issuedate`) VALUES
+(13, 'CERTIFICATE IN SOFTWARE DEVELOPMENT', 'CSD1.1', 'Bismark Otu', 'Active', '2022-06-28 14:06:07', '2022-06-28 14:06:07', '2022-06-28', '2022-07-14', '2022-09-21'),
+(14, 'INTERNATIONAL COMPUTER DRIVING LICENECE', 'ICDL1.1', 'Jude Clottey', 'Active', '2022-06-28 14:06:32', '2022-06-28 14:06:32', '2022-07-12', '2022-08-18', '2022-10-21');
 
 -- --------------------------------------------------------
 
@@ -76,27 +71,87 @@ CREATE TABLE `modules` (
 -- Dumping data for table `modules`
 --
 
-
-
 INSERT INTO `modules` (`id`, `module_name`, `course_name`, `staff_name`, `course_id`, `status`, `module_start_date`, `module_end_date`, `created_at`, `updated_at`) VALUES
-(1, 'HTML/CSS', 'CERTIFICATE IN SOFTWARE DEVELOPMENT---CSD1.1', 'Mr Francis Korsah', 1, 'Active', '2020-09-08', '2022-10-20', '2020-10-16 00:08:37', '2022-03-08 10:32:11'),
-(2, 'Oracle Database', 'CERTIFICATE IN SOFTWARE DEVELOPMENT---CSD4.2', 'Bismark Otu', 3, 'Active', '2020-09-08', '2022-10-20', '2020-10-16 00:09:34', '2022-03-08 10:32:14'),
-(3, 'Microsoft', 'INTERNATIONAL COMPUTER DRIVING LICENCE---ICDL4.2', 'Mr Kennedy Asewie', 2, 'Active', '2020-09-08', '2022-10-20', '2020-10-16 00:13:11', '2022-03-08 10:32:18'),
-(4, 'Oracle Database', 'CERTIFICATE IN SOFTWARE DEVELOPMENT---CSD1.1', 'Bismark Otu', 1, 'Active', '2020-09-08', '2022-10-20', '2020-10-16 00:15:10', '2022-03-08 10:32:20'),
-(5, 'HTML/CSS', 'CERTIFICATE IN SOFTWARE DEVELOPMENT---CSD4.2', 'Mr Francis Korsah', 3, 'Active', '2020-09-08', '2022-10-20', '2020-10-16 00:17:59', '2022-03-08 10:32:22'),
-(6, 'Software Engineering', 'CERTIFICATE IN SOFTWARE DEVELOPMENT---CSD1.1', 'Mr Kennedy Asewie', 1, 'Active', '2020-09-08', '2022-10-20', '2020-10-16 00:19:53', '2022-03-08 10:32:25'),
-(7, 'Software Engineering', 'CERTIFICATE IN SOFTWARE DEVELOPMENT---CSD4.2', 'Mr Kennedy Asewie', 3, 'Active', NULL, '2022-10-20', '2020-10-16 00:20:48', '2022-03-08 10:32:29'),
-(8, 'JavaScript', 'CERTIFICATE IN SOFTWARE DEVELOPMENT---CSD1.1', 'Mr Francis Korsah', 1, 'Active', '2020-09-08', '2022-10-20', '2021-10-18 15:37:33', '2022-03-08 10:32:31'),
-(9, 'Excel', 'INTERNATIONAL COMPUTER DRIVING LICENCE---ICDL4.2', 'Nana Kwesi', 2, 'Active', '2020-09-08', '2022-10-20', '2021-09-28 11:11:19', '2022-03-08 10:32:33'),
-(10, 'Networking', 'CISCO CERTIFIED NETWORK ASSOCIATE---CCNA9.2', 'Nana Kwesi', 4, 'Active', '2020-09-08', '2022-10-20', '2021-09-28 11:16:28', '2022-03-08 10:32:35'),
-(11, 'Fundamentals of Computing', 'CERTIFICATE IN SOFTWARE DEVELOPMENT---CSD1.1', 'Mr Francis Korsah', 1, 'Active', '2020-09-08', '2022-10-20', '2021-09-28 11:20:15', '2022-03-08 10:32:38'),
-(12, 'Maven', 'JAVA ENTERPRISE---JAVA7.2', 'Mr Francis Korsah', 5, 'Active', '2020-09-08', '2022-10-20', '2021-09-28 11:22:20', '2022-03-08 10:32:39'),
-(13, 'Router Configuration', 'CISCO CERTIFIED NETWORK ASSOCIATE---CCNA9.2', 'Bismark Otu', 4, 'Active', '2020-09-08', '2022-10-20', '2021-09-28 11:27:10', '2022-03-08 10:32:41'),
-(14, 'Hibernate', 'JAVA ENTERPRISE---JAVA7.2', 'Mr Yao', 5, 'Active', '2020-09-08', '2022-10-20', '2021-09-28 11:34:30', '2022-03-08 10:32:43'),
-(15, 'Python', 'CERTIFICATE IN SOFTWARE DEVELOPMENT---CSD1.1', 'Elvis Segbewu', 1, 'Active', '2020-09-08', '2022-10-20', '2021-09-28 11:39:14', '2022-03-08 10:32:47'),
-(16, 'Powerpoint', 'INTERNATIONAL COMPUTER DRIVING LICENCE---ICDL4.2', 'Mr Kennedy Asewie', 2, 'Active', '2020-09-08', '2022-10-20', '2021-09-28 11:43:56', '2022-03-08 10:32:49'),
-(18, 'CORE JAVA & JDBC', 'DIPLOMA IN BUSINESS COMPUTING---DBC1.1', 'Mr Francis Korsah', 6, 'Active', '2020-09-08', '2022-10-20', '2021-10-20 14:32:31', '2022-03-08 10:32:51'),
-(19, 'PHP', 'DIPLOMA IN BUSINESS COMPUTING', 'Mr Edward Yeboah', 6, 'Active', '2020-09-08', '2022-10-20', '2021-10-20 16:12:34', '2022-03-08 10:32:53');
+(27, 'FOC', 'CERTIFICATE IN SOFTWARE DEVELOPMENT', 'Elvis Segbawu', 13, 'Active', '2022-06-29', '2022-08-11', '2022-06-28 14:08:08', '2022-06-28 14:08:08'),
+(28, 'Html', 'CERTIFICATE IN SOFTWARE DEVELOPMENT', 'Elvis Segbawu', 13, 'Active', '2022-06-30', '2022-07-15', '2022-06-28 14:08:29', '2022-06-28 14:08:29'),
+(29, 'Powerpoint', 'INTERNATIONAL COMPUTER DRIVING LICENECE', 'Elvis Segbawu', 14, 'Active', '2022-06-30', '2022-07-14', '2022-06-28 14:11:30', '2022-06-28 14:11:30'),
+(30, 'Microsoft word', 'INTERNATIONAL COMPUTER DRIVING LICENECE', 'Elvis Segbawu', 14, 'Active', '2022-07-13', '2022-08-19', '2022-06-28 14:11:44', '2022-06-28 14:11:44'),
+(31, 'Excel', 'INTERNATIONAL COMPUTER DRIVING LICENECE', 'Elvis Segbawu', 14, 'Active', '2022-07-06', '2022-09-14', '2022-06-28 15:03:17', '2022-06-28 15:03:17'),
+(32, 'Digital Marketing', 'INTERNATIONAL COMPUTER DRIVING LICENECE', 'Elvis Segbawu', 14, 'Active', '2022-07-21', '2022-09-08', '2022-06-28 15:27:48', '2022-06-28 15:27:48');
+
+--
+-- Triggers `modules`
+--
+DELIMITER $$
+CREATE TRIGGER `after_inserting_into_modules` AFTER INSERT ON `modules` FOR EACH ROW BEGIN
+
+    IF (NEW.status = 'Active')
+    THEN
+    
+INSERT into students_results(students_results.module_id, students_results.module_name, students_results.course_id, students_results.staff_name, students_results.status,  
+                             students_results.name, students_results.student_id)
+
+SELECT NEW.id, NEW.module_name, NEW.course_id , NEW.staff_name, NEW.status, 
+students.name, students.student_id
+FROM students where students.course_id = NEW.course_id GROUP by students.name ORDER by students.name;
+
+
+    END IF;
+    
+
+
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `after_inserting_into_modules_update_course_id_on_staff_table` AFTER INSERT ON `modules` FOR EACH ROW BEGIN
+
+    IF (NEW.status = 'Active')
+    THEN
+    
+
+UPDATE staffs SET staffs.course_id = NEW.course_id 
+WHERE staffs.name = NEW.staff_name;
+
+END IF;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `after_updating_only_course_id_on_modules` AFTER UPDATE ON `modules` FOR EACH ROW BEGIN
+
+    IF (OLD.course_id != NEW.course_id)
+    THEN
+    
+
+UPDATE staffs SET staffs.course_id = NEW.course_id 
+WHERE staffs.course_id = OLD.course_id and staffs.name = OLD.staff_name;
+
+END IF;
+END
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `past_students`
+--
+
+CREATE TABLE `past_students` (
+  `id` int(255) DEFAULT NULL,
+  `name` varchar(250) DEFAULT NULL,
+  `student_id` varchar(255) DEFAULT NULL,
+  `course_id` int(255) DEFAULT NULL,
+  `date_of_birth` varchar(100) DEFAULT NULL,
+  `contact` varchar(255) DEFAULT NULL,
+  `gender` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `fees` varchar(255) DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -122,44 +177,14 @@ CREATE TABLE `staffs` (
 --
 
 INSERT INTO `staffs` (`id`, `name`, `staff_id`, `email`, `contact`, `usertype`, `course_id`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Mr Francis Korsah', 'St2632', 'francisk@aiti-kace.com.gh', '0555560810', 'Instructor', 1, 'Active', '2022-03-31 19:06:07', '2022-04-01 11:03:34'),
-(2, 'Mr Lawrence Kpodo', 'St6833', 'academicsecretary@aiti-kace.com.gh', '0547386724', 'Academic Secretary', NULL, 'Active', '2021-09-18 08:50:25', '2021-10-20 15:25:22'),
-(3, 'Mr Gabriel Dwamena', 'St3073', 'coursecordinator@aiti-kace.com.gh', '0207638264', 'Course Cordinator', NULL, 'Active', '2021-09-18 08:51:50', '2021-10-20 15:25:14'),
-(4, 'Dr Yaw Okraku-Yirenkyi', 'St9462', 'directorofstudies@aiti-kace.com.gh', '0207693568', 'Director of Studies', NULL, 'Active', '2021-09-18 09:04:03', '2021-10-20 17:08:19'),
-(5, 'Kennedy Asewie', 'St7308', 'secondinstructor@aiti-kace.com.gh', '0542426541', 'Instructor', 2, 'Active', '2021-09-18 09:19:34', '2022-03-08 11:53:22'),
-(6, 'Mr Yao', 'ST7834', 'yaoa@aiti-kace.com.gh', '0207457634', 'Instructor', 5, 'Active', '2021-10-19 10:03:24', '2022-03-08 11:53:30'),
-(7, 'Bismark Otu', 'ST41941', 'bismarko@aiti-kace.com.gh', '0549057688', 'Instructor', 3, 'Active', '2021-09-24 10:47:14', '2022-03-08 11:54:03'),
-(8, 'Nana Kwesi', 'St845', 'nanakwesi1006@hotmail.com', '0247016266', 'Instructor', 2, 'Active', '2021-09-24 10:49:08', '2022-03-08 11:54:09'),
-(9, 'Mr Hermas Songtaa', 'ST5768', 'hermass@aiti-kace.com.gh', '0548276444', 'Instructor', 1, 'Active', '2021-10-20 14:06:27', '2022-03-08 11:54:14'),
-(10, 'Elvis Segbawu', 'ST5645', 'elviss@aiti-kace.com.gh', '0505736458', 'Instructor', 3, 'Active', '2021-10-20 16:00:15', '2022-03-08 11:54:19'),
-(11, 'Jude Clottey', 'ST7429', 'judec@aiti-kace.com.gh', '0275856453', 'Instructor', 1, 'Active', '2021-10-20 16:09:35', '2022-03-08 11:54:23'),
-(12, 'Mr Edward Yeboah', 'ST6580', 'edwardy@aiti-kace.com.gh', '0249658903', 'Instructor', 6, 'Active', '2021-10-20 16:12:11', '2022-03-08 11:54:34'),
-(13, 'Mr Isaac', 'ST8920', 'isaaca@aiti-kace.com.gh', '0573856354', 'Instructor', 7, 'Active', '2021-10-21 16:49:37', '2022-03-08 11:54:41');
+(4, 'Dr Yaw Okraku-Yirenkyi', 'St9462', 'directorofstudies@aiti-kace.com.gh', '0207693568', 'Director', NULL, 'Active', '2021-09-18 09:04:03', '2022-06-22 13:25:41'),
+(19, 'Bismark Otu', 'ST1405476', 'bismarko@aiti-kace.com.gh', '0276890865', 'Course Cordinator', NULL, 'Active', '2022-06-28 11:38:00', '2022-06-28 11:38:00'),
+(20, 'Jude Clottey', 'ST1760989', 'judec@aiti-kace.com.gh', '0555555556', 'Course Cordinator', NULL, 'Active', '2022-06-28 11:38:41', '2022-06-28 11:38:41'),
+(21, 'Mr Lawrence Kpodo', 'ST1406798', 'lawrencek@aiti-kace.com.gh', '0208362456', 'Academic Secretary', NULL, 'Active', '2022-06-28 11:39:47', '2022-06-28 11:39:47'),
+(22, 'Elvis Segbawu', 'ST1406798', 'bismarko@aiti-kace.com.gh', '0208362456', 'Instructor', 14, 'Active', '2022-06-28 11:55:11', '2022-06-28 14:51:38'),
+(23, 'Nana Kwesi', 'ST1760559', 'nana@aiti-kace.com.gh', '0247016266', 'Instructor', 13, 'Active', '2022-07-06 15:20:45', '2022-07-06 15:20:45');
 
 -- --------------------------------------------------------
-
-
-
--- Table structure for table `past students`
-
-CREATE TABLE `past_students` (
-  `id` int(255) NOT NULL,
-  `name` varchar(250) DEFAULT NULL,
-  `student_id` varchar(255) DEFAULT NULL,
-  `course_id` int(255) DEFAULT NULL,
-  `date_of_birth` varchar(100) DEFAULT NULL,
-  `contact` varchar(255) DEFAULT NULL,
-  `gender` varchar(255) DEFAULT NULL,
-  `email` varchar(255) DEFAULT NULL,
-  `fees` varchar(255) DEFAULT NULL,
-  `status` varchar(255) DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-
-
-
 
 --
 -- Table structure for table `students`
@@ -181,63 +206,13 @@ CREATE TABLE `students` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
-
-
-
-
---
--- Table structure for table `students_results`
+-- Dumping data for table `students`
 --
 
-CREATE TABLE `students_results` (
-  `id` int(255) NOT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `student_id` varchar(255) DEFAULT NULL,
-  `course_id` int(255) DEFAULT NULL,
-  `module_id` int(100) DEFAULT NULL,
-  `module_name` varchar(255) DEFAULT NULL,
-  `staff_name` varchar(255) DEFAULT NULL,
-  `marks` int(100) DEFAULT NULL,
-  `status` varchar(255) DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
+INSERT INTO `students` (`id`, `name`, `student_id`, `course_id`, `date_of_birth`, `contact`, `gender`, `email`, `fees`, `status`, `created_at`, `updated_at`) VALUES
+(7, 'Solomon Okyere', 'ICDL2022M001', 14, '2022-07-01T00:00:00.000Z', '0276890865', 'male', 'solomonokyere89@gmail.com', 'Full Payment', 'Active', '2022-07-06 14:28:34', '2022-07-06 14:28:34');
 
 --
--- Table structure for table `users`
---
-
-CREATE TABLE `users` (
-  `id` int(250) NOT NULL,
-  `usertype` varchar(255) DEFAULT NULL,
-  `staff_id` varchar(255) DEFAULT NULL,
-  `email` varchar(255) DEFAULT NULL,
-  `password` varchar(255) DEFAULT NULL,
-  `status` varchar(255) DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`id`, `usertype`, `staff_id`, `email`, `password`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Instructor', 'St2632', 'francisk@aiti-kace.com.gh', 'franciskInstructor', 'Active', '2021-09-18 09:14:49', '2022-04-01 11:05:38'),
-(2, 'Instructor', 'St7308', 'secondinstructor@aiti-kace.com.gh', 'secondInstructor', 'Active', '2021-09-15 14:18:26', '2021-09-28 14:14:57'),
-(3, 'Academic Secretary', 'St6833', 'academicsecretary@aiti-kace.com.gh', 'academicSecretary', 'Active', '2021-09-15 14:34:05', '2022-04-01 13:57:43'),
-(4, 'Course Cordinator', 'St3073', 'coursecordinator@aiti-kace.com.gh', 'courseCordinator', 'Active', '2021-09-18 08:47:24', '2022-04-01 13:58:53'),
-(5, 'Director of Studies', 'St9462', 'directorofstudies@aiti-kace.com.gh', 'directorOfStudies', 'Active', '2021-09-18 09:03:00', '2022-04-01 13:59:09');
-
---
--- Indexes for dumped tables
---
-
-
-
-
 -- Triggers `students`
 --
 DELIMITER $$
@@ -262,17 +237,8 @@ FROM modules where modules.course_id = NEW.course_id GROUP by modules.module_nam
 END
 $$
 DELIMITER ;
-
-
-
-
-
-
 DELIMITER $$
-
-CREATE TRIGGER after_updating_only_course_id
-AFTER UPDATE ON students FOR EACH ROW
-BEGIN
+CREATE TRIGGER `after_updating_only_course_id` AFTER UPDATE ON `students` FOR EACH ROW BEGIN
 
     IF (OLD.course_id != NEW.course_id)
     THEN
@@ -288,68 +254,92 @@ FROM modules where modules.course_id = NEW.course_id GROUP by modules.module_nam
 
     END IF;
 
-END$$
-
+END
+$$
 DELIMITER ;
--- --------------------------------------------------------
-
-
-
-
-
 DELIMITER $$
+CREATE TRIGGER `after_updating_only_course_id_insert_into_past_student` AFTER UPDATE ON `students` FOR EACH ROW BEGIN
 
-CREATE TRIGGER after_inserting_into_modules
-AFTER INSERT ON modules FOR EACH ROW
-BEGIN
-
-    IF (NEW.status = 'Active')
-    THEN
+    IF (NEW.course_id != OLD.course_id)
+    Then
     
-INSERT into students_results(students_results.module_id, students_results.module_name, students_results.course_id, students_results.staff_name, students_results.status,  
-                             students_results.name, students_results.student_id)
-
-SELECT NEW.id, NEW.module_name, NEW.course_id , NEW.staff_name, NEW.status, 
-students.name, students.student_id
-FROM students where students.course_id = NEW.course_id GROUP by students.name ORDER by students.name;
-
-
-    END IF;
-    
-
-
-END$$
-
-DELIMITER ;
-
-
-
-
-
-
-DELIMITER $$
-
-CREATE TRIGGER `insert_into_past_student` AFTER INSERT ON `students`
- FOR EACH ROW BEGIN
-
-    IF (NEW.status = 'Active')
-    THEN
-    
-INSERT into past_students(past_students.id, past_students.name,past_students.student_id,past_students.course_id,
+  
+ INSERT into past_students(past_students.id, past_students.name,past_students.student_id,past_students.course_id,
  						 past_students.date_of_birth,past_students.contact,past_students.gender,
                          past_students.email,past_students.fees,past_students.status)
 
-SELECT NEW.id, NEW.name, NEW.student_id, NEW.course_id,
-NEW.date_of_birth, NEW.contact,
-NEW.gender, NEW.email, NEW.fees, NEW.status
-FROM students;
+SELECT OLD.id, OLD.name, OLD.student_id, OLD.course_id,
+OLD.date_of_birth, OLD.contact,
+OLD.gender, OLD.email, OLD.fees, OLD.status FROM students;
+
 
     END IF;
-    
-
-END$$
-
+END
+$$
 DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `students_results`
+--
+
+CREATE TABLE `students_results` (
+  `id` int(255) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `student_id` varchar(255) DEFAULT NULL,
+  `course_id` int(255) DEFAULT NULL,
+  `module_id` int(100) DEFAULT NULL,
+  `module_name` varchar(255) DEFAULT NULL,
+  `staff_name` varchar(255) DEFAULT NULL,
+  `marks` int(100) DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `students_results`
+--
+
+INSERT INTO `students_results` (`id`, `name`, `student_id`, `course_id`, `module_id`, `module_name`, `staff_name`, `marks`, `status`, `created_at`, `updated_at`) VALUES
+(17, 'Solomon Okyere', 'ICDL2022M001', 14, 32, 'Digital Marketing', 'Elvis Segbawu', NULL, 'Active', '2022-07-06 14:28:34', '2022-07-06 14:28:34'),
+(18, 'Solomon Okyere', 'ICDL2022M001', 14, 31, 'Excel', 'Elvis Segbawu', NULL, 'Active', '2022-07-06 14:28:34', '2022-07-06 14:28:34'),
+(19, 'Solomon Okyere', 'ICDL2022M001', 14, 30, 'Microsoft word', 'Elvis Segbawu', NULL, 'Active', '2022-07-06 14:28:34', '2022-07-06 14:28:34'),
+(20, 'Solomon Okyere', 'ICDL2022M001', 14, 29, 'Powerpoint', 'Elvis Segbawu', NULL, 'Active', '2022-07-06 14:28:34', '2022-07-06 14:28:34');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(250) NOT NULL,
+  `usertype` varchar(255) DEFAULT NULL,
+  `staff_id` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `usertype`, `staff_id`, `email`, `password`, `status`, `created_at`, `updated_at`) VALUES
+(5, 'Director', 'St9462', 'directorofstudies@aiti-kace.com.gh', 'directorOfStudies', 'Active', '2021-09-18 09:03:00', '2022-06-22 13:25:54'),
+(11, 'Course Cordinator', 'ST1405476', 'bismarko@aiti-kace.com.gh', 'Openforme', 'Active', '2022-06-28 11:38:00', '2022-06-28 11:38:00'),
+(12, 'Course Cordinator', 'ST1760989', 'judec@aiti-kace.com.gh', 'Openforme', 'Active', '2022-06-28 11:38:41', '2022-06-28 11:38:41'),
+(13, 'Academic Secretary', 'ST1406798', 'lawrencek@aiti-kace.com.gh', 'academic', 'Active', '2022-06-28 11:39:47', '2022-06-28 11:39:47'),
+(14, 'Instructor', 'ST1406798', 'elvis@aiti-kace.com.gh', 'directorOfStudies', 'Active', '2022-06-28 11:55:11', '2022-06-28 11:55:11'),
+(15, 'Instructor', 'ST1760559', 'nana@aiti-kace.com.gh', 'directorOfStudies', 'Active', '2022-07-06 15:20:45', '2022-07-06 15:20:45');
+
+--
+-- Indexes for dumped tables
+--
 
 --
 -- Indexes for table `courses`
@@ -379,13 +369,6 @@ ALTER TABLE `students`
   ADD UNIQUE KEY `student_id` (`student_id`),
   ADD KEY `fk_course` (`course_id`);
 
-
-
-  ALTER TABLE `past_students`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `student_id` (`student_id`),
-  ADD KEY `fk_course` (`course_id`);
-
 --
 -- Indexes for table `students_results`
 --
@@ -404,46 +387,41 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for dumped tables
 --
 
-
 --
 -- AUTO_INCREMENT for table `courses`
 --
 ALTER TABLE `courses`
-  MODIFY `id` int(250) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `modules`
 --
 ALTER TABLE `modules`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `staffs`
 --
 ALTER TABLE `staffs`
-  MODIFY `id` int(250) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT;
-
-
-  ALTER TABLE `past_students`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `students_results`
 --
 ALTER TABLE `students_results`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(250) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
