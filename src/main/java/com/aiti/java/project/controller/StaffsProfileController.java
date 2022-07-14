@@ -1,5 +1,6 @@
 package com.aiti.java.project.controller;
 
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,19 +15,74 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.aiti.java.project.entities.Staffs;
+import com.aiti.java.project.repository.ModulesRepository;
 import com.aiti.java.project.repository.StaffProfileRepository;
+
 
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping("/staffs")
 public class StaffsProfileController {
 	
+	
+	@Autowired
+	SendingEmailService sendingEmailService;
+	
+	
 	@Autowired
 	StaffProfileRepository staffRepos;
 	
 	
+	@Autowired
+	ModulesRepository modulesRepository;
 	
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+//	SENDING EMAILS TO INSTRUCTORS AFTER ASSIGNED TO A MODULE
+	
+	@GetMapping("/sendInstructorEmail") 
+	public String sendInstructorEmail() {
+		 
+		 return sendingEmailService.sendEmail();
+	 }
+	
+	
+
+
+
+	
+	
+	
+		  
 		
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	// USERS LOGIN
 	
 	  @GetMapping("/userLogin") 
@@ -36,9 +92,6 @@ public class StaffsProfileController {
 		  
 	  }
 	  
-	
-	
-	
 	
 	
 	//  SAVE STAFF
@@ -71,6 +124,18 @@ public class StaffsProfileController {
 	
 	
 	
+	
+	// FIND STAFF BY ID
+	
+	@GetMapping("/findUsersById")
+	public Staffs findUsersById(@RequestParam("id") int id) {
+		
+		return staffRepos.findById(id).get();
+	}	
+	
+	
+	
+	
 	//  DELETE STAFF
 	
 	@DeleteMapping("/deleteStaff")
@@ -80,13 +145,7 @@ public class StaffsProfileController {
 	
 	
 	
-	// FIND STAFF BY ID
-	
-	@GetMapping("/findStaffById")
-	public Staffs findStaffById(@RequestParam("id") int id) {
-		return staffRepos.findById(id).get();
-		
-	}
+
 
 	
 	
