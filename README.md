@@ -19,4 +19,4 @@ Endpoint (pastStudents/findPastStudentsUnderCourseBatch).
 
 
 # CHANGES ON THE DATABASE
-> ### **Please Check the New Entity Relationship Diagram file**
+![click here to view the ER Diagram here](New_Entity_Relationship_Diagram.png)
