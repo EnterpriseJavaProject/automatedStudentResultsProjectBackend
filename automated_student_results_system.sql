@@ -80,35 +80,7 @@ INSERT INTO `course_batch` (`id`, `course_name`, `course_id`, `course_level`, `c
 (2, 'CERTIFICATE IN SOFTWARE DEVELOPMENT', 1, 'CSD2.2', 'Bismark Otu', '2022-09-19', '2022-09-30', '2022-10-06', 'Active', '2022-09-19 16:30:07', '2022-09-19 16:38:36');
 
 --
--- Triggers `course_batch`
---
-DELIMITER $$
-CREATE TRIGGER `insert_into_CourseBatch_update_Modules_BatchID` AFTER INSERT ON `course_batch` FOR EACH ROW BEGIN
 
-    IF (NEW.status = 'Active')
-    THEN
-    
-
-UPDATE modules SET modules.batch_id = NEW.id 
-WHERE modules.course_id = NEW.course_id;
-
-END IF;
-END
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `insert_into_courseBatch_update_staff_department_to_cordinator` AFTER INSERT ON `course_batch` FOR EACH ROW BEGIN
-
-    IF (NEW.status = 'Active')
-    THEN
-    
-UPDATE staff_details SET staff_details.department = "Course Cordinator", staff_details.batch_id = NEW.id
-WHERE staff_details.name = NEW.coordinator;
-
-END IF;
-END
-$$
-DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -156,55 +128,7 @@ INSERT INTO `modules` (`id`, `module_name`, `staff_name`, `course_id`, `batch_id
 (20, 'NETWORKING', 'Paul Ntim', 4, NULL, 'Active', '2022-09-09', '2022-11-11', '2022-09-12 15:28:31', '2022-09-12 17:13:44');
 
 --
--- Triggers `modules`
---
-DELIMITER $$
-CREATE TRIGGER `after_insert_into_modules_insert_into_student_results` AFTER INSERT ON `modules` FOR EACH ROW BEGIN
 
-    IF (NEW.status = 'Active')
-    THEN
-    
-INSERT into students_results(students_results.module_name, students_results.batch_id, students_results.staff_name, students_results.status,  
-                             students_results.name, students_results.student_id)
-
-SELECT NEW.module_name, NEW.batch_id, NEW.staff_name, NEW.status, 
-students.name, students.student_id
-FROM students where students.batch_id = NEW.batch_id GROUP by students.name ORDER by students.name;
-
-    END IF;
-    
-END
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `after_insert_into_modules_update_batch_id_on_staff_table` AFTER INSERT ON `modules` FOR EACH ROW BEGIN
-
-    IF (NEW.status = 'Active')
-    THEN
-    
-UPDATE staff_details SET staff_details.batch_id = NEW.batch_id 
-WHERE staff_details.name = NEW.staff_name;
-
-    END IF;
-    
-END
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `after_update_on_modules_update_batch_id_on_staff_table` AFTER UPDATE ON `modules` FOR EACH ROW BEGIN
-
-    IF (OLD.staff_name != NEW.staff_name)
-    THEN
-    
-
-UPDATE staff_details SET staff_details.batch_id = NEW.batch_id
-WHERE staff_details.name = NEW.staff_name;
-
-    END IF;
-    
-END
-$$
-DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -352,6 +276,121 @@ CREATE TABLE `students` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `students_results`
+--
+
+CREATE TABLE `students_results` (
+  `id` int(255) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `student_id` varchar(255) DEFAULT NULL,
+  `batch_id` int(250) DEFAULT NULL,
+  `module_name` varchar(255) DEFAULT NULL,
+  `staff_name` varchar(255) DEFAULT NULL,
+  `marks` int(100) DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Indexes for dumped tables
+--
+
+
+
+
+
+-- Triggers `course_batch`
+--
+DELIMITER $$
+CREATE TRIGGER `insert_into_CourseBatch_update_Modules_BatchID` AFTER INSERT ON `course_batch` FOR EACH ROW BEGIN
+
+    IF (NEW.status = 'Active')
+    THEN
+    
+
+UPDATE modules SET modules.batch_id = NEW.id 
+WHERE modules.course_id = NEW.course_id;
+
+END IF;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `insert_into_courseBatch_update_staff_department_to_cordinator` AFTER INSERT ON `course_batch` FOR EACH ROW BEGIN
+
+    IF (NEW.status = 'Active')
+    THEN
+    
+UPDATE staff_details SET staff_details.department = "Course Cordinator", staff_details.batch_id = NEW.id
+WHERE staff_details.name = NEW.coordinator;
+
+END IF;
+END
+$$
+DELIMITER ;
+
+
+
+
+-- Triggers `modules`
+--
+DELIMITER $$
+CREATE TRIGGER `after_insert_into_modules_insert_into_student_results` AFTER INSERT ON `modules` FOR EACH ROW BEGIN
+
+    IF (NEW.status = 'Active')
+    THEN
+    
+INSERT into students_results(students_results.module_name, students_results.batch_id, students_results.staff_name, students_results.status,  
+                             students_results.name, students_results.student_id)
+
+SELECT NEW.module_name, NEW.batch_id, NEW.staff_name, NEW.status, 
+students.name, students.student_id
+FROM students where students.batch_id = NEW.batch_id GROUP by students.name ORDER by students.name;
+
+    END IF;
+    
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `after_insert_into_modules_update_batch_id_on_staff_table` AFTER INSERT ON `modules` FOR EACH ROW BEGIN
+
+    IF (NEW.status = 'Active')
+    THEN
+    
+UPDATE staff_details SET staff_details.batch_id = NEW.batch_id 
+WHERE staff_details.name = NEW.staff_name;
+
+    END IF;
+    
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `after_update_on_modules_update_batch_id_on_staff_table` AFTER UPDATE ON `modules` FOR EACH ROW BEGIN
+
+    IF (OLD.staff_name != NEW.staff_name)
+    THEN
+    
+
+UPDATE staff_details SET staff_details.batch_id = NEW.batch_id
+WHERE staff_details.name = NEW.staff_name;
+
+    END IF;
+    
+END
+$$
+DELIMITER ;
+
+
+
+
 -- Triggers `students`
 --
 DELIMITER $$
@@ -408,29 +447,6 @@ END
 $$
 DELIMITER ;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `students_results`
---
-
-CREATE TABLE `students_results` (
-  `id` int(255) NOT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `student_id` varchar(255) DEFAULT NULL,
-  `batch_id` int(250) DEFAULT NULL,
-  `module_name` varchar(255) DEFAULT NULL,
-  `staff_name` varchar(255) DEFAULT NULL,
-  `marks` int(100) DEFAULT NULL,
-  `status` varchar(255) DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Indexes for dumped tables
---
-
 --
 -- Indexes for table `courses`
 --
@@ -477,37 +493,37 @@ ALTER TABLE `students_results`
 -- AUTO_INCREMENT for table `courses`
 --
 ALTER TABLE `courses`
-  MODIFY `id` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(250) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `course_batch`
 --
 ALTER TABLE `course_batch`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `modules`
 --
 ALTER TABLE `modules`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `staff_details`
 --
 ALTER TABLE `staff_details`
-  MODIFY `id` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
+  MODIFY `id` int(250) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `students_results`
 --
 ALTER TABLE `students_results`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=204;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
