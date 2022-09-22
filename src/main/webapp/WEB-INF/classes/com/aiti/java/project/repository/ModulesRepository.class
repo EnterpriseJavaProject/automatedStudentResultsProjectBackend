@@ -1,0 +1,128 @@
+package com.aiti.java.project.repository;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import com.aiti.java.project.entities.Modules;
+
+public interface ModulesRepository extends JpaRepository<Modules, Long>  {
+	
+	
+
+
+	
+	@Query(value="select count(*) from modules", nativeQuery=true)
+	public String countModule();
+	
+	
+	
+	
+	
+	
+	// METHOD TO RETRIEVE ALL COURSE NAME UNDER MODULE TABLE
+	
+	@Query(value="SELECT DISTINCT modules.course_name, modules.id, modules.module_name, modules.course_id, modules.staff_name, modules.status, modules.created_at, modules.updated_at FROM `modules`", nativeQuery=true)
+	public List<Modules> getCourseNameAndCourseLevel();
+	
+	
+	
+	
+	
+	
+	
+	//  METHOD TO RETRIVE ONLY MODULE NAME AFTER STUDENT SEARCH RESULTS
+	@Query(value="select modules.course_name, students.name, students.student_id, students.contact, students.gender, modules.module_name, results.marks from students, modules, results, courses WHERE students.course_id = modules.course_id AND students.student_id = results.student_id and courses.id = students.course_id and modules.id = results.module_id and modules.course_name = modules.course_name  AND students.student_id = students.student_id" , nativeQuery=true)
+	public List<String> getAllModuleNames();
+	
+	
+	
+
+	
+	
+
+	
+//  ALL MODULES UNDER EACH COURSE
+	@Query(value="SELECT * from modules WHERE modules.course_id = ?", nativeQuery=true)
+	public List<Modules> findModulesUnderEachCourseById(Long id);
+	
+	
+	
+
+
+
+
+	//RETRIEVE THE TOTAL NUMBER OF MODULES UNDER EACH COURSE
+	@Query(value="SELECT modules.id, modules.module_name, modules.staff_name, modules.course_id, modules.status, modules.created_at, modules.updated_at,count(modules.module_name), modules.course_name from  modules where modules.course_id = ? GROUP by modules.course_name;", nativeQuery=true)
+	public List<Modules> findTotalNumberOfModulesUnderEachCourseById(int id);
+	
+	
+	
+
+
+
+//  ALL STUDENTS UNDER EACH MODULES
+	@Query(value="SELECT  students.name, modules.module_name, modules.course_name from students, courses, modules where students.course_id = courses.id and courses.id = modules.course_id and modules.id = ? ORDER BY modules.id", nativeQuery=true)
+	public List<String> retrievalOfStudentsUnderEachModuleById(int id);
+
+
+
+
+
+
+	
+//  RETRIEVE THE TOTAL NUMBER OF STUDENTS UNDER EACH MODULE
+//@Query(value="SELECT modules.course_name,  modules.module_name, count(DISTINCT(students.name))from students, courses, modules where students.course_id = courses.id and courses.id = modules.course_id and modules.id = ? ;", nativeQuery=true)
+	//public List<String> findTotalNumberOfStudentsUnderEachModuleById(int id);
+ 
+	
+	
+	
+	
+	
+	public ArrayList<String> findTotalNumberOfStudentsUnderEachModulesById(int id);
+	
+	
+	
+	
+	
+	
+
+	
+	
+  	// RETRIEVE ONLY MODULE NAME AND COURSE NAME  
+	
+	@Query(value="SELECT DISTINCT students.name, students.student_id, modules.module_name, modules.course_name, staffs.name from students,staffs, courses, modules where students.course_id = courses.id and courses.id = modules.course_id and modules.id = ? GROUP by students.student_id ORDER BY modules.id", nativeQuery=true)
+	public String retrieveModuleNameAndCourseName(int id);
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	// METHOD TO RETRIEVE ONLY STUDENT NAME AND ID 
+
+		@Query(value="SELECT DISTINCT modules.id, students.name, students.student_id, modules.module_name, modules.course_name, modules.staff_name from students, courses, modules where students.course_id = courses.id and courses.id = modules.course_id and modules.id = ? GROUP by students.student_id ORDER BY modules.id", nativeQuery=true)
+		public List<String> findAllStudentResults(int id);
+  		
+  			  			
+	
+	
+	
+		
+		// METHOD TO RETRIEVE ONLY STUDENT NAME,ID, COURSE NAME,MODULE NAME AND STAFF NAME 
+	
+//		@Query(value="SELECT DISTINCT students.name, students.student_id, modules.module_name, modules.course_name, modules.staff_name from students, courses, modules where students.course_id = courses.id and courses.id = modules.course_id and modules.id = ? GROUP by students.student_id ORDER BY modules.id", nativeQuery=true)
+//		public ArrayList<String> findAllStudentResults(int id);
+	
+
+}

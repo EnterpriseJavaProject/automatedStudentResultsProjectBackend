@@ -1,0 +1,50 @@
+package com.aiti.java.project.repository;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import com.aiti.java.project.entities.StudentProfile;
+
+public interface StudentProfileRepository extends JpaRepository<StudentProfile, Long> {
+	
+	//@Query(value="select full_name from students", nativeQuery=true)
+	List<StudentProfile> findByName(String name);
+	
+	
+
+	
+	
+	@Query(value="select count(*) from students", nativeQuery=true)
+	public String countStudent();
+	
+	
+	
+	
+	// METHOD TO RETRIEVE ALL STUDENT NAME AND STUDENT ID FROM STUDENT TABLE
+	
+	@Query(value="SELECT DISTINCT `id`, `name`, `student_id`, `course_name`, `course_id`, `date_of_birth`, `contact`, `gender`, `email`, `status`, `created_at`, `updated_at` FROM `students`", nativeQuery=true)
+	public List<StudentProfile> getStudentNameAndStudentID();
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+  	// RETRIEVE ONLY STUDENT NAME AND STUDENT ID 
+	
+	@Query(value="select `id`, `name`, `student_id`, `course_name`, `course_id`, `date_of_birth`, `contact`, `gender`, `email`, `status`, `created_at`, `updated_at` from students where students.id = ?", nativeQuery=true)
+	public String retrieveStudentNameAndStudentID(int id);
+	
+	
+	
+	
+	
+	
+	
+}

@@ -1,0 +1,261 @@
+package com.aiti.java.project.controller;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.aiti.java.project.entities.Modules;
+import com.aiti.java.project.repository.ModulesRepository;
+
+@RestController
+@CrossOrigin(origins = "http://localhost:4200")
+@RequestMapping("/modules")
+public class ModulesController {
+	
+	
+	Modules modules = new Modules();
+	
+	
+
+	  
+  
+	
+	
+	@Autowired
+	ModulesRepository modulesRepo;
+	
+	
+	
+	
+	
+	
+	
+
+
+	
+	@PostMapping("/saveModules")
+	public Modules saveModules(@RequestBody Modules module) {
+		return modulesRepo.save(module);
+	}
+	
+	
+	
+	
+	@PatchMapping("/updateModules")
+	public Modules updateModules(@RequestBody Modules module) {
+		
+		return modulesRepo.save(module);
+	}
+	
+	
+	
+	
+	@GetMapping("/getAllModules")
+	public List<Modules> getAllModules(){
+		return modulesRepo.findAll();
+	}
+	
+	
+	
+	
+	@DeleteMapping("/deleteModulesById/{id}")
+	public void deleteModules(@PathVariable ("id") Long id) {
+		modulesRepo.deleteById(id);
+	}
+	
+	
+	
+	
+	@GetMapping("/findModulesById/{id}")
+	public Modules findById(@PathVariable("id") Long id) {
+		return modulesRepo.findById(id).get();
+	}
+	
+	
+	
+	
+	
+	  @GetMapping("/countModule")
+	  public String countModule() {
+		  
+		  return modulesRepo.countModule();
+	  }
+	
+	
+	  
+	  
+	  
+		
+		
+		
+		
+		
+		
+		//	// METHOD TO RETRIEVE ALL COURSE NAME UNDER MODULE TABLE
+		
+		@GetMapping("/getCourseNameAndCourseLevel")
+		public List<Modules> getCourseNameAndCourseLevel(){
+			return modulesRepo.getCourseNameAndCourseLevel();
+		}
+	
+	
+			
+				
+				
+	
+				
+				
+				  
+				  
+				//   ALL MODULES UNDER EACH COURSE
+			  @GetMapping("/findModulesUnderEachCourseById/{id}")
+			  public List<Modules> findModulesUnderEachCourseById(@PathVariable("id") Long id) {
+				  
+				  return modulesRepo.findModulesUnderEachCourseById(id);
+				  
+			  }
+
+
+
+			  
+			  
+			  
+			  
+			  
+			  
+
+
+				//RETRIEVE THE TOTAL NUMBER OF MODULES UNDER EACH COURSE
+				  	  @GetMapping("/totalNumberOfModulesUnderEachCourse/{id}")
+				  public List<Modules> findTotalNumberOfModulesUnderEachCourseById(@PathVariable("id") int id) {
+					  
+					  return modulesRepo.findTotalNumberOfModulesUnderEachCourseById(id);
+				  }
+
+
+
+
+
+			//  ALL STUDENTS UNDER EACH MODULES
+				  	  @GetMapping("/retrievalOfStudentsUnderEachModule/{id}")
+				  public List<String> retrievalOfStudentsUnderEachModuleById(@PathVariable("id") int id) {
+					  
+					  return modulesRepo.retrievalOfStudentsUnderEachModuleById(id);
+				  }
+
+
+
+				  	  
+				  	  
+				  	  
+
+			//  RETRIEVE THE TOTAL NUMBER OF STUDENTS UNDER EACH MODULE
+				  	 // @GetMapping("/totalNumberOfStudentsUnderEachModule/{id}")
+				  //public List<String> findTotalNumberOfStudentsUnderEachModuleById(@PathVariable("id") int id) {
+					  
+					  //return modulesRepo.findTotalNumberOfStudentsUnderEachModuleById(id);
+				  //}
+			
+				
+				
+	
+				  	  
+				  	  
+				  	  
+				  	  
+				  	  
+				  	  
+				  	  
+				  	  
+						@GetMapping("/findAllStudentResults/{id}")
+						public String findAllStudentResults(@PathVariable("id") int id) throws SQLException, ClassNotFoundException {
+						  		
+						  		
+						 					  						  							  			
+						 Class.forName("com.mysql.cj.jdbc.Driver");
+						 Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/automated_student_results_system", "root", "");
+						  			
+						 PreparedStatement pstm = conn.prepareStatement("SELECT DISTINCT students.name, students.student_id, modules.module_name, modules.course_name, staffs.name from students,staffs, courses, modules where students.course_id = courses.id and courses.id = modules.course_id and modules.id = ? GROUP by students.student_id ORDER BY modules.id");
+
+						  			
+						 pstm.setInt(1, id);
+						  	
+						
+						  			
+						 ResultSet rs = pstm.executeQuery();
+						  			
+						  	while(rs.next()) {
+						  				
+						  		rs.getString(1);
+						  		rs.getString(2);
+						  		rs.getString(3);
+						  		rs.getString(4);
+						  		rs.getString(5);
+						  				
+						  			}
+
+						  		
+						  	 pstm.execute();
+						  	 
+						  	 
+						  	
+						  	return "";
+						  		
+						  		
+						  	}			  	  
+					  	   
+				  	  
+				  	  
+				  	  
+				  	  
+					  	
+		
+				  	  
+				  	  
+					  	
+					  	
+					  	
+					  	
+					  	
+					  	
+					  	
+					  	
+					  	
+					  	
+					  	
+					  	
+					  	
+					  	
+				  	// RETRIEVE ONLY MODULE NAME AND COURSE NAME  				  	
+				  	
+				  	@GetMapping("/retrieveModuleNameAndCourseName/{id}")
+				  	public List<String> retrieveModuleNameAndCourseName(@PathVariable("id") int id) {
+				  		
+						return modulesRepo.findAllStudentResults(id);
+				  						  		
+				  	}
+				  	  	  
+				  	  
+				  	  
+				  	  
+				  	  
+				  	  
+				  	  
+				  	  
+				  	  
+
+}
