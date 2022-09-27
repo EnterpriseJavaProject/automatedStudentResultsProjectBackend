@@ -17,7 +17,7 @@ public interface CourseBatchRepository extends JpaRepository<CourseBatch, Long> 
 	
 	// FIND ALL COURSE BATCHES BY COURSE ID
 	@Query(value="SELECT * FROM course_batch inner join courses on course_batch.course_name = courses.course_name and course_batch.course_id = courses.id where course_batch.course_name = courses.course_name and course_batch.course_id = courses.id and courses.id = ?" , nativeQuery = true )
-	List<CourseBatch> findAllCourseBatchesByCourseID(int course_id);
+	List<CourseBatch> findAllCourseBatchesUnderEachCourse(int course_id);
 	
 	
 	
@@ -123,13 +123,48 @@ public interface CourseBatchRepository extends JpaRepository<CourseBatch, Long> 
 		//  STUDENTS UNDER EACH COURSE BATCH
 		
 		@Query(value="select count(students.name) from students inner join course_batch on students.batch_id = course_batch.id where students.batch_id = course_batch.id and course_batch.id = ? GROUP by course_batch.id order by course_batch.id", nativeQuery=true)
-		public Long totalNumberOfStudentsUnderEachCourse(Long id);
+		public Long totalNumberOfStudentsUnderEachCourseBatch(Long id);
 
 	
 	
 	
 	
 	
+		
+		
+		
+		
+		
+		
+		
+		
+		// SELECTING ONLY EMAIL FORM STAFF AND SENDING THEM EMAIL NOTIFICATIONS AFTER BEEN ASSIGNED AS A COURSE COORDINATOR
+		@Query(value="SELECT staff_details.email FROM staff_details inner join course_batch on staff_details.batch_id = course_batch.id and staff_details.name = course_batch.coordinator where staff_details.batch_id = course_batch.id and staff_details.name = course_batch.coordinator GROUP by course_batch.updated_at order by course_batch.updated_at DESC limit 1" , nativeQuery = true )
+		String selectingStaffEmailtoSendEmailAfterBeenAssignedAsACourseCoordinator();
+		
+		
+		
+		
+		
+		
+		// SELECTING ONLY COURSE NAME FROM COURSE BATCH AND SENDING THEM EMAIL NOTIFICATIONS AS A COURSE COORDINATOR
+		@Query(value="SELECT course_batch.course_name FROM course_batch GROUP by course_batch.updated_at order by course_batch.updated_at desc limit 1" , nativeQuery = true )
+		String selectingCourseNametoSendEmailNotification();
+		
+		
+		// SELECTING ONLY COURSE LEVEL FROM COURSE BATCH AND SENDING THEM EMAIL NOTIFICATIONS AS A COURSE COORDINATOR
+		@Query(value="SELECT course_batch.course_level FROM course_batch GROUP by course_batch.updated_at order by course_batch.updated_at desc limit 1" , nativeQuery = true )
+		String selectingCourseLeveltoSendEmailNotification();
+		
+		
+		// SELECTING ONLY COURSE BATCH START DATE FROM COURSE BATCH AND SENDING THEM EMAIL NOTIFICATIONS AS A COURSE COORDINATOR
+		@Query(value="SELECT course_batch.course_start_date FROM course_batch GROUP by course_batch.updated_at order by course_batch.updated_at desc limit 1" , nativeQuery = true )
+		String selectingCourseBatchStartDatetoSendEmailNotification();
+		
+		
+		// SELECTING ONLY COURSE BATCH END DATE FROM COURSE BATCH AND SENDING THEM EMAIL NOTIFICATIONS AS A COURSE COORDINATOR
+		@Query(value="SELECT course_batch.course_end_date FROM course_batch GROUP by course_batch.updated_at order by course_batch.updated_at desc limit 1" , nativeQuery = true )
+		String selectingCourseBatchEndDatetoSendEmailNotification();
 	
 	
 	
