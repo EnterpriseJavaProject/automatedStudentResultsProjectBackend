@@ -5,9 +5,11 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+import com.aiti.java.project.entities.CourseBatch;
 import com.aiti.java.project.entities.StaffsDetails;
 import com.aiti.java.project.entities.StudentProfile;
 import com.aiti.java.project.entities.StudentResults;
+import com.aiti.java.project.repository.CourseBatchRepository;
 import com.aiti.java.project.repository.ModulesRepository;
 import com.aiti.java.project.repository.StaffDetailsRepository;
 import com.aiti.java.project.repository.StudentProfileRepository;
@@ -22,6 +24,8 @@ public class SendingEmailService {
 	StaffDetailsRepository staffDetailsRepository; 
 	
 	
+	@Autowired
+	CourseBatchRepository courseBatchRepository;
 	
 	
 	@Autowired
@@ -188,16 +192,16 @@ public class SendingEmailService {
 	
 	
 	
-	// SENDING EMAILS TO INSTRUCTORS AFTER BEEN ASSIGNED TO A COURSE
+	// SENDING EMAILS TO INSTRUCTORS AFTER BEEN ASSIGNED TO A MODULE
 	
-	public void sendEmailToInstructorsAfterBeenAssignedToACourse(StaffsDetails staff) {
+	public void sendEmailToInstructorsAfterBeenAssignedToAModule(StaffsDetails staff) {
 		
 		
 		SimpleMailMessage msg = new SimpleMailMessage();
 		
         msg.setFrom("bismarkotu1006@gmail.com");
 
-        msg.setTo(staffDetailsRepository.selectingStaffEmailtoSendEmailNotification());
+        msg.setTo(staffDetailsRepository.selectingStaffEmailtoSendEmailAfterBeenAssignedToAModule());
         //msg.setCc("obwebsitedesign@gmail.com", "bismarkotu1995@gmail.com");
 
         
@@ -236,6 +240,59 @@ public class SendingEmailService {
 	
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	// SENDING EMAILS TO INSTRUCTORS AFTER BEEN ASSIGNED AS A COURSE COORDINATOR
+	
+		public void sendEmailToInstructorsAfterBeenAssignedAsACourseCoordinator(CourseBatch courses) {
+			
+			
+			SimpleMailMessage msg = new SimpleMailMessage();
+			
+	        msg.setFrom("bismarkotu1006@gmail.com");
+
+	        msg.setTo(courseBatchRepository.selectingStaffEmailtoSendEmailAfterBeenAssignedAsACourseCoordinator());
+	        //msg.setCc("obwebsitedesign@gmail.com", "bismarkotu1995@gmail.com");
+
+	        
+	        
+	        msg.setSubject("YOU HAVE BEEN ASSIGNED AS A COURSE COORDINATOR FOR THE UPCOMING COURSE BELOW");
+
+	        
+	        msg.setText(
+	        		 
+	        		" YOU HAVE BEEN ASSIGNED AS A COURSE COORDINATOR FOR THIS COURSE: \n\n " 
+	        		+ "COURSE NAME: " + " " + courseBatchRepository.selectingCourseNametoSendEmailNotification()
+	        		+ "\n " 
+	        		+ "COURSE LEVEL: " + " " + courseBatchRepository.selectingCourseLeveltoSendEmailNotification()
+	        		+ "\n "
+	        		+ "COURSE START DATE: " + " " + courseBatchRepository.selectingCourseBatchStartDatetoSendEmailNotification()
+	        		+ "\n " 
+	        		+ "COURSE END DATE: " + " " + courseBatchRepository.selectingCourseBatchEndDatetoSendEmailNotification() 
+	        		+ "\n\n " 
+	        		+ "Login  http://localhost:8081/Frontend_API/"
+	        		+ "\n\n " 
+	        		+ "Reset Password  http://localhost:8081/Frontend_API/aitiKaceModulesCoursesApiConsumption/findEmailVerificationForm");
+	        
+	   
+	        javaMailSender.send(msg);
+	        
+
+	        System.out.println("Email sent successfully.......");
+
+		
+		}
 
 	
 	
