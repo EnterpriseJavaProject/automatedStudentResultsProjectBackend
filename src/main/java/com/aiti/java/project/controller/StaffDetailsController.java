@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -120,13 +121,15 @@ public class StaffDetailsController {
 	
 		
 		
-		// UPDATE STAFF
+		// UPDATE STAFF DETAILS AFTER RESET PASSWORD
 		
-		@PutMapping("/updateStaff")
-		public void updateStaff(@RequestBody StaffsDetails staff) {
+		@PutMapping("/updateStaffDetailsAfterResetPassword")
+		public void updateStaffDetailsAfterResetPassword(@RequestBody StaffsDetails staff) {
 			
 			staffDetailsRepository.save(staff);
-			//sendingEmailService.sendEmailToInstructorsAfterBeenAssignedToACourse(staff);
+			//sendingEmailService.sendEmailToInstructorsAfterBeenAssignedAsACourseCoordinator(staff);
+			//sendingEmailService.sendEmailToInstructorsAfterBeenAssignedToAModule(staff);
+			//sendingEmailService.sendEmailToInstructorsAfterBeenAssignedToAModule(staff);
 		}
 		
 		
@@ -139,20 +142,19 @@ public class StaffDetailsController {
 	
 	
 	
+		// UPDATE STAFF 
+		
+		@PatchMapping("/updateStaff")
+		public void updateStaf(@RequestBody StaffsDetails staff) {
+			
+			staffDetailsRepository.save(staff);
 
+		}
 	
 	
 	
 	
-	
-//	SENDING EMAILS TO INSTRUCTORS AFTER ASSIGNED TO A COURSE
-	
-//	@GetMapping("/sendEmailToInstructorsAfterBeenAssignedToACourse") 
-//	public String sendEmailToInstructorsAfterBeenAssignedToACourse(@RequestBody StaffsDetails staff) {
-//		 
-//		 return sendingEmailService.sendEmailToInstructorsAfterBeenAssignedToACourse();
-//	 }
-	
+
 	
 	  
 	  
