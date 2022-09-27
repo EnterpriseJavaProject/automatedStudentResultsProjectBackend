@@ -25,14 +25,18 @@ public class ModulesController {
 	
 	Modules modules = new Modules();
 	
-	
 
-	  
-  
-	
-	
 	@Autowired
 	ModulesRepository modulesRepo;
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
@@ -42,7 +46,7 @@ public class ModulesController {
 	  @GetMapping("/findModulesUnderPastStudentCourse")
 	  public List<Modules> findModulesUnderPastStudentCourse(@RequestParam("id") Long id) {
 		  
-		  return modulesRepo.allModulesUnderPastStudentCourse(id);
+		  return modulesRepo.allModulesUnderPastStudentCourseBatch(id);
 		  
 	  }
 	  
@@ -106,7 +110,7 @@ public String retrievalOfStudentsUnderEachModuleById(@RequestParam("module_id") 
 	
 	@GetMapping("/getAllModules")
 	public List<Modules> getAllModules(){
-		return modulesRepo.findAll();
+		return modulesRepo.findAllModules();
 	}
 	
 	
