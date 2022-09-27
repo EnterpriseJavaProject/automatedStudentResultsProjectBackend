@@ -34,7 +34,8 @@ public class CourseBatchController {
 	
 	
 	
-	
+	@Autowired
+	SendingEmailService sendingEmailService;
 	
 
 	
@@ -43,12 +44,12 @@ public class CourseBatchController {
 	
 	
 	
-	// FIND ALL COURSE BATCHES BY COURSE ID
+	// FIND ALL COURSE BATCHES UNDER EACH COURSE BY COURSE ID
 	
-	  @GetMapping("/findAllCourseBatchesByCourseID") 
-	  public List<CourseBatch> findAllCourseBatchesByCourseID(@RequestParam ("course_name") int course_id){ 
+	  @GetMapping("/findAllCourseBatchesUnderEachCourse") 
+	  public List<CourseBatch> findAllCourseBatchesUnderEachCourse(@RequestParam ("course_id") int course_id){ 
 		  
-		  return courseBatchRepository.findAllCourseBatchesByCourseID(course_id);
+		  return courseBatchRepository.findAllCourseBatchesUnderEachCourse(course_id);
 		  
 	  }
 	
@@ -60,7 +61,7 @@ public class CourseBatchController {
 	  
 	  
 	  
-		//   ALL MODULES UNDER EACH COURSE
+		//   ALL MODULES UNDER EACH COURSE BATCH
 	  @GetMapping("/findModulesUnderEachCourseBatch")
 	  public List<Modules> findModulesUnderEachCourseBatchByID(@RequestParam("id") Long id) {
 		  
@@ -81,7 +82,7 @@ public class CourseBatchController {
 	
 	
 	
-	// SELECTING FROM COURSE TABLE FOR RESULTS
+	// SELECTING FROM COURSE BATCH TABLE FOR RESULTS
 	
 	@GetMapping("/selectingFromCourseBatchForResults")
 	public List<CourseBatch> selectingFromCourseBatchForResults(@RequestParam ("student_id") String student_id, @RequestParam ("course_id") int course_id){
@@ -146,8 +147,8 @@ public class CourseBatchController {
 	
 //	// GET ALL COURSE BATCHES
 	
-	@GetMapping("/getAllCourse")
-	public List<CourseBatch> getAllCourses(){
+	@GetMapping("/getAllCourseBatches")
+	public List<CourseBatch> getAllCourseBatches(){
 		
 		return courseBatchRepository.findAll();
 		
@@ -160,12 +161,13 @@ public class CourseBatchController {
 	
 	
 	
-	//  SAVE COURSE
+	//  SAVE COURSE BATCH
 	
 	@PostMapping("/saveCourseBatch")
 	public void saveCourseBatch(@RequestBody CourseBatch courses) {
 		
 		courseBatchRepository.save(courses);
+		//sendingEmailService.sendEmailToInstructorsAfterBeenAssignedAsACourseCoordinator(courses);
 	}
 	
 	
@@ -178,10 +180,10 @@ public class CourseBatchController {
 	
 	
 	
-	//  UPDATE COURSES
+	//  UPDATE COURSE BATCH
 	
-	@PatchMapping("/updateCourses")
-	public CourseBatch updateCourses(@RequestBody CourseBatch course) {
+	@PatchMapping("/updateCourseBatch")
+	public CourseBatch updateCourseBatch(@RequestBody CourseBatch course) {
 		
 		return courseBatchRepository.save(course);
 	}
@@ -193,19 +195,19 @@ public class CourseBatchController {
 	
 	
 	
-	// DELETE COURSE
+	// DELETE COURSE BATCH
 	
-	@DeleteMapping("/deleteCourseById")
-	public void deleteCourse(@RequestParam ("id") Long id) {
+	@DeleteMapping("/deleteCourseBatchById")
+	public void deleteCourseBatch(@RequestParam ("id") Long id) {
 		courseBatchRepository.deleteById(id);
 	}
 	
 	
 	
-	// FIND COURSE BY ID
+	// FIND COURSE BATCH BY ID
 	
-	@GetMapping("/findCourseById")
-	public CourseBatch findById(@RequestParam("id") Long id) {
+	@GetMapping("/findCourseBatchById")
+	public CourseBatch findCourseBatchById(@RequestParam("id") Long id) {
 		return courseBatchRepository.findById(id).get();
 	}
 	
@@ -215,8 +217,8 @@ public class CourseBatchController {
 	
 	// FIND COURSE BATCH BY COURSE NAME
 	
-	  @GetMapping("/findCourseByCourseName") 
-	  public List<CourseBatch> findByName(@RequestParam ("course_name") String course_name){ 
+	  @GetMapping("/findCourseBatchByCourseName") 
+	  public List<CourseBatch> findCourseBatchByCourseName(@RequestParam ("course_name") String course_name){ 
 		  return courseBatchRepository.findCourseBatchByCourseName(course_name);
 		  
 	  }
@@ -228,9 +230,9 @@ public class CourseBatchController {
 	  
 	  
 		
-		// FIND COURSE BY COURSE LEVEL
+		// FIND COURSE BATCH BY COURSE LEVEL
 		
-		  @GetMapping("/findCourseByCourseLevel") 
+		  @GetMapping("/findCourseBatchByCourseLevel") 
 		  public List<CourseBatch> findByCourseLevel(@RequestParam ("course_level") String course_level){ 
 			  return courseBatchRepository.findCourseBatchByCourseLevel(course_level);
 			  
@@ -259,10 +261,10 @@ public class CourseBatchController {
 	  
 	
 	
-	//	FIND STAFF COURSES
+	//	FIND STAFF COURSE BATCH
 	
-@GetMapping("/findStaffCourses")
-public List<CourseBatch> findStaffCourses(@RequestParam("staff_id") Long staff_id) {
+@GetMapping("/findStaffCourseBatch")
+public List<CourseBatch> findStaffCourseBatch(@RequestParam("staff_id") Long staff_id) {
 
 	return courseBatchRepository.findStaffCourses(staff_id);
 
@@ -271,10 +273,10 @@ public List<CourseBatch> findStaffCourses(@RequestParam("staff_id") Long staff_i
 
 	  
 	  
-		// TOTAL NUMBER OF MODULES UNDER EACH COURSE
+		// TOTAL NUMBER OF MODULES UNDER EACH COURSE BATCH
 	  
-	  @GetMapping("/totalNumberOfModulesUnderEachCourse")
-	  public Long totalNumberOfModulesUnderEachCourse(@RequestParam("id") Long id) {
+	  @GetMapping("/totalNumberOfModulesUnderEachCourseBatch")
+	  public Long totalNumberOfModulesUnderEachCourseBatch(@RequestParam("id") Long id) {
 		  
 		  return courseBatchRepository.totalNumberOfModulesUnderEachCourseBatch(id);
 	  }
@@ -289,12 +291,12 @@ public List<CourseBatch> findStaffCourses(@RequestParam("staff_id") Long staff_i
 	  
 	  
 	  
-		//  STUDENTS UNDER EACH COURSE
+		//  STUDENTS UNDER EACH COURSE BATCH
 	  
-	  @GetMapping("/totalNumberOfStudentsUnderEachCourse")
-	  public Long totalNumberOfStudentsUnderEachCourse(@RequestParam("id") Long id) {
+	  @GetMapping("/totalNumberOfStudentsUnderEachCourseBatch")
+	  public Long totalNumberOfStudentsUnderEachCourseBatch(@RequestParam("id") Long id) {
 		  
-		  return courseBatchRepository.totalNumberOfStudentsUnderEachCourse(id);
+		  return courseBatchRepository.totalNumberOfStudentsUnderEachCourseBatch(id);
 	  }
 	  
 	  
