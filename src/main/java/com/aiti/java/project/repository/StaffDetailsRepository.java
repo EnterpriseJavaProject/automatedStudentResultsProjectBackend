@@ -83,10 +83,14 @@ public interface StaffDetailsRepository extends JpaRepository<StaffsDetails, Int
 	String staffUserTypeRetrival(String staffUserType);
 	
 	
+	
 
-	// SELECTING ONLY EMAIL FORM STAFF AND SENDING THEM EMAIL NOTIFICATIONS
+	
+	
+
+	// SELECTING ONLY EMAIL FORM STAFF AND SENDING THEM EMAIL NOTIFICATIONS AFTER BEEN ASSIGNED TO HANDLE MODULE
 	@Query(value="SELECT staff_details.email FROM staff_details inner join modules on staff_details.batch_id = modules.batch_id and staff_details.name = modules.staff_name where staff_details.batch_id = modules.batch_id and staff_details.name = modules.staff_name GROUP by modules.updated_at order by modules.updated_at DESC limit 1" , nativeQuery = true )
-	String selectingStaffEmailtoSendEmailNotification();
+	String selectingStaffEmailtoSendEmailAfterBeenAssignedToAModule();
 	
 	
 	
