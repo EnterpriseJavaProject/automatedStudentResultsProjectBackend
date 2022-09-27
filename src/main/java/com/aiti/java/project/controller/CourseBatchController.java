@@ -43,7 +43,34 @@ public class CourseBatchController {
 	
 	
 	
-	
+	  
+		// TOTAL NUMBER OF MODULES UNDER EACH COURSE BATCH
+	  
+	  @GetMapping("/totalNumberOfModulesUnderEachCourseBatch")
+	  public Long totalNumberOfModulesUnderEachCourseBatch(@RequestParam("id") Long id) {
+		  
+		  return courseBatchRepository.totalNumberOfModulesUnderEachCourseBatch(id);
+	  }
+	  
+	  
+	  
+	  
+	  
+	  
+		//  STUDENTS UNDER EACH COURSE BATCH
+	  
+	  @GetMapping("/totalNumberOfStudentsUnderEachCourseBatch")
+	  public Long totalNumberOfStudentsUnderEachCourseBatch(@RequestParam("id") Long id) {
+		  
+		  return courseBatchRepository.totalNumberOfStudentsUnderEachCourseBatch(id);
+	  }  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
 	// FIND ALL COURSE BATCHES UNDER EACH COURSE BY COURSE ID
 	
 	  @GetMapping("/findAllCourseBatchesUnderEachCourse") 
@@ -272,32 +299,11 @@ public List<CourseBatch> findStaffCourseBatch(@RequestParam("staff_id") Long sta
 
 
 	  
-	  
-		// TOTAL NUMBER OF MODULES UNDER EACH COURSE BATCH
-	  
-	  @GetMapping("/totalNumberOfModulesUnderEachCourseBatch")
-	  public Long totalNumberOfModulesUnderEachCourseBatch(@RequestParam("id") Long id) {
-		  
-		  return courseBatchRepository.totalNumberOfModulesUnderEachCourseBatch(id);
-	  }
+
 	  
 	  
 	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-		//  STUDENTS UNDER EACH COURSE BATCH
-	  
-	  @GetMapping("/totalNumberOfStudentsUnderEachCourseBatch")
-	  public Long totalNumberOfStudentsUnderEachCourseBatch(@RequestParam("id") Long id) {
-		  
-		  return courseBatchRepository.totalNumberOfStudentsUnderEachCourseBatch(id);
-	  }
+
 	  
 	  
 	  
