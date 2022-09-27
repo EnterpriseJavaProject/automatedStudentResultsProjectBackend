@@ -115,7 +115,7 @@ public interface ModulesRepository extends JpaRepository<Modules, Long>  {
 	
 //  ALL MODULES UNDER EACH COURSE BATCH
 	
-	@Query(value="select * from modules inner join course_batch on modules.batch_id = course_batch.batch_id where modules.batch_id = course_batch.batch_id and course_batch.id = ?", nativeQuery=true)
+	@Query(value="select * from modules inner join course_batch on modules.batch_id = course_batch.id where modules.batch_id = course_batch.id and course_batch.id = ?", nativeQuery=true)
 	public List<Modules> allModulesUnderEachCourseBatch(Long id);
 	
 	
@@ -131,13 +131,22 @@ public interface ModulesRepository extends JpaRepository<Modules, Long>  {
 	
 	
 	
+
+	
+	
+//  ALL MODULES UNDER STUDENT COURSE
+	
+	@Query(value="select * from modules inner join course_batch on modules.batch_id = course_batch.id where modules.batch_id = course_batch.id and course_batch.id = ?", nativeQuery=true)
+	public List<Modules> allModulesUnderStudentCourse(Long id);
+	
+	
 	
 	
 
-//  ALL MODULES UNDER PAST COURSE
+//  ALL MODULES UNDER PAST STUDENT COURSE
 	
 	@Query(value="select * from modules inner join course_batch on modules.batch_id = course_batch.id where modules.batch_id = course_batch.id and course_batch.id = ?", nativeQuery=true)
-	public List<Modules> allModulesUnderPastStudentCourse(Long id);
+	public List<Modules> allModulesUnderPastStudentCourseBatch(Long id);
 	
 	
 	
@@ -239,6 +248,10 @@ public interface ModulesRepository extends JpaRepository<Modules, Long>  {
 	
 	
 	
+	// METHOD TO RETRIEVE ALL COURSE NAME UNDER MODULE TABLE
+	
+	@Query(value="SELECT * FROM modules", nativeQuery=true)
+	public List<Modules> findAllModules();
 	
 	
 //	// METHOD TO RETRIEVE ONLY STUDENT NAME AND ID 
