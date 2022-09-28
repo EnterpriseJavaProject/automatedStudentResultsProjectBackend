@@ -20,3 +20,8 @@ Endpoint (pastStudents/findPastStudentsUnderCourseBatch).
 
 # CHANGES ON THE DATABASE
 ![click here to view the ER Diagram here](New_Entity_Relationship_Diagram.png)
+
+
+# CHANGES ON THE FLOWCHART
+![click here to view the FlowChart here](StudentResultsManagementSystemFlowChart.png)
+
