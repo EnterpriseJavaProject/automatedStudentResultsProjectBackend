@@ -23,5 +23,5 @@ Endpoint (pastStudents/findPastStudentsUnderCourseBatch).
 
 
 # CHANGES ON THE FLOWCHART
-![click here to view the FlowChart here](StudentResultsManagementSystemFlowChart.png)
+![click here to view the FlowChart here](NewStudentResultsManagementSystemFlowChart.png)
 
